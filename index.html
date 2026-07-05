@@ -701,7 +701,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's11');
       return buildSlide({
-        claim: `Marked to hardware peers, TEP alone is worth <u>$${s.ev_floor_bn ?? '—'}bn</u> — leaving the software at an <u>implied ${s.residual_sw_multiple ?? '—'}x residual</u>.`,
+        claim: `Marked opco-by-opco against Badger Meter, Teleflex, Ambu and Masimo, TEP is worth <u>~$11.5bn at the peer-mark floor</u> (17–18x) — and our SOTP carries it below even that, at 15.5x (~$${s.ev_floor_bn ?? '—'}bn), so the hardware leg needs no generosity to do its work in the valuation.`,
         section: 'Thesis 2 — Hardware', sub: 'EV floor',
         panels: [
           { take: `Peer marks bracket TEP — <b>defensible ~17–18x</b>, with 20x+ the bull, not the base.`, title: 'Hardware peer marks', table: s.peer_marks },
@@ -896,15 +896,16 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's20');
       return buildSlide({
-        claim: `At $364 you pay <u>~${s.implied_t1 ?? '—'}x</u> for Tier-1 software after fair marks on hardware and network — a <u>break-even multiple of ~${s.breakeven_mult ?? '—'}x</u> the group has not traded at since 2011 outside the GFC.`,
+        claim: `At $364 the market implies <u>${s.implied_t1 ?? '—'}x for Tier-1 software</u> after our marks on hardware and network — two to five turns below the quality-VMS comps (15–17x) and the 18x our base case argues the durable core deserves.`,
         section: 'Valuation', sub: 'SOTP',
         panels: [
           { take: `Tiered by quality: <b>T1/T2/T3 software + TEP</b>, each on its own multiple.`, title: 'Sum-of-the-parts', table: s.sotp },
           { take: `Bear/base/bull <b>scenario grid</b> — the base is not the ceiling.`, title: 'Scenario grid', grid: s.scenario_grid },
-          { take: `<b>Break-even multiples</b> sit below spot — you are paid to be patient.`, title: 'Break-even vs spot', canvasId: 'c-s20-breakeven' }
+          { take: `<b>Break-even = today's multiple held forever</b> — losing money requires a further de-rate from a 10-year-low mark.`, title: 'Break-even vs spot', canvasId: 'c-s20-breakeven' }
         ],
         sources: ['model_out.json (SOTP)'],
-        notes: ['Tier multiples anchored to the S19 regression, not picked.']
+        notes: ['Tier multiples anchored to the S19 regression, not picked.',
+                'At the June $332 anchor the implied Tier-1 residual was ~11x; the July re-rate consumed about two turns of the discount — what remains is real but more modest.']
       });
     },
     init(d) { const s = sd(d, 's20'); mkBar('c-s20-breakeven', { ...s.breakeven }); }
