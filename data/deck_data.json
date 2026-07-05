@@ -39,12 +39,12 @@
     {
       "label": "Base PT",
       "value": "$442",
-      "sub": "SOTP base"
+      "sub": "12-mo SOTP"
     },
     {
       "label": "5-yr TSR",
       "value": "10.9%/yr",
-      "sub": "base"
+      "sub": "5-yr hold, base"
     },
     {
       "label": "Skew",
@@ -108,13 +108,20 @@
       "skew": {
         "up": 21.4,
         "down": -11.3,
-        "ratio": "1.9:1"
+        "ratio": "1.9:1",
+        "base_px": 442,
+        "bear_px": 323,
+        "bear_tsr_ann": 2.9,
+        "fcf_yield_pct": 7.4,
+        "trough_px": 293,
+        "trough_pct": -20
       },
       "wrong": [
         "STUB falsifier one",
         "STUB falsifier two",
         "STUB falsifier three"
-      ]
+      ],
+      "bear_pt": 323
     },
     "s2": {
       "derate_turns": 11.8,
@@ -244,7 +251,25 @@
           }
         ]
       },
-      "cri_note": "Blended cash-on-cash yield on the installed platform book (deal ledger, current)."
+      "cri_note": "Blended cash-on-cash yield on the installed platform book (deal ledger, current).",
+      "fcf_mini": {
+        "labels": [
+          "ROP (decade median)",
+          "Large-cap median"
+        ],
+        "series": [
+          {
+            "label": "FCF per $1 revenue (%)",
+            "data": [
+              31.6,
+              7.8
+            ],
+            "color": "#00294b"
+          }
+        ]
+      },
+      "fcf_margin_pct": 31.6,
+      "fcf_median_pct": 7.8
     },
     "s4": {
       "exposed_pct": 10.2,
@@ -454,7 +479,9 @@
             "color": "#005f9e"
           }
         ]
-      }
+      },
+      "exposed_m": 862,
+      "residual_turns": 4.1
     },
     "s5": {
       "share_bar": {
@@ -709,7 +736,29 @@
             "color": "#00294b"
           }
         ]
-      }
+      },
+      "cc_pricing": {
+        "labels": [
+          "2024-12-03",
+          "2025-03-05",
+          "2025-11-07",
+          "2026-01-05"
+        ],
+        "series": [
+          {
+            "label": "ConstructConnect Bid Mgmt list ($/yr)",
+            "data": [
+              3600,
+              3600,
+              4500,
+              4500
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      },
+      "cc_escalation_pct": 25.0,
+      "lucasys_note": "Court-record corroboration: the Lucasys antitrust complaint (N.D. Ga., 1:20-cv-02987) characterizes PowerPlan as a \u201cmonopoly on accounting software for investor-owned utilities\u201d \u2014 the adversary's own words. Settled Jan-2025 (~$24M to Lucasys / $17.7M reported charge) with a no-retaliation covenant; defending the moat has a cost."
     },
     "s7": {
       "contested_pct": 10.2,
@@ -798,7 +847,48 @@
             "color": "#a6256e"
           }
         ]
-      }
+      },
+      "challenger_reviews": {
+        "cols": [
+          "Arena",
+          "Incumbent (rating/reviews)",
+          "Largest challenger",
+          "Read"
+        ],
+        "rows": [
+          [
+            "GovCon ERP",
+            "Deltek Costpoint (3.9/215)",
+            "Unanet ERP GovCon (4.4/56, G2 4.4/645)",
+            "Contested"
+          ],
+          [
+            "ABA therapy practice mgmt",
+            "CentralReach (4.3/156)",
+            "Motivity (5.0/4)",
+            "Moat intact"
+          ],
+          [
+            "K-12 absence/HCM",
+            "Frontline Insights Platform (4.2/19)",
+            "Red Rover (None/None)",
+            "Moat intact"
+          ],
+          [
+            "Construction takeoff/estimating",
+            "ConstructConnect On-Screen Takeoff (None/None)",
+            "STACK (4.5/1,300)",
+            "Contested"
+          ],
+          [
+            "Insurance agency mgmt",
+            "\u2014",
+            "HawkSoft CMS (4.5/64)",
+            "Moat intact"
+          ]
+        ]
+      },
+      "aba_note": "Demand-side overhang, stated honestly: HHS-OIG ABA-Medicaid audits have flagged ~$200M in improper payments (Indiana $56M Dec-2024; Wisconsin $18.5M Jul-2025). CentralReach is the software vendor, not the biller, so it is not a target \u2014 but reimbursement pressure on its ABA-provider base tempers the S8 attach story."
     },
     "s8": {
       "attach_print_pct": 75,
@@ -868,7 +958,8 @@
             "VERIFIED-PRIMARY"
           ]
         ]
-      }
+      },
+      "hiring_note": "Hiring corroboration (OBSERVED Jul-2026): CentralReach's 20 open reqs skew engineering + AI/data product (Director, AI Product Management, Clinical AI Evaluation Specialist) \u2014 the attach roadmap is being staffed, not just narrated. One point-in-time count, not a trend."
     },
     "s9": {
       "tep_organic_pct": 5.8,
@@ -1034,7 +1125,8 @@
             "color": "#007e6c"
           }
         ]
-      }
+      },
+      "honolulu_note": "The honest counterexample: the Honolulu Board of Water Supply sued Neptune alleging ~40,000 of 54,000 meters failed before the 10-year warranty (cracked covers, water ingress). Hardware can physically fail \u2014 a tail risk no software asset carries. (alt_evidence WS4 litigation record.)"
     },
     "s11": {
       "ev_floor_bn": 10.31,
@@ -1987,7 +2079,9 @@
             "color": "#a6256e"
           }
         ]
-      }
+      },
+      "implied_t1": 13.2,
+      "breakeven_mult": 13.6
     },
     "s21": {
       "base_tsr_pct": 10.9,
@@ -2059,56 +2153,72 @@
         ]
       },
       "sensitivity": {
-        "rowTitle": "Exit multiple",
-        "colTitle": "5-yr annualized TSR (%) \u2014 exit multiple x FY31 DEPS",
+        "rowTitle": "Exit P/E",
+        "colTitle": "5-yr annualized TSR (%) \u2014 exit P/E \u00d7 software-organic \u0394 (base cell flagged)",
         "colLabels": [
-          "Bear FY31 $32.7",
-          "Base FY31 $35.3",
-          "Bull FY31 $39.0"
+          "-2pp",
+          "-1pp",
+          "base",
+          "+1pp"
         ],
         "rows": [
           {
             "label": "12x",
             "cells": [
               2.9,
-              4.4,
-              6.4
+              3.8,
+              4.7,
+              5.5
             ]
           },
           {
-            "label": "14x",
+            "label": "13.5x",
             "cells": [
+              5.1,
               6.0,
-              7.5,
-              9.6
+              6.9,
+              7.8
             ]
           },
           {
-            "label": "16.6x",
+            "label": "15x",
             "cells": [
-              9.4,
-              11.0,
-              13.2
+              7.2,
+              8.1,
+              9.0,
+              9.9
             ]
           },
           {
-            "label": "16.5x",
+            "label": "16.5x \u25c0",
             "cells": [
-              9.3,
+              9.1,
+              10.0,
               10.9,
-              13.0
+              11.8
             ]
           },
           {
             "label": "18x",
             "cells": [
-              11.1,
-              12.8,
-              15.0
+              10.8,
+              11.7,
+              12.7,
+              13.6
+            ]
+          },
+          {
+            "label": "19x",
+            "cells": [
+              11.9,
+              12.9,
+              13.8,
+              14.8
             ]
           }
         ]
-      }
+      },
+      "no_rerate_pct": 11.0
     },
     "s22": {
       "fcf_share_cagr_pct": 8.6,
@@ -2237,68 +2347,43 @@
         ],
         "rows": [
           [
-            "Segment organic prints (Applicatio",
-            "ROP 10-Q segment note (quarter",
+            "Segment organic prints (Application + Network SW)",
+            "ROP 10-Q segment note (quarterly)",
             "organic <4% and decelerating for 2+ quarters"
           ],
           [
-            "CentralReach AI-attach follow-thro",
+            "CentralReach AI-attach follow-through",
             "ROP earnings calls (quarterly)",
-            "75% bookings print does not recur or fails to sp"
+            "75% bookings print does not recur or fails to spread to other opcos"
           ],
           [
             "DAT spot truckload rates",
-            "DAT Trendlines / news releases",
-            "freight recovery stalls/reverses -> Network SW o"
+            "DAT Trendlines / news releases (weekly)",
+            "freight recovery stalls/reverses -> Network SW organic rolls over"
           ],
           [
-            "Frontline district churn to Red Ro",
-            "Red Rover press / district boa",
-            "named ENTERPRISE logos leave (not just SMB tails"
+            "Frontline district churn to Red Rover",
+            "Red Rover press / district board minutes (ongoing)",
+            "named ENTERPRISE logos leave (not just SMB tails)"
           ],
           [
-            "Costpoint 8.2 migration noise post",
-            "Deltek/partner forums, GovCon ",
-            "defections to Unanet/competitors instead of in-D"
+            "Costpoint 8.2 migration noise post-EOL",
+            "Deltek/partner forums, GovCon press (2026)",
+            "defections to Unanet/competitors instead of in-Deltek upgrade"
           ],
           [
-            "PowerPlan / Lucasys competitive & ",
-            "court dockets, utility-tech pr",
-            "credible challenger takes rate-case accounting s"
+            "PowerPlan / Lucasys competitive & litigation docket",
+            "court dockets, utility-tech press",
+            "credible challenger takes rate-case accounting share"
           ],
           [
             "Buyback pace vs leverage",
             "ROP 10-Q (quarterly)",
-            "net leverage climbs >3.5x funding buybacks at a "
-          ],
-          [
-            "M&A entry multiples on next platfo",
-            "ROP deal press releases",
-            "new platforms bought >18x (spread stays negative"
-          ],
-          [
-            "CSU-vs-ROP relative multiple",
-            "prices + filings (monthly)",
-            "ROP keeps cheapening vs CSU -> no re-rate coming"
-          ],
-          [
-            "Insider transactions",
-            "SEC Form 4",
-            "insiders SELL into weakness (undercuts 'manageme"
-          ],
-          [
-            "Consensus 2026-27 organic revenue ",
-            "sell-side estimate trend",
-            "organic estimates cut across the group"
-          ],
-          [
-            "Tier-1 net revenue retention comme",
-            "ROP calls / MD&A",
-            "mid-90s NRR on regulated core slips below ~92%"
+            "net leverage climbs >3.5x funding buybacks at a flat/de-rating price"
           ]
         ]
       },
-      "sizing_note": "Liquid S&P-100 name; core position. The bear we underwrite is the AI-thesis-fails case (exit 12x, contested tail loses share), not muddle-through \u2014 and it still marks to $323 (-11% vs spot) with a positive 2.9%/yr five-year TSR.",
+      "sizing_note": "Liquid S&P-100 mega-cap; CORE / measured overweight. Sized on the shape of the downside (the bear still compounds +2.9%/yr, low impairment risk) and the ~7% carry, not on a headline skew ratio. Size up on confirmation: a second AI-attach print, a \u226415x platform deal, or the freight up-cycle broadening.",
       "fls_tally": {
         "n": 15,
         "made": 12,
@@ -2307,7 +2392,8 @@
         "right_reasons": 11,
         "wrong_reasons": 0,
         "note": "12 made / 2 lost / 1 pending; right-reasons 11, wrong-reasons 0. Zero 'wrong-reasons + lost-money'. The losses (Indicor 49% retention; FY25 organic) are a retention choice and a cyclical decel, not flawed logic."
-      }
+      },
+      "robustness_note": "The +2.9%/yr bear-still-compounds figure is one conclusion cross-checked under two bear constructions (11.5x EV/EBITDA dossier; 12x P/E model) \u2014 a robustness check, not two independent models agreeing."
     },
     "s24": {
       "base_pt": 442,
@@ -2346,7 +2432,8 @@
           ]
         ]
       },
-      "restate_note": "Roper compounds cash at a P95 rate, the AI fear is aimed at ~10% of revenue, and you are paying the 0th percentile of a decade of multiples. Held to FY31 the base earns a double-digit TSR with no re-rate assumed; held ten years the owner math only needs 5-8% FCF/share growth to clear 10%/yr."
+      "restate_note": "Roper compounds cash at a P95 rate, the AI fear is aimed at ~10% of revenue, and you are paying the 0th percentile of a decade of multiples. Held to FY31 the base earns a double-digit TSR with no re-rate assumed; held ten years the owner math only needs 5-8% FCF/share growth to clear 10%/yr.",
+      "into_print": "Into the print (deck ships ~2.5 weeks before Q2 earnings): initiate at core size now rather than waiting. The entry case rests on the decade math, not the quarter, and the stock already re-rated +10% off the June low on no news \u2014 waiting for a clean print risks paying another turn for confirmation. Add on (a) a second AI-attach print, (b) segment software organic \u22655% with Tier-1 retention intact, or (c) the first platform deal at \u226415x. Trim only if software organic prints <4% AND decelerates sequentially \u2014 the bear's tell, not a bad quarter alone."
     },
     "a1": {
       "table": {

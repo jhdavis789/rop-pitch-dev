@@ -1,5 +1,8 @@
 <meta charset="utf-8">
 <title>ROP — Buy-Side Evidence Deck</title>
+<!-- inline favicon: avoids the browser's default /favicon.ico 404 (no network request) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='2' fill='%2300294b'/%3E%3Ctext x='8' y='12' font-size='11' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2300294b'/%3E%3C/svg%3E">
 <!--
   ROP evidence deck (EQT-screenshot style). Single-file app.
   Local sanity:  python3 -m http.server 8765   (open http://localhost:8765/deck/)
@@ -403,13 +406,24 @@ const SLIDES = [
     cover: true,
     render(d) {
       const m = d.meta || {};
+      const th = (d.slides && d.slides.s1 && d.slides.s1.theses) || [];
+      const heads = ['The software fear is mis-aimed', 'Hardware is a razor/blade compounder', 'A disciplined redeployment machine'];
+      const thesisBlock = th.length ? `<div style="display:flex;gap:14px;margin-top:30px">${th.map((t, i) => `
+          <div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid #ffffff26;border-radius:7px;padding:13px 15px">
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="font-family:var(--serif);font-size:22px;font-weight:700;color:#75d9d7">${t.n}</span>
+              <span style="font-size:12.5px;font-weight:600;color:#eaf3fb;line-height:1.25">${heads[i] || ''}</span></div>
+            <div style="font-size:11.5px;color:#a7cae4;line-height:1.35;margin-top:7px">${(t.eps_impact || '').replace(/^Model:\s*/, '')}</div>
+          </div>`).join('')}</div>` : '';
       return `<div class="cover-inner">
         <div class="cover-eyebrow">${m.ticker || 'ROP'} · Roper Technologies · Buy-Side Evidence Deck</div>
         <div class="cover-title">The market is discounting the wrong dollars in Roper's software base.</div>
         <div class="cover-sub">${m.one_line || 'STUB one-line trade thesis.'}</div>
         <div class="cover-rating"><span class="pill">${m.rating || 'BUY'}</span>
-          <span style="font-size:14px;color:#cfe3f2">Base PT ${m.price_target != null ? '$'+m.price_target : '—'} · ${m.tsr_5yr_pct != null ? m.tsr_5yr_pct+'% 5-yr TSR' : ''} · skew ${m.skew || '—'}</span>
+          <span style="font-size:14px;color:#cfe3f2">Base PT ${m.price_target != null ? '$'+m.price_target : '—'} (12-mo SOTP) · ${m.tsr_5yr_pct != null ? m.tsr_5yr_pct+'%/yr 5-yr TSR' : ''} · skew ${m.skew || '—'}</span>
         </div>
+        <div class="cover-spacer"></div>
+        ${thesisBlock}
         <div class="cover-spacer"></div>
         ${kpiStrip(d.cover_kpis || [])}
         <div class="cover-meta">By JAOD &amp; (mainly) Claude · As of ${m.asof || ''} · All figures scripted from data/deck_data.json</div>
@@ -428,22 +442,28 @@ const SLIDES = [
            <div><div style="font-size:12.5px;font-weight:600;line-height:1.3">${t.title}</div>
              <div style="font-size:11.5px;color:${C.TEAL};font-weight:600">${t.eps_impact}</div></div>
          </div>`).join('');
-      const wrong = (s.wrong || []).map(w => `<li style="margin:3px 0">${w}</li>`).join('');
-      const skewBody = `<div style="font-size:13px;line-height:1.6">
-          Up:down skew <b style="color:${C.NAVY}">${(s.skew || {}).ratio ?? '—'}</b> — base headlined, not the bull.
-          <div style="margin-top:8px;font-size:12px;font-weight:600;color:${C.GRAY}">WHAT WOULD MAKE ME WRONG</div>
-          <ul style="font-size:12px;margin-left:16px">${wrong}</ul></div>`;
+      const k = s.skew || {};
+      const skewBody = `<div style="font-size:12.5px;line-height:1.55">
+          One skew construction, used everywhere. On <b>12-month SOTP marks</b>, base
+          <b style="color:${C.NAVY}">$${k.base_px ?? '—'}</b> (+${k.up ?? '—'}%) against bear
+          <b style="color:${C.MAGENTA}">$${k.bear_px ?? '—'}</b> (${k.down ?? '—'}%) is <b>${k.ratio ?? '—'}</b>;
+          against the deeper de-rate trough (~$${k.trough_px ?? '—'}, ${k.trough_pct ?? '—'}%) it is roughly 1:1.
+          The edge is the <b>shape of the downside</b>, not the ratio: the full 5-year bear still compounds
+          <b style="color:${C.TEAL}">+${k.bear_tsr_ann ?? '—'}%/yr</b> with dividends, and a ~${k.fcf_yield_pct ?? '—'}% FCF yield pays you to wait.
+          <div style="margin-top:8px;font-size:11.5px;font-weight:700;color:${C.GRAY}">WHAT KILLS IT</div>
+          <ul style="font-size:11.5px;margin-left:15px;line-height:1.4">
+            <li>Tier-1 NRR cracks</li><li>a full-price panic deal</li><li>13–14x proves the permanent multiple</li></ul></div>`;
       return buildSlide({
-        claim: `Three theses, one trade: <u>exposed dollars are mispriced</u>, <u>hardware is under-owned</u>, and the allocator compounds to a <u>$${s.base_pt ?? '—'} base case</u> and <u>${s.tsr_5yr_pct ?? '—'}% TSR</u>.`,
+        claim: `Buy Roper: a <u>P95 cash-conversion</u> compounder priced at the <u>0th percentile of its own decade</u> of multiples, where the AI fear is aimed at ~10% of revenue and the whole book is de-rated for it.`,
         section: 'Recommendation', sub: 'One-pager',
         panels: [
-          { take: `Each thesis maps to a <b>discrete EPS driver</b>; the trade works even if only two of three land.`, title: 'The three theses', body: theses },
-          { take: `At a glance — <b>price, EV, multiple, and our base target</b> on one card.`, title: 'At a glance', table: s.at_glance },
-          { take: `Skew is <b>~${(s.skew || {}).ratio ?? '—'}</b>, honestly struck; the downside is the AI-thesis-fails bear, not muddle-through.`, title: 'Skew & falsifiers', body: skewBody }
+          { take: `Each thesis maps to a <b>named EPS driver</b>; the trade works even if only two of three land.`, title: 'The three theses', body: theses },
+          { take: `At a glance — <b>price, EV, multiple, base target</b>; the PT is a 12-mo SOTP mark, the TSR a 5-yr hold.`, title: 'At a glance', table: s.at_glance },
+          { take: `Skew is <b>${k.ratio ?? '—'}</b> on SOTP marks; the downside is the AI-thesis-fails bear, not muddle-through.`, title: 'Skew & falsifiers', body: skewBody }
         ],
         cols: 3,
-        sources: ['model_out.json', 'prices.json (7/2 close)'],
-        notes: ['Base case headlined per the honesty contract; bull and bear on S21.']
+        sources: ['model_out.json#sotp,scenarios', 'bear_dossier.json (trough)'],
+        notes: ['Horizons labeled: $442 is a 12-mo SOTP mark; 10.9%/yr is a 5-yr hold TSR (S21).']
       });
     }
   },
@@ -454,7 +474,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's2');
       return buildSlide({
-        claim: `The de-rate did all the damage — <u>EPS compounded ~${s.eps_cagr_pct ?? '—'}%</u> since 2021 while the multiple gave back <u>${s.derate_turns ?? '—'} turns</u>, not the business.`,
+        claim: `Roper's five-year underperformance decomposes almost fully into the <u>multiple</u> — adjusted EPS compounded ~${s.eps_cagr_pct ?? '—'}%/yr while the P/E fell from 28x to 17x, and the July move (+10% in two sessions) was sector beta on no company news, which is why the entry still works at $364.`,
         section: 'The setup', sub: 'De-rate anatomy',
         panels: [
           { take: `Price and EPS <b>diverged</b> after 2021 — the gap is multiple, not fundamentals.`, title: 'Price vs EPS (indexed)', canvasId: 'c-s2-price' },
@@ -475,14 +495,16 @@ const SLIDES = [
     title: 'S3 · What Roper is',
     render(d) {
       const s = sd(d, 's3');
-      const flow = `<div style="font-size:13px;line-height:1.9">
+      const flow = `<div style="font-size:12.5px;line-height:1.65">
           <b>Buy</b> niche software/med-tech monopolies →<br><b>Run</b> them decentralized for cash →<br>
           <b>Redeploy</b> the cash into the next one.
-          <div style="margin-top:10px;padding:8px;background:${C.BGTEAL};border-radius:4px;font-size:12px">
-            Cash-return-on-investment (CRI): <b style="color:${C.NAVY}">${s.cri_pct ?? '—'}%</b><br>
-            <span style="color:${C.GRAY}">${s.cri_note ?? ''}</span></div></div>`;
+          <div style="margin-top:8px;padding:7px 8px;background:${C.BGTEAL};border-radius:4px;font-size:11.5px">
+            Cash-return-on-investment (CRI): <b style="color:${C.NAVY}">${s.cri_pct ?? '—'}%</b>
+            <span style="color:${C.GRAY}"> — ${s.cri_note ?? ''}</span></div>
+          <div style="margin-top:10px;font-size:11px;font-weight:600;color:${C.GRAY};text-transform:uppercase;letter-spacing:.5px">Every $1 of revenue → free cash</div>
+          <div style="position:relative;height:118px;margin-top:4px"><canvas id="c-s3-fcf"></canvas></div></div>`;
       return buildSlide({
-        claim: `Roper is a <u>${s.n_opcos ?? '—'}-opco cash machine</u>, not a software bet — buy niche monopolies, run for cash, and <u>redeploy at a ${s.cri_pct ?? '—'}% cash return</u>.`,
+        claim: `Roper is a <u>permanent-capital redeployment machine</u> that owns ~${s.n_opcos ?? '—'} niche market leaders, runs each for cash, and moves the cash to the next compounder — the model Jellison built in 2001 and Hunn still runs.`,
         section: 'Business', sub: 'What Roper is',
         panels: [
           { take: `Three segments, but one <b>business model</b> — software plus a durable med-tech/water leg.`, title: 'Revenue by segment ($m)', canvasId: 'c-s3-mix' },
@@ -495,7 +517,9 @@ const SLIDES = [
     },
     init(d) { const s = sd(d, 's3');
       mkBar('c-s3-mix', { ...s.segment_mix, yTitle: '$m' });
-      mkBar('c-s3-tree', { ...s.opco_treemap, horizontal: true }); }
+      mkBar('c-s3-tree', { ...s.opco_treemap, horizontal: true });
+      mkBar('c-s3-fcf', { ...s.fcf_mini, horizontal: true, yTitle: '%',
+        series: (s.fcf_mini?.series || []).map(x => ({ ...x, color: C.TEAL })) }); }
   },
 
   /* ---- S4 Dollar decomposition (THE slide) ---- */
@@ -509,7 +533,7 @@ const SLIDES = [
       const tbl = dataTable(['Durable franchise', 'Revenue ($m)', 'Grade'],
         durable.map(o => [o.name, o.rev, o.grade === 'benefit' ? 'AI-benefiting' : 'Durable']));
       return buildSlide({
-        claim: `The revenue AI threatens and the revenue AI helps are <u>not the same dollars</u> — the <u>exposed ~${s.exposed_pct ?? '—'}%</u> is small next to a durable core that trades four turns below the peer line.`,
+        claim: `The revenue AI threatens and the revenue AI helps are <u>not the same dollars</u>: $${s.exposed_m ?? '—'}M (${s.exposed_pct ?? '—'}%) is genuinely exposed, while the durable core carries mid-90s retention — yet the whole book trades ${s.residual_turns ? Math.round(s.residual_turns) : '4'} turns below the peer line.`,
         section: 'Thesis 1 — Software', sub: 'Dollar decomposition', num: 1,
         panels: [
           { take: `Only <b>~${s.exposed_pct ?? '—'}%</b> of the book is genuinely AI-exposed; the rest is workflow spend AI makes stickier.`, title: 'Revenue by AI-exposure grade ($m)', canvasId: 'c-s4-decomp' },
@@ -538,7 +562,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's5');
       return buildSlide({
-        claim: `Most of the software book is the <u>system of record someone's auditor, regulator, or counterparty relies on</u> — you can write code cheaply; you cannot cheaply cold-start a freight network or assume audit continuity.`,
+        claim: `Most of the software book is the <u>system of record someone else's auditor, regulator, or counterparty relies on</u> — you can write code cheaply; you cannot cheaply cold-start a freight network or assume audit continuity.`,
         section: 'Thesis 1 — Software', sub: 'System of record',
         panels: [
           { take: `The case franchises carry a <b>durable revenue share</b> AI does not dislodge — the inverse of their graded exposure.`, title: 'Durable revenue share (%)', canvasId: 'c-s5-share' },
@@ -559,19 +583,23 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's6');
       return buildSlide({
-        claim: `Growth here is <u>price on bases that cannot leave</u> — organic held mean <u>~${s.mean_organic_pct ?? '—'}%</u> and never worse than <u>${s.min_organic_pct ?? '—'}%</u> through COVID, the freight recession, DOGE, and the AI panic.`,
+        claim: `Growth here is <u>price on bases that cannot leave</u>: contractual escalators, uncapped renewal repricing, and NRR above 100% — organic has averaged <u>${s.mean_organic_pct ?? '—'}%</u> since 2019 and has not printed a negative quarter since early 2021, through the freight recession, DOGE, and the AI panic.`,
         section: 'Thesis 1 — Software', sub: 'Pricing power',
         panels: [
-          { take: `Consolidated organic stayed positive across <b>every macro shock since 2019</b> — mean ~${s.mean_organic_pct ?? '—'}%, trough ${s.min_organic_pct ?? '—'}%.`, title: 'ROP organic growth by year (%)', canvasId: 'c-s6-org' },
-          { take: `Growth is <b>contractual price</b>: modeled escalators cluster near ${s.median_escalator_pct ?? '—'}%/yr, written into renewals, not won deal-by-deal.`, title: 'Modeled price escalators by opco (%/yr)', canvasId: 'c-s6-esc' }
+          { take: `Consolidated organic stayed positive across <b>every macro shock since 2019</b> — mean ~${s.mean_organic_pct ?? '—'}%, trough ${s.min_organic_pct ?? '—'}% (COVID only).`, title: 'ROP organic growth by year (%)', canvasId: 'c-s6-org' },
+          { take: `Documented escalation: ConstructConnect's Bid Management list price stepped <b>+${s.cc_escalation_pct ?? '—'}%</b> ($3,600→$4,500/yr) across four Wayback snapshots — pricing power made visible, in a <b>contested</b> opco no less.`, title: 'ConstructConnect list price ($/yr, archived)', canvasId: 'c-s6-cc' },
+          { take: `Modeled escalators cluster near <b>${s.median_escalator_pct ?? '—'}%/yr</b>, written into renewals.`, title: 'Modeled price escalators + court record',
+            body: `<div style="position:relative;height:150px"><canvas id="c-s6-esc"></canvas></div>
+              <div style="font-size:10px;color:${C.GRAY};line-height:1.35;margin-top:6px">${s.lucasys_note ?? ''}</div>` }
         ],
-        cols: 2,
-        sources: ['organic.json (SEC 8-K organic series)', 'model/drivers.json#priceG'],
-        notes: ['Escalators are the modeled per-opco price-growth assumptions, anchored to disclosed renewal terms where available.']
+        cols: 3,
+        sources: ['organic.json (SEC 8-K organic series)', 'alt_evidence.json (Wayback pricing, Lucasys docket)', 'model/drivers.json#priceG'],
+        notes: ['Escalators are the modeled per-opco price-growth assumptions; the ConstructConnect series is OBSERVED (archived list prices).']
       });
     },
     init(d) { const s = sd(d, 's6');
       mkLine('c-s6-org', { ...s.organic_by_year, yTitle: '%' });
+      mkLine('c-s6-cc', { ...s.cc_pricing, yTitle: '$/yr' });
       mkBar('c-s6-esc', { ...s.escalators, horizontal: true, yTitle: '%' }); }
   },
 
@@ -581,14 +609,16 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's7');
       return buildSlide({
-        claim: `Here is the <u>honest ${s.contested_pct ?? '—'}%</u> we could lose — <u>named challenger by named challenger</u>, with what we assume they take.`,
+        claim: `We underwrote the bear's best evidence: the <u>contested tail is real</u> — named challengers are winning logos — and we size it, cap it, and model it losing.`,
         section: 'Thesis 1 — Software', sub: 'Contested 12%',
         panels: [
-          { take: `The contested set is <b>small and named</b> — no hand-waving; each has a live challenger.`, title: 'Contested opcos & challengers', table: s.challengers },
-          { take: `Even if challengers win, the <b>revenue at risk</b> is bounded — sized here per opco.`, title: 'Revenue at risk ($m)', canvasId: 'c-s7-contested' }
+          { take: `Named challenger by named challenger, with <b>independent review evidence</b> — Unanet out-rates Deltek (G2 4.4/645); STACK leads takeoff (4.5/1,300).`, title: 'Challenger reviews (Capterra / G2)', table: s.challenger_reviews },
+          { take: `Even if they win, the <b>revenue at risk is bounded</b> — sized per opco; a demand-side overhang noted honestly.`, title: 'Revenue at risk ($m)',
+            body: `<div style="position:relative;height:150px"><canvas id="c-s7-contested"></canvas></div>
+              <div style="font-size:10px;color:${C.GRAY};line-height:1.35;margin-top:6px">${s.aba_note ?? ''}</div>` }
         ],
         cols: 2,
-        sources: ['ai_exposure.json (contested set)'],
+        sources: ['alt_evidence.json#workstream_3_review_trends', 'ai_exposure.json (exposed $)', 'alt_evidence.json (HHS-OIG audits)'],
         notes: ['Assumed loss is a deliberately conservative haircut, not a base case.']
       });
     },
@@ -601,14 +631,16 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's8');
       return buildSlide({
-        claim: `AI shows up first as <u>attach, not substitution</u> — a <u>${s.attach_print_pct ?? '—'}% CentralReach print</u> anchors a modeled <u>+${s.net_uplift_pp ?? '—'}pt net uplift</u>.`,
+        claim: `The upside case is AI sold through the system of record — <u>${s.attach_print_pct ?? '—'}% of CentralReach's new bookings were AI or AI-influenced in Q1'26</u>, up from zero two years ago — but it is one print, and we model it as optionality, not base.`,
         section: 'Thesis 1 — Software', sub: 'AI as attach',
         panels: [
           { take: `Demand is <b>workflow, not cycle</b> — consolidated organic stayed positive through every shock since 2019.`, title: 'ROP organic growth by year (%)', canvasId: 'c-s8-dat' },
           { take: `The bull carries AI-attach to a <b>higher FY31 adj DEPS</b>; we hold it as optionality, anchored to one CentralReach print.`, title: 'FY31 adj DEPS: base vs bull (attach)', canvasId: 'c-s8-attach' },
-          { take: `The attach evidence is <b>verified, primary, and labeled</b> — one print, not a run-rate.`, title: 'Verified attach statements', table: s.tam_statements }
+          { take: `The attach evidence is <b>verified and staffed</b> — one booking print, plus open reqs that fund the roadmap.`, title: 'Verified attach statements + hiring',
+            body: dataTable(s.tam_statements.cols, s.tam_statements.rows)
+              + `<div style="font-size:10px;color:${C.GRAY};line-height:1.35;margin-top:6px">${s.hiring_note ?? ''}</div>` }
         ],
-        sources: ['ai_exposure.json', 'model_out.json', 'earnings transcripts'],
+        sources: ['ai_exposure.json', 'model_out.json', 'case_facts.json', 'alt_evidence.json (Greenhouse ATS)'],
         notes: ['+1pt uplift is a one-print extrapolation — explicitly not a proven run-rate.']
       });
     },
@@ -623,7 +655,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's9');
       return buildSlide({
-        claim: `TEP is <u>razor-and-blade med-tech plus a water annuity</u> — a <u>${s.tep_organic_pct ?? '—'}% organic</u> P×Q build, not cyclical metal.`,
+        claim: `Technology Enabled Products is a <u>razor/blade consumables franchise</u> — ~35% EBITDA margins on ~1.3% capex, +7% organic latest quarter, growing units AND mix — and it is structurally beyond AI's reach.`,
         section: 'Thesis 2 — Hardware', sub: 'TEP economics', num: 2,
         panels: [
           { take: `Revenue is <b>price × units</b>, product by product — a build, not a black box.`, title: 'TEP P×Q build', table: s.pxq_build },
@@ -645,15 +677,17 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's10');
       return buildSlide({
-        claim: `The hardware <u>locks the software in</u> — <u>Neptune's closed system</u>, <u>Verathon's RCT-backed conversion</u>, and a <u>${s.consumable_mix_pct ?? '—'}% consumable mix</u>.`,
+        claim: `Neptune sells a <u>closed metering system</u> — switching vendors means re-installing the network, not swapping meters; Verathon's blade TAM is being <u>enlarged by RCT evidence</u> (NEJM 2023: video laryngoscopy 85% first-pass vs 70% direct).`,
         section: 'Thesis 2 — Hardware', sub: 'Lock-in',
         panels: [
           { take: `Units × ASP with a <b>consumable tail</b> — the installed base annuitizes.`, title: 'Units × ASP × consumable', table: s.units_asp },
           { take: `Verathon's video laryngoscopy has <b>RCT-backed</b> first-pass gains — a clinical, not price, moat.`, title: 'First-pass success (%)', canvasId: 'c-s10-vl' },
-          { take: `Consumable mix is <b>high and rising</b> — recurring by design.`, title: 'Consumable mix (%)', canvasId: 'c-s10-cons' }
+          { take: `Consumable unit growth is <b>steady</b> — recurring by design; the honest counterexample below.`, title: 'Consumable unit growth + the honest counterexample',
+            body: `<div style="position:relative;height:135px"><canvas id="c-s10-cons"></canvas></div>
+              <div style="font-size:10px;color:${C.GRAY};line-height:1.35;margin-top:6px">${s.honolulu_note ?? ''}</div>` }
         ],
-        sources: ['model_out.json (drivers)', 'clinical literature'],
-        notes: ['RCT figures cited in A9.']
+        sources: ['model/drivers.json (P×Q)', 'case_facts.json#VER1 (NEJM 2023)', 'alt_evidence.json (Honolulu docket)'],
+        notes: ['RCT figures cited in A9; hardware carries warranty/reliability tail risk software does not.']
       });
     },
     init(d) { const s = sd(d, 's10');
@@ -689,7 +723,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's12');
       return buildSlide({
-        claim: `Roper <u>buys well</u> and it shows — a <u>${s.median_moic ?? '—'}x median MOIC</u> and <u>${s.median_irr_pct ?? '—'}% IRR</u> across the platform ledger, cheap and full vintages labeled.`,
+        claim: `The 2015–18 vintage compounded at <u>2.4–3.8x unlevered MOIC</u>; the 2020–22 vintage paid top-of-cycle prices and shows it — the process is disciplined, the outcomes are vintage-dependent, and we underwrite the process.`,
         section: 'Thesis 3 — Allocator', sub: 'Deal ledger', num: 3,
         panels: [
           { take: `Platform-by-platform <b>MOIC and IRR</b>, disclosed vs estimated clearly marked.`, title: 'Platform deal ledger', table: s.ledger },
@@ -709,7 +743,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's13');
       return buildSlide({
-        claim: `ROIC <u>rises with the hold</u> — a <u>${s.entry_yield_pct ?? '—'}% day-one yield</u> compounds to <u>${s.today_yield_pct ?? '—'}% cash-on-cash</u> as price escalators run.`,
+        claim: `Reported ~6–7% ROIC measures the <u>entry fee, not the engine</u>: invested capital is frozen at purchase price while cash earnings compound — every vintage's return rises mechanically with hold, and the blended number always carries the newest, lowest-yield cohort.`,
         section: 'Thesis 3 — Allocator', sub: 'ROIC mechanism',
         panels: [
           { take: `Entry yield is <b>modest (~${s.entry_yield_pct ?? '—'}%)</b>; the return is built in the hold, not day one.`, title: 'Entry vs today cash yield (%)', canvasId: 'c-s13-coc' },
@@ -732,7 +766,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's14');
       return buildSlide({
-        claim: `Roper <u>sold well, not just bought well</u> — a divestiture ledger, a working-capital tailwind, and <u>${s.fcf_conversion_cents ?? '—'}¢ of FCF per revenue dollar</u>.`,
+        claim: `The other half of allocation: sold the cyclical book at the top ($3.36bn audited net-of-tax gains in 2022), run negative working capital, and convert <u>110%+ of adjusted earnings to cash</u>.`,
         section: 'Thesis 3 — Allocator', sub: 'Divestitures',
         panels: [
           { take: `Exits realized value <b>at the top of the cycle</b> ($3.36bn audited net-of-tax gains in 2022), not fire-sale.`, title: 'Divestiture ledger', table: s.divestitures },
@@ -753,7 +787,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's15');
       return buildSlide({
-        claim: `Buybacks are a <u>decision, not a reflex</u> — zero for a decade, then <u>$${s.buyback_bn ?? '—'}bn</u> only when a <u>${s.fcf_yield_pct ?? '—'}% FCF yield</u> beat the pipeline.`,
+        claim: `$${s.buyback_bn ?? '—'}bn repurchased since mid-2025 at a blended ~$367 — <u>a wash to today's price, not a bottom-tick</u> — funded at ~5% debt against a 7% FCF yield; the logic is arithmetic, not timing.`,
         section: 'Thesis 3 — Allocator', sub: 'Buybacks',
         panels: [
           { take: `<b>Zero buyback for ~a decade</b>, then a deliberate $${s.buyback_bn ?? '—'}bn — timing, not habit.`, title: 'Annual buyback ($bn)', canvasId: 'c-s15-buyback' },
@@ -761,7 +795,7 @@ const SLIDES = [
           { take: `A written <b>decision rule</b> — buyback vs M&A by signal.`, title: 'Buyback vs M&A rule', table: s.decision }
         ],
         sources: ['panel.json', 'model_out.json'],
-        notes: ['Q1’26 buyback was debt-funded; leverage ~3.1x — disclosed, then defended (5% debt vs 7% FCF yield).']
+        notes: ['Debt-funded, leverage up 2.9x (end-FY25: net debt $9.0bn / adj EBITDA $3.14bn, panel.json) → 3.1x (post-Q1’26) — disclosed, then defended (5% debt vs 7% FCF yield).']
       });
     },
     init(d) { const s = sd(d, 's15');
@@ -775,7 +809,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's16');
       return buildSlide({
-        claim: `The clearing window is <u>open</u> — <u>$${s.dry_powder_bn ?? '—'}bn of dry powder</u> aging past a <u>${s.median_hold_yrs ?? '—'}-year median hold</u>, and few permanent-capital buyers.`,
+        claim: `$3.8 trillion and ~32,000 unsold companies sit in PE portfolios — <u>both records</u> — with DPI below 15% of NAV for a fourth straight year; entry multiples for software carve-outs are compressing toward the vintages that made Roper's best deals.`,
         section: 'Thesis 3 — Allocator', sub: 'Forced sellers',
         panels: [
           { take: `<b>Dry powder</b> is high but exits are jammed — pressure to transact.`, title: 'PE dry powder ($bn)', canvasId: 'c-s16-dry' },
@@ -798,7 +832,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's17');
       return buildSlide({
-        claim: `Own Roper <u>over Constellation</u> — <u>comparable cash ROIC</u>, more <u>deployment capacity</u>, and a <u>hardware leg CSU does not have</u>.`,
+        claim: `Constellation is the <u>better business</u>; Roper is the <u>better mix at the same price</u> — on consistent cash-flow definitions the two now trade near parity (~15.7x vs ~14.6x plain FCF), and at parity you would rather own the one with the <u>stronger organic engine</u> (6% vs ~4%) and an AI-resistant hardware leg.`,
         section: 'Thesis 3 — Allocator', sub: 'ROP vs CSU',
         panels: [
           { take: `Head-to-head, ROP is a <b>peer</b> — not "the best allocator in the market", just the cheaper one here.`, title: 'ROP vs Constellation', table: s.head_to_head },
@@ -840,7 +874,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's19');
       return buildSlide({
-        claim: `On growth and margin, Roper trades <u>${s.residual_turns ?? '—'} turns cheap</u> to the VMS fit line (<u>R²=${s.r2 ?? '—'}</u>) — the residual is the opportunity.`,
+        claim: `At 13.5x adjusted EBITDA (SBC-added basis; 13.6x FY26E on the deck's standard basis), Roper trades <u>−34% below the vertical-software peer median</u> — with the second-highest margin in the set — and −40% below its own 10-year median.`,
         section: 'Valuation', sub: 'Comps regression',
         panels: [
           { take: `Regress EV/EBITDA on <b>growth + margin</b>; ROP sits <b>below the fit</b> line.`, title: 'EV/EBITDA vs growth+margin', canvasId: 'c-s19-scatter' },
@@ -862,7 +896,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's20');
       return buildSlide({
-        claim: `Sum the parts and the floor is <u>$${s.sotp_pt ?? '—'}</u> — tiered software multiples plus a hardware mark, with <u>break-evens well below spot</u>.`,
+        claim: `At $364 you pay <u>~${s.implied_t1 ?? '—'}x</u> for Tier-1 software after fair marks on hardware and network — a <u>break-even multiple of ~${s.breakeven_mult ?? '—'}x</u> the group has not traded at since 2011 outside the GFC.`,
         section: 'Valuation', sub: 'SOTP',
         panels: [
           { take: `Tiered by quality: <b>T1/T2/T3 software + TEP</b>, each on its own multiple.`, title: 'Sum-of-the-parts', table: s.sotp },
@@ -882,15 +916,15 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's21');
       return buildSlide({
-        claim: `The ladder pays <u>${s.base_tsr_pct ?? '—'}% base</u>, <u>${s.bull_tsr_pct ?? '—'}% bull</u>, <u>${s.bear_tsr_pct ?? '—'}% bear</u> — buyback and dividend carry it even if the multiple never re-rates.`,
+        claim: `The base case earns <u>${s.base_tsr_pct ?? '—'}%/yr</u> over a 5-year hold; <u>with no re-rate at all</u> — exit at today's 13.6x — the compounding alone returns <u>${s.no_rerate_pct ?? '—'}%/yr</u>, and the honest bear is <u>${s.bear_tsr_pct ?? '—'}%</u>.`,
         section: 'Valuation', sub: 'TSR ladder',
         panels: [
           { take: `Even the <b>bear</b> clears cash returns — multiple re-rate is upside, not the thesis.`, title: '5-yr annualized TSR (%)', canvasId: 'c-s21-ladder' },
           { take: `TSR is mostly <b>organic + buyback + dividend</b> — multiple is a minority of the return.`, title: 'TSR contribution', canvasId: 'c-s21-contrib' },
           { take: `Sensitivity to <b>exit multiple × organic</b> — the base sits mid-grid.`, title: 'Sensitivity (multiple × organic)', grid: s.sensitivity }
         ],
-        sources: ['model_out.json'],
-        notes: ['Skew ~2.5:1, not 5:1; bear is the AI-thesis-fails case.']
+        sources: ['model_out.json', 'sensitivity.json'],
+        notes: ['Horizons: this is a 5-yr hold exiting at 16.5x P/E, below the 18x SOTP blend behind the $442 12-mo mark — the exit is conservative relative to the mark.']
       });
     },
     init(d) { const s = sd(d, 's21');
@@ -904,7 +938,7 @@ const SLIDES = [
     render(d) {
       const s = sd(d, 's22');
       return buildSlide({
-        claim: `Held ten years, you compound with <u>${s.fcf_share_cagr_pct ?? '—'}% FCF-per-share growth</u> — <u>price follows cash</u>, and the <u>multiple is a rounding error</u>.`,
+        claim: `A ten-year holder at $364 needs only <u>5–8% FCF/share growth at humble exits</u> to earn 10%/yr — against a machine that has delivered 10% for a decade and is priced for ~1%.`,
         section: 'Valuation', sub: 'Owner returns',
         panels: [
           { take: `Over a decade, <b>FCF/share and price converge</b> — you earn the compounding, not the re-rate.`, title: 'FCF/share vs price (indexed)', canvasId: 'c-s22-owner' },
@@ -923,10 +957,11 @@ const SLIDES = [
     title: 'S23 · Risks',
     render(d) {
       const s = sd(d, 's23');
-      const sizing = `<div style="font-size:13px;line-height:1.6">${s.sizing_note ?? ''}
-        <div style="margin-top:8px;font-size:12px;color:${C.GRAY}">Bear target: <b style="color:${C.MAGENTA}">$${s.bear_pt ?? '—'}</b></div></div>`;
+      const sizing = `<div style="font-size:12.5px;line-height:1.5">${s.sizing_note ?? ''}
+        <div style="margin-top:8px;font-size:12px;color:${C.GRAY}">Bear target: <b style="color:${C.MAGENTA}">$${s.bear_pt ?? '—'}</b> (12-mo SOTP)</div>
+        <div style="margin-top:8px;font-size:10.5px;color:${C.GRAY};line-height:1.35">${s.robustness_note ?? ''}</div></div>`;
       return buildSlide({
-        claim: `Here is the <u>bear case that would make us wrong</u> — the NRR tells, the Costpoint migration, and the DAT spot cycle, each with a <u>date to watch</u>.`,
+        claim: `What would make us wrong, with dates and thresholds — and the bear we underwrite is the <u>AI-thesis-fails bear</u>, not a muddle-through.`,
         section: 'Risks', sub: 'Falsifiers',
         panels: [
           { take: `Honest <b>bear math</b> — the levers that break the thesis, quantified.`, title: 'Bear math', table: s.bear_math },
@@ -944,15 +979,17 @@ const SLIDES = [
     title: 'S24 · Catalysts',
     render(d) {
       const s = sd(d, 's24');
-      const restate = `<div style="font-size:14px;line-height:1.6">${s.restate_note ?? ''}
-        <div style="margin-top:10px;padding:10px;background:${C.BGBLUE};border-radius:4px">
-          <b style="color:${C.NAVY};font-size:16px">BUY</b> — base $${s.base_pt ?? '—'}, ${s.tsr_5yr_pct ?? '—'}% five-year TSR.</div></div>`;
+      const restate = `<div style="font-size:12.5px;line-height:1.5">${s.restate_note ?? ''}
+        <div style="margin-top:8px;padding:8px 10px;background:${C.WARM};border-radius:4px;font-size:11px;line-height:1.4;color:${C.NAVY2}">
+          <b style="color:${C.MAGENTA}">Into the print.</b> ${(s.into_print ?? '').replace(/^Into the print[^:]*:\s*/, '')}</div>
+        <div style="margin-top:8px;padding:9px 10px;background:${C.BGBLUE};border-radius:4px">
+          <b style="color:${C.NAVY};font-size:16px">BUY</b> — base $${s.base_pt ?? '—'} (12-mo SOTP), ${s.tsr_5yr_pct ?? '—'}%/yr 5-yr TSR.</div></div>`;
       return buildSlide({
-        claim: `The catalysts are <u>dated and specific</u> — reiterate <u>BUY to a $${s.base_pt ?? '—'} base</u> and a <u>${s.tsr_5yr_pct ?? '—'}% five-year TSR</u>.`,
+        claim: `The catalysts are <u>dated and specific</u> — reiterate <u>BUY to a $${s.base_pt ?? '—'} base</u> and a <u>${s.tsr_5yr_pct ?? '—'}%/yr five-year TSR</u>.`,
         section: 'Close', sub: 'Catalysts',
         panels: [
           { take: `Catalysts are <b>on the calendar</b> — each with why it moves the stock.`, title: 'Catalyst calendar', table: s.calendar },
-          { take: `Restated: <b>BUY</b>, base $${s.base_pt ?? '—'}, ${s.tsr_5yr_pct ?? '—'}% TSR.`, title: 'Recommendation', body: restate }
+          { take: `Own the question: the deck ships <b>~2.5 weeks before Q2</b>; initiate at core now, add on confirmation.`, title: 'Recommendation & into the print', body: restate }
         ],
         cols: 2,
         sources: ['build_deck_data.py', 'company IR calendar'],
