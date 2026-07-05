@@ -1,0 +1,3851 @@
+{
+  "_note": "Assembled by scripts/build_deck_data.py. Provenance: deck_data_provenance.json. Sections still on 999 await missing upstream (see build log).",
+  "meta": {
+    "ticker": "ROP",
+    "name": "Roper Technologies",
+    "rating": "BUY",
+    "one_line": "The market's software fear is aimed at the wrong dollars; the hardware annuity and the redeployment engine are underpriced.",
+    "asof": "2026-07-03",
+    "price": 364.2,
+    "shares_out_m": 100.92,
+    "ev_bn": 46.84,
+    "ev_ebitda": 13.6,
+    "fcf_yield_pct": 7.4,
+    "price_target": 442,
+    "tsr_5yr_pct": 10.9,
+    "skew": "1.9:1"
+  },
+  "cover_kpis": [
+    {
+      "label": "Price (7/2)",
+      "value": "$364",
+      "sub": "spot"
+    },
+    {
+      "label": "EV",
+      "value": "$46.8bn",
+      "sub": "anchor"
+    },
+    {
+      "label": "EV/EBITDA",
+      "value": "13.6x",
+      "sub": "FY26E adj"
+    },
+    {
+      "label": "FCF yield",
+      "value": "7.4%",
+      "sub": "FY26E"
+    },
+    {
+      "label": "Base PT",
+      "value": "$442",
+      "sub": "SOTP base"
+    },
+    {
+      "label": "5-yr TSR",
+      "value": "10.9%/yr",
+      "sub": "base"
+    },
+    {
+      "label": "Skew",
+      "value": "1.9:1",
+      "sub": "up:down (PT)"
+    }
+  ],
+  "slides": {
+    "s1": {
+      "base_pt": 442,
+      "tsr_5yr_pct": 10.9,
+      "theses": [
+        {
+          "n": 1,
+          "title": "The software fear is mis-aimed: exposed-$ is ~10% of revenue; the durable core is regulatory/network systems of record.",
+          "eps_impact": "Model: software organic \u2192 +$7.94 of FY31 adj DEPS"
+        },
+        {
+          "n": 2,
+          "title": "TEP is a razor/blade med-tech + water annuity, ~$11.5bn at peer marks (~25% of EV) the AI narrative cannot touch.",
+          "eps_impact": "Model: TEP organic \u2192 +$2.05 of FY31 adj DEPS"
+        },
+        {
+          "n": 3,
+          "title": "A disciplined redeployment machine enters its best buyer's market in a decade \u2014 record PE exit backlog, DPI at lows.",
+          "eps_impact": "Model: buyback +$1.12; disciplined M&A the swing ($-7.40 vs the buyback alternative)"
+        }
+      ],
+      "at_glance": {
+        "cols": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Price (7/2)",
+            "$364.20"
+          ],
+          [
+            "EV",
+            "$46.8bn"
+          ],
+          [
+            "EV/EBITDA (FY26E)",
+            "13.6x"
+          ],
+          [
+            "FCF yield (FY26E)",
+            "7.4%"
+          ],
+          [
+            "Base PT (SOTP)",
+            "$427"
+          ],
+          [
+            "Skew (reward:risk)",
+            "0.7:1"
+          ]
+        ]
+      },
+      "skew": {
+        "up": 21.4,
+        "down": -11.3,
+        "ratio": "1.9:1"
+      },
+      "wrong": [
+        "STUB falsifier one",
+        "STUB falsifier two",
+        "STUB falsifier three"
+      ]
+    },
+    "s2": {
+      "derate_turns": 11.8,
+      "eps_cagr_pct": 12.0,
+      "price_vs_eps": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Price (indexed)",
+            "data": [
+              100.0,
+              88.4,
+              112.1,
+              107.5,
+              92.6
+            ],
+            "color": "#00294b"
+          },
+          {
+            "label": "EPS (indexed)",
+            "data": [
+              100.0,
+              122.0,
+              168.5,
+              189.7,
+              187.8
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      },
+      "evebitda_hist": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "label": "ROP EV/EBITDA",
+            "data": [
+              38.83,
+              28.75,
+              29.48,
+              24.74,
+              19.7,
+              14.6
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "tsr_decomp": {
+        "labels": [
+          "EPS growth",
+          "Multiple",
+          "Dividend"
+        ],
+        "series": [
+          {
+            "label": "pp / yr (2015-26)",
+            "data": [
+              12.0,
+              -5.0,
+              1.0
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      }
+    },
+    "s3": {
+      "n_opcos": 31,
+      "cri_pct": 12.1,
+      "segment_mix": {
+        "labels": [
+          "App Software",
+          "Network Software",
+          "TEP"
+        ],
+        "series": [
+          {
+            "label": "Revenue ($m)",
+            "data": [
+              4483.0,
+              1600.8,
+              1818.7
+            ],
+            "color": "#00294b"
+          }
+        ]
+      },
+      "opco_treemap": {
+        "labels": [
+          "Vertafore",
+          "Deltek",
+          "Neptune",
+          "DAT",
+          "Clinisys/Sunquest",
+          "Strata Decision",
+          "Verathon",
+          "Frontline Education"
+        ],
+        "series": [
+          {
+            "label": "Revenue ($m)",
+            "data": [
+              950,
+              900,
+              750,
+              675,
+              640,
+              500,
+              475,
+              450
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "cri_note": "Blended cash-on-cash yield on the installed platform book (deal ledger, current)."
+    },
+    "s4": {
+      "exposed_pct": 10.2,
+      "benefiting_pct": 89.8,
+      "opcos": [
+        {
+          "name": "Vertafore",
+          "rev": 950,
+          "grade": "neutral"
+        },
+        {
+          "name": "Deltek",
+          "rev": 900,
+          "grade": "benefit"
+        },
+        {
+          "name": "Neptune",
+          "rev": 750,
+          "grade": "neutral"
+        },
+        {
+          "name": "DAT",
+          "rev": 675,
+          "grade": "benefit"
+        },
+        {
+          "name": "Clinisys/Sunquest",
+          "rev": 640,
+          "grade": "neutral"
+        },
+        {
+          "name": "Strata Decision",
+          "rev": 500,
+          "grade": "neutral"
+        },
+        {
+          "name": "Verathon",
+          "rev": 475,
+          "grade": "neutral"
+        },
+        {
+          "name": "Frontline Education",
+          "rev": 450,
+          "grade": "exposed"
+        },
+        {
+          "name": "PowerPlan",
+          "rev": 340,
+          "grade": "neutral"
+        },
+        {
+          "name": "Aderant",
+          "rev": 340,
+          "grade": "neutral"
+        },
+        {
+          "name": "iPipeline",
+          "rev": 320,
+          "grade": "neutral"
+        },
+        {
+          "name": "ConstructConnect",
+          "rev": 290,
+          "grade": "exposed"
+        },
+        {
+          "name": "iTradeNetwork",
+          "rev": 230,
+          "grade": "neutral"
+        },
+        {
+          "name": "NDI",
+          "rev": 200,
+          "grade": "neutral"
+        },
+        {
+          "name": "CentralReach",
+          "rev": 190,
+          "grade": "neutral"
+        },
+        {
+          "name": "CIVCO",
+          "rev": 160,
+          "grade": "neutral"
+        },
+        {
+          "name": "Foundry",
+          "rev": 135,
+          "grade": "exposed"
+        },
+        {
+          "name": "Replicon",
+          "rev": 130,
+          "grade": "exposed"
+        },
+        {
+          "name": "Procare Solutions",
+          "rev": 120,
+          "grade": "exposed"
+        },
+        {
+          "name": "Data Innovations",
+          "rev": 80,
+          "grade": "benefit"
+        },
+        {
+          "name": "MHA",
+          "rev": 80,
+          "grade": "neutral"
+        },
+        {
+          "name": "rf IDEAS",
+          "rev": 80,
+          "grade": "exposed"
+        },
+        {
+          "name": "Inovonics",
+          "rev": 75,
+          "grade": "neutral"
+        },
+        {
+          "name": "Horizon",
+          "rev": 60,
+          "grade": "neutral"
+        },
+        {
+          "name": "FMI",
+          "rev": 60,
+          "grade": "neutral"
+        },
+        {
+          "name": "Subsplash",
+          "rev": 55,
+          "grade": "exposed"
+        },
+        {
+          "name": "SHP",
+          "rev": 55,
+          "grade": "neutral"
+        },
+        {
+          "name": "IntelliTrans",
+          "rev": 45,
+          "grade": "exposed"
+        },
+        {
+          "name": "SoftWriters",
+          "rev": 40,
+          "grade": "exposed"
+        },
+        {
+          "name": "IPA",
+          "rev": 35,
+          "grade": "neutral"
+        },
+        {
+          "name": "Loadlink",
+          "rev": 13,
+          "grade": "neutral"
+        }
+      ],
+      "retention_dist": {
+        "labels": [
+          "<95%",
+          "95-98%",
+          "98-100%",
+          ">100% NRR"
+        ],
+        "counts": [
+          999,
+          999,
+          999,
+          999
+        ]
+      },
+      "case_tiles": [
+        {
+          "opco": "STUB-DAT",
+          "share_pct": 999,
+          "retention_pct": 999
+        },
+        {
+          "opco": "STUB-Deltek",
+          "share_pct": 999,
+          "retention_pct": 999
+        },
+        {
+          "opco": "STUB-PowerPlan",
+          "share_pct": 999,
+          "retention_pct": 999
+        }
+      ],
+      "net_effect": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "Net AI effect on software organic (pp/yr)",
+            "data": [
+              -0.62,
+              -0.12,
+              0.34
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      }
+    },
+    "s5": {
+      "share_bar": {
+        "labels": [
+          "STUB DAT",
+          "STUB PowerPlan",
+          "STUB Deltek",
+          "STUB DataInno",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Category share (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "retention_bar": {
+        "labels": [
+          "STUB DAT",
+          "STUB PowerPlan",
+          "STUB Deltek",
+          "STUB DataInno",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Gross retention (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "tiles": {
+        "cols": [
+          "Case opco",
+          "Type",
+          "Verified fact",
+          "Status"
+        ],
+        "rows": [
+          [
+            "DAT",
+            "Freight network",
+            "RateView built on ~$1tn of paid freight transactions",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "PowerPlan",
+            "Regulatory SoR",
+            "~99% of US IOUs use it; ~99% logo retention",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "Deltek",
+            "Gov-contract ledger",
+            "GovWin IQ leading gov-contract intelligence",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "Aderant",
+            "BigLaw SoR",
+            "\u2014",
+            "\u2014"
+          ],
+          [
+            "Data Innovations",
+            "Lab interface",
+            "\u2014",
+            "\u2014"
+          ]
+        ]
+      },
+      "durability_bar": {
+        "labels": [
+          "DAT",
+          "PowerPlan",
+          "Deltek",
+          "Aderant",
+          "Data Innovations"
+        ],
+        "series": [
+          {
+            "label": "Durable revenue (100 \u2212 AI-exposed %)",
+            "data": [
+              95.0,
+              97.0,
+              92.0,
+              92.0,
+              100.0
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      }
+    },
+    "s6": {
+      "median_escalator_pct": 5.0,
+      "escalators": {
+        "labels": [
+          "Transact",
+          "Loadlink",
+          "DAT",
+          "CentralReach",
+          "Vertafore",
+          "PowerPlan",
+          "Aderant",
+          "ConstructConnect",
+          "Deltek",
+          "Strata"
+        ],
+        "series": [
+          {
+            "label": "Modeled contractual price growth (%/yr)",
+            "data": [
+              8.5,
+              8,
+              7.5,
+              7,
+              6.5,
+              6.5,
+              6,
+              6,
+              5.5,
+              5.5
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "retention_dist": {
+        "labels": [
+          "<95%",
+          "95-98%",
+          "98-100%",
+          ">100%"
+        ],
+        "series": [
+          {
+            "label": "Opco count",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "reviews": {
+        "points": [
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "fit": [
+          {
+            "x": 0,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "highlight": {
+          "x": 999,
+          "y": 999,
+          "label": "ROP"
+        }
+      },
+      "mean_organic_pct": 5.6,
+      "min_organic_pct": -3.0,
+      "organic_by_year": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "ROP consolidated organic (%)",
+            "data": [
+              2.8,
+              -1.0,
+              7.8,
+              9.8,
+              7.8,
+              5.8,
+              5.5
+            ],
+            "color": "#00294b"
+          }
+        ]
+      }
+    },
+    "s7": {
+      "contested_pct": 10.2,
+      "challengers": {
+        "cols": [
+          "Opco",
+          "Exposure note",
+          "Exposed %",
+          "$ at risk ($m)"
+        ],
+        "rows": [
+          [
+            "Vertafore",
+            "SMB agency tail exposed; rolling out AI tools (Q1'26",
+            "12%",
+            114
+          ],
+          [
+            "Frontline Education",
+            "Absence module leaking to Red Rover; ERP/IEP core st",
+            "22%",
+            99
+          ],
+          [
+            "ConstructConnect",
+            "Takeoff tools displaced by Togal.ai; but strong mome",
+            "30%",
+            87
+          ],
+          [
+            "Replicon",
+            "Generic time-tracking directly substitutable by AI a",
+            "65%",
+            84
+          ],
+          [
+            "Foundry",
+            "June draft said 60% exposed; Q1'26 posted RECORD Nuk",
+            "30%",
+            40
+          ],
+          [
+            "Procare Solutions",
+            "Childcare SaaS, lower switching cost, AI-native entr",
+            "30%",
+            36
+          ],
+          [
+            "CentralReach",
+            "Q1'26: ~75% of new bookings AI/AI-influenced, recurr",
+            "18%",
+            34
+          ],
+          [
+            "iTradeNetwork",
+            "Analytics/compliance upsell wedge exposed; perishabl",
+            "12%",
+            28
+          ]
+        ]
+      },
+      "contested_bar": {
+        "labels": [
+          "Vertafore",
+          "Frontline Education",
+          "ConstructConnect",
+          "Replicon",
+          "Foundry",
+          "Procare Solutions",
+          "CentralReach",
+          "iTradeNetwork"
+        ],
+        "series": [
+          {
+            "label": "Revenue at risk ($m)",
+            "data": [
+              114,
+              99,
+              87,
+              84,
+              40,
+              36,
+              34,
+              28
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      }
+    },
+    "s8": {
+      "attach_print_pct": 75,
+      "net_uplift_pp": -0.12,
+      "dat_organic": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "ROP consolidated organic (%)",
+            "data": [
+              2.8,
+              -1.0,
+              7.8,
+              9.8,
+              7.8,
+              5.8,
+              5.5
+            ],
+            "color": "#00294b"
+          }
+        ]
+      },
+      "attach_model": {
+        "labels": [
+          "Base FY31",
+          "Bull (AI-attach) FY31"
+        ],
+        "series": [
+          {
+            "label": "Adj DEPS ($)",
+            "data": [
+              35.31,
+              39.05
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      },
+      "tam_statements": {
+        "cols": [
+          "Opco",
+          "Verified statement",
+          "Status"
+        ],
+        "rows": [
+          [
+            "CentralReach",
+            "AI-attached bookings 0 -> ~75% in two years",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "Verathon",
+            "video laryngoscopy first-pass 85% vs direct 70%",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "DAT",
+            "RateView built on ~$1tn of paid freight transactions",
+            "VERIFIED-PRIMARY"
+          ]
+        ]
+      }
+    },
+    "s9": {
+      "tep_organic_pct": 5.8,
+      "pxq_build": {
+        "cols": [
+          "Product",
+          "ASP ($)",
+          "Units/yr",
+          "Revenue ($m)"
+        ],
+        "rows": [
+          [
+            "Neptune",
+            "$190",
+            "3.95m",
+            750.5
+          ],
+          [
+            "Verathon",
+            "$73",
+            "6.50m",
+            475.0
+          ],
+          [
+            "NDI",
+            "$274",
+            "730k",
+            200.0
+          ],
+          [
+            "CIVCO",
+            "$45",
+            "3.55m",
+            160.0
+          ],
+          [
+            "rf IDEAS",
+            "$105",
+            "762k",
+            80.0
+          ],
+          [
+            "IPA",
+            "$7,778",
+            "4k",
+            35.0
+          ]
+        ]
+      },
+      "organic_hist": {
+        "labels": [
+          "2027",
+          "2028",
+          "2029",
+          "2030",
+          "2031"
+        ],
+        "series": [
+          {
+            "label": "Modeled TEP organic (%)",
+            "data": [
+              5.8,
+              5.8,
+              5.8,
+              5.8,
+              5.8
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "margins": {
+        "labels": [
+          "Neptune",
+          "Verathon",
+          "NDI",
+          "CIVCO",
+          "rf IDEAS",
+          "IPA"
+        ],
+        "series": [
+          {
+            "label": "Opco margin (%)",
+            "data": [
+              32,
+              42,
+              33,
+              34,
+              37,
+              36
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      }
+    },
+    "s10": {
+      "consumable_mix_pct": 49,
+      "units_asp": {
+        "cols": [
+          "Product",
+          "Units/yr",
+          "ASP ($)",
+          "Consumable engine"
+        ],
+        "rows": [
+          [
+            "Neptune",
+            "3.95m",
+            "$190",
+            "meters shipped/yr"
+          ],
+          [
+            "Verathon",
+            "6.50m",
+            "$73",
+            "single-use GlideScope blades/yr"
+          ],
+          [
+            "NDI",
+            "730k",
+            "$274",
+            "navigated procedures/yr"
+          ],
+          [
+            "CIVCO",
+            "3.55m",
+            "$45",
+            "ultrasound-guided interventional procedures/yr"
+          ]
+        ]
+      },
+      "vl_conversion": {
+        "labels": [
+          "Direct laryngoscopy",
+          "Video laryngoscopy"
+        ],
+        "series": [
+          {
+            "label": "First-pass success (%)",
+            "data": [
+              70,
+              85
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "consumable_bar": {
+        "labels": [
+          "Verathon",
+          "NDI",
+          "CIVCO"
+        ],
+        "series": [
+          {
+            "label": "Consumable unit growth (%/yr)",
+            "data": [
+              4,
+              4,
+              3
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      }
+    },
+    "s11": {
+      "ev_floor_bn": 10.31,
+      "ev_bull_bn": 11.3,
+      "residual_sw_multiple": 13.2,
+      "peer_marks": {
+        "cols": [
+          "TEP mark",
+          "Multiple",
+          "EV ($bn)",
+          "Note"
+        ],
+        "rows": [
+          [
+            "Bear (punitive)",
+            "12.0x",
+            7.98,
+            "Below hardware peers"
+          ],
+          [
+            "Base (rigorous floor)",
+            "15.5x",
+            10.31,
+            "Badger/Teleflex/Ambu/Masimo range"
+          ],
+          [
+            "Bull (full comp)",
+            "17.0x",
+            11.3,
+            "20x+ = bull, not base"
+          ]
+        ]
+      },
+      "ev_floor": {
+        "labels": [
+          "Bear (12x)",
+          "Base (15.5x)",
+          "Bull (17x)"
+        ],
+        "series": [
+          {
+            "label": "TEP EV ($bn)",
+            "data": [
+              7.98,
+              10.31,
+              11.3
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "residual": {
+        "labels": [
+          "Implied residual T1",
+          "Base T1 mark"
+        ],
+        "series": [
+          {
+            "label": "EV / EBITDA (x)",
+            "data": [
+              13.2,
+              18
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      }
+    },
+    "s12": {
+      "median_moic": 1.98,
+      "median_irr_pct": 13.0,
+      "ledger": {
+        "cols": [
+          "Platform",
+          "Vintage",
+          "Entry EV/EBITDA",
+          "ROIC now",
+          "Basis"
+        ],
+        "rows": [
+          [
+            "TransCore/DAT",
+            "2004-12",
+            "7.6x",
+            "33.4%",
+            "Franchise"
+          ],
+          [
+            "Sunquest",
+            "2012-08",
+            "10.1x",
+            "6.0%",
+            "Franchise"
+          ],
+          [
+            "MHA (Managed Health Care Assoc.)",
+            "2013-09",
+            "10.5x",
+            "7.4%",
+            "Franchise"
+          ],
+          [
+            "Aderant",
+            "2015-10",
+            "12.3x",
+            "13.5%",
+            "Graded"
+          ],
+          [
+            "Deltek",
+            "2016-12",
+            "14.0x",
+            "8.5%",
+            "Graded"
+          ],
+          [
+            "ConstructConnect",
+            "2016-10",
+            "12.6x",
+            "10.4%",
+            "Graded"
+          ],
+          [
+            "PowerPlan",
+            "2018-06",
+            "14.7x",
+            "8.8%",
+            "Graded"
+          ],
+          [
+            "Foundry/Nuke",
+            "2019-04",
+            "20.9x",
+            "5.2%",
+            "Graded"
+          ],
+          [
+            "iPipeline",
+            "2019-08",
+            "21.7x",
+            "5.8%",
+            "Graded"
+          ],
+          [
+            "Vertafore",
+            "2020-09",
+            "18.4x",
+            "4.7%",
+            "Graded"
+          ],
+          [
+            "Frontline Education",
+            "2022-09",
+            "19.3x",
+            "3.6%",
+            "Graded"
+          ],
+          [
+            "Syntellis (->Strata)",
+            "2023-08",
+            "14.7x",
+            "5.9%",
+            "Underwrite"
+          ],
+          [
+            "Procare Solutions",
+            "2024-03",
+            "18.4x",
+            "3.9%",
+            "Underwrite"
+          ],
+          [
+            "Transact Campus (->CBORD)",
+            "2024-09",
+            "14.3x",
+            "5.7%",
+            "Underwrite"
+          ],
+          [
+            "CentralReach",
+            "2025-05",
+            "24.7x",
+            "2.8%",
+            "Underwrite"
+          ],
+          [
+            "Subsplash",
+            "2025-07",
+            "24.2x",
+            "2.4%",
+            "Underwrite"
+          ]
+        ]
+      },
+      "vintage_scatter": {
+        "points": [
+          {
+            "x": 2004,
+            "y": 7.6
+          },
+          {
+            "x": 2012,
+            "y": 10.1
+          },
+          {
+            "x": 2013,
+            "y": 10.5
+          },
+          {
+            "x": 2015,
+            "y": 12.3
+          },
+          {
+            "x": 2016,
+            "y": 14.0
+          },
+          {
+            "x": 2016,
+            "y": 12.6
+          },
+          {
+            "x": 2018,
+            "y": 14.7
+          },
+          {
+            "x": 2019,
+            "y": 20.9
+          },
+          {
+            "x": 2019,
+            "y": 21.7
+          },
+          {
+            "x": 2020,
+            "y": 18.4
+          },
+          {
+            "x": 2022,
+            "y": 19.3
+          },
+          {
+            "x": 2023,
+            "y": 14.7
+          },
+          {
+            "x": 2024,
+            "y": 18.4
+          },
+          {
+            "x": 2024,
+            "y": 14.3
+          },
+          {
+            "x": 2025,
+            "y": 24.7
+          },
+          {
+            "x": 2025,
+            "y": 24.2
+          }
+        ]
+      }
+    },
+    "s13": {
+      "entry_yield_pct": 4.3,
+      "today_yield_pct": 12.1,
+      "goodwill_pct": 61.6,
+      "cash_on_cash": {
+        "labels": [
+          "TransCore/DAT",
+          "Aderant",
+          "Deltek",
+          "ConstructConnect",
+          "PowerPlan",
+          "iPipeline",
+          "Vertafore"
+        ],
+        "series": [
+          {
+            "label": "Entry yield (%)",
+            "data": [
+              7.5,
+              4.6,
+              4.1,
+              4.5,
+              3.9,
+              2.6,
+              3.1
+            ],
+            "color": "#6b7f8a"
+          },
+          {
+            "label": "Today yield (%)",
+            "data": [
+              33.4,
+              13.5,
+              8.5,
+              10.4,
+              8.8,
+              5.8,
+              4.7
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      },
+      "yield_curve": {
+        "labels": [
+          "t+0",
+          "t+5",
+          "t+10",
+          "t+15",
+          "t+20"
+        ],
+        "series": [
+          {
+            "label": "Cash yield (%)",
+            "data": [
+              4.2,
+              6.4,
+              9.6,
+              14.4,
+              21.8
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "roic_bridge": {
+        "labels": [
+          "Newest cohort (day-1)",
+          "Blended today",
+          "Mature DAT cohort"
+        ],
+        "series": [
+          {
+            "label": "Cash yield (%)",
+            "data": [
+              3.0,
+              12.1,
+              33.4
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      }
+    },
+    "s14": {
+      "fcf_conversion_cents": 32,
+      "divestitures": {
+        "cols": [
+          "Asset",
+          "Close",
+          "Buyer",
+          "Proceeds ($m)"
+        ],
+        "rows": [
+          [
+            "Gatan (EM instruments)",
+            "2019-10",
+            "AMETEK",
+            925
+          ],
+          [
+            "CIVCO Radiotherapy",
+            "2021-11",
+            "Blue Wolf Capital",
+            120
+          ],
+          [
+            "Zetec (NDT/eddy-current)",
+            "2022-01",
+            "Eddyfi NDT",
+            350
+          ],
+          [
+            "TransCore (tolling/traffic)",
+            "2022-03",
+            "ST Engineering",
+            2680
+          ],
+          [
+            "Indicor (51% of 16 industrials)",
+            "2022-11",
+            "CD&R",
+            2600
+          ],
+          [
+            "Certinia stake (18.2% PSA SW)",
+            "2024",
+            "financial buyer",
+            246
+          ]
+        ]
+      },
+      "wc_swing": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "NWC / revenue (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "fcf_conversion": {
+        "labels": [
+          "ROP",
+          "Large-cap p25",
+          "p50",
+          "p75",
+          "p90"
+        ],
+        "series": [
+          {
+            "label": "FCF per $1 revenue (\u00a2)",
+            "data": [
+              31.6,
+              2.4,
+              7.8,
+              15.8,
+              25.5
+            ],
+            "color": "#00294b"
+          }
+        ]
+      }
+    },
+    "s15": {
+      "buyback_bn": 4.4,
+      "fcf_yield_pct": 7.4,
+      "debt_cost_pct": 4.5,
+      "buyback_hist": {
+        "labels": [
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Buyback ($bn)",
+            "data": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5
+            ],
+            "color": "#00294b"
+          }
+        ]
+      },
+      "yield_vs_debt": {
+        "labels": [
+          "FCF yield (installed)",
+          "Debt cost (pre-tax)",
+          "Debt cost (after-tax)"
+        ],
+        "series": [
+          {
+            "label": "%",
+            "data": [
+              7.4,
+              4.5,
+              3.51
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      },
+      "decision": {
+        "cols": [
+          "Signal",
+          "Reads",
+          "Action"
+        ],
+        "rows": [
+          [
+            "FCF yield on installed book",
+            "~7.4%",
+            "Buy back"
+          ],
+          [
+            "Day-1 FCF yield on new deal @16-18x",
+            "~3.2%",
+            "Pass / wait"
+          ],
+          [
+            "Cost of debt (pre-tax)",
+            "4.5%",
+            "Below FCF yield"
+          ],
+          [
+            "Leverage (net debt / EBITDA)",
+            "~3.1x, cap ~3.0x",
+            "Fund within cap"
+          ],
+          [
+            "FY26-31 base buyback ($m)",
+            "4,597",
+            "Residual FCF"
+          ],
+          [
+            "FY31 base net debt ($m)",
+            "12,985",
+            "Serviceable"
+          ]
+        ]
+      }
+    },
+    "s16": {
+      "dry_powder_bn": 1200,
+      "median_hold_yrs": 7.0,
+      "dry_powder": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Dry powder ($bn)",
+            "data": [
+              900,
+              1100,
+              1150,
+              1250,
+              1200
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "aging_inventory": {
+        "labels": [
+          "2019",
+          "2023",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Held \u22654yr (% of portfolio)",
+            "data": [
+              52,
+              57,
+              61
+            ],
+            "color": "#00294b"
+          }
+        ]
+      },
+      "dpi_holdtime": {
+        "labels": [
+          "2014",
+          "2017",
+          "2019",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Median DPI (% NAV)",
+            "data": [
+              29,
+              29,
+              21,
+              18,
+              14,
+              13,
+              11,
+              14
+            ],
+            "color": "#a6256e"
+          },
+          {
+            "label": "Median hold (yrs)",
+            "data": [
+              null,
+              null,
+              5.7,
+              5.8,
+              null,
+              6.8,
+              null,
+              7.0
+            ],
+            "color": "#007e6c"
+          }
+        ]
+      }
+    },
+    "s17": {
+      "csu_premium_now_pct": 71.0,
+      "head_to_head": {
+        "cols": [
+          "Metric",
+          "ROP",
+          "CSU"
+        ],
+        "rows": [
+          [
+            "EV/EBITDA (fwd)",
+            "13.6x",
+            "13.8x*"
+          ],
+          [
+            "FCF yield",
+            "6.9%",
+            "4.0%"
+          ],
+          [
+            "Rev CAGR (10y)",
+            "8.2%",
+            "20.3%"
+          ],
+          [
+            "FCF/sh CAGR (10y)",
+            "10%",
+            "15.5%*"
+          ],
+          [
+            "Organic (2025)",
+            "6%",
+            "4%"
+          ],
+          [
+            "P/FCF",
+            "14.6x",
+            "24.9x"
+          ]
+        ]
+      },
+      "compare_bar": {
+        "labels": [
+          "EV/EBITDA fwd",
+          "FCF yield %",
+          "Organic 2025 %"
+        ],
+        "series": [
+          {
+            "label": "ROP",
+            "data": [
+              13.6,
+              6.9,
+              6
+            ],
+            "color": "#00294b"
+          },
+          {
+            "label": "CSU",
+            "data": [
+              13.8,
+              4.0,
+              4
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      }
+    },
+    "s18": {
+      "flow_steps": [
+        "P\u00d7Q per opco",
+        "\u2192 segment revenue",
+        "\u2192 3-statement",
+        "\u2192 FCF & TSR"
+      ],
+      "drivers": {
+        "cols": [
+          "Thesis",
+          "Named driver",
+          "FY31 adj DEPS impact"
+        ],
+        "rows": [
+          [
+            "1 \u2014 Software organic",
+            "Per-opco price \u00d7 quantity",
+            "+$7.94"
+          ],
+          [
+            "2 \u2014 Hardware organic",
+            "TEP razor/blade P \u00d7 Q",
+            "+$2.05"
+          ],
+          [
+            "3 \u2014 Buyback",
+            "Residual FCF \u2192 repurchase",
+            "+$1.12"
+          ],
+          [
+            "3 \u2014 M&A vs buyback",
+            "$2.5bn/yr @16x entry",
+            "\u2212$7.40 vs buyback"
+          ],
+          [
+            "Base FY31 adj DEPS",
+            "Sum of named drivers",
+            "$35.31"
+          ]
+        ]
+      }
+    },
+    "s19": {
+      "residual_turns": 4.1,
+      "r2": 0.05,
+      "scatter": {
+        "points": [
+          {
+            "x": 8.7,
+            "y": 20.6
+          },
+          {
+            "x": 5.9,
+            "y": 16.9
+          },
+          {
+            "x": 22.6,
+            "y": 24.7
+          },
+          {
+            "x": 10.9,
+            "y": 23.7
+          },
+          {
+            "x": 8.5,
+            "y": 17.0
+          },
+          {
+            "x": 9.0,
+            "y": 21.9
+          },
+          {
+            "x": 20.7,
+            "y": 22.5
+          },
+          {
+            "x": 14.9,
+            "y": 23.4
+          },
+          {
+            "x": 24.9,
+            "y": 32.3
+          },
+          {
+            "x": 7.5,
+            "y": 6.5
+          },
+          {
+            "x": 18.3,
+            "y": 14.9
+          },
+          {
+            "x": 15.1,
+            "y": 8.9
+          },
+          {
+            "x": 12.2,
+            "y": 22.9
+          },
+          {
+            "x": 4.0,
+            "y": 20.3
+          },
+          {
+            "x": 9.5,
+            "y": 22.7
+          },
+          {
+            "x": 7.5,
+            "y": 18.4
+          },
+          {
+            "x": 19.9,
+            "y": 12.0
+          }
+        ],
+        "highlight": {
+          "x": 12.1,
+          "y": 13.5,
+          "label": "ROP"
+        }
+      },
+      "residual_bar": {
+        "labels": [
+          "SSNC",
+          "INTU",
+          "CSU.TO",
+          "ROP",
+          "MSCI",
+          "GWRE"
+        ],
+        "series": [
+          {
+            "label": "Residual (turns EV/adj EBITDA)",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      }
+    },
+    "s20": {
+      "sotp_ev_bn": 54.91,
+      "sotp_pt": 442,
+      "sotp": {
+        "cols": [
+          "Tier",
+          "FY26E EBITDA ($m)",
+          "Base multiple",
+          "EV ($bn)"
+        ],
+        "rows": [
+          [
+            "Tier-1 software",
+            "1,649",
+            "18x",
+            29.68
+          ],
+          [
+            "Tier-2 software",
+            "1,224",
+            "13.5x",
+            16.52
+          ],
+          [
+            "Tier-3 software",
+            "80",
+            "10x",
+            0.8
+          ],
+          [
+            "TEP (hardware)",
+            "665",
+            "15.5x",
+            10.31
+          ],
+          [
+            "Corporate",
+            "-172",
+            "14x",
+            -2.41
+          ],
+          [
+            "Gross EV (base)",
+            "",
+            "",
+            54.91
+          ]
+        ]
+      },
+      "scenario_grid": {
+        "rowTitle": "Scenario",
+        "colTitle": "SOTP by scenario",
+        "colLabels": [
+          "Gross EV ($bn)",
+          "PT ($)",
+          "vs spot (%)"
+        ],
+        "rows": [
+          {
+            "label": "Bear",
+            "cells": [
+              42.8,
+              323,
+              -11.3
+            ]
+          },
+          {
+            "label": "Base",
+            "cells": [
+              54.9,
+              442,
+              21.4
+            ]
+          },
+          {
+            "label": "Bull",
+            "cells": [
+              61.1,
+              503,
+              38.2
+            ]
+          }
+        ]
+      },
+      "breakeven": {
+        "labels": [
+          "Tier-1",
+          "Tier-2",
+          "Tier-3",
+          "TEP"
+        ],
+        "series": [
+          {
+            "label": "Base mark (x)",
+            "data": [
+              18,
+              13.5,
+              10,
+              15.5
+            ],
+            "color": "#005f9e"
+          },
+          {
+            "label": "Break-even (uniform 13.6x)",
+            "data": [
+              13.6,
+              13.6,
+              13.6,
+              13.6
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      }
+    },
+    "s21": {
+      "base_tsr_pct": 10.9,
+      "bull_tsr_pct": 16.2,
+      "bear_tsr_pct": 2.9,
+      "ladder": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull",
+          "Prob-wtd"
+        ],
+        "series": [
+          {
+            "label": "5-yr annualized TSR (%)",
+            "data": [
+              2.9,
+              10.9,
+              16.2,
+              9.8
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "contribution": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "Organic",
+            "data": [
+              3.2,
+              9.1,
+              12.2
+            ],
+            "color": "#00294b"
+          },
+          {
+            "label": "Buyback",
+            "data": [
+              5.6,
+              0.8,
+              -0.1
+            ],
+            "color": "#005f9e"
+          },
+          {
+            "label": "Dividend",
+            "data": [
+              1.5,
+              1.5,
+              1.5
+            ],
+            "color": "#007e6c"
+          },
+          {
+            "label": "Multiple",
+            "data": [
+              -6.3,
+              -0.1,
+              2.7
+            ],
+            "color": "#a6256e"
+          }
+        ]
+      },
+      "sensitivity": {
+        "rowTitle": "Exit multiple",
+        "colTitle": "5-yr annualized TSR (%) \u2014 exit multiple x FY31 DEPS",
+        "colLabels": [
+          "Bear FY31 $32.7",
+          "Base FY31 $35.3",
+          "Bull FY31 $39.0"
+        ],
+        "rows": [
+          {
+            "label": "12x",
+            "cells": [
+              2.9,
+              4.4,
+              6.4
+            ]
+          },
+          {
+            "label": "14x",
+            "cells": [
+              6.0,
+              7.5,
+              9.6
+            ]
+          },
+          {
+            "label": "16.6x",
+            "cells": [
+              9.4,
+              11.0,
+              13.2
+            ]
+          },
+          {
+            "label": "16.5x",
+            "cells": [
+              9.3,
+              10.9,
+              13.0
+            ]
+          },
+          {
+            "label": "18x",
+            "cells": [
+              11.1,
+              12.8,
+              15.0
+            ]
+          }
+        ]
+      }
+    },
+    "s22": {
+      "fcf_share_cagr_pct": 8.6,
+      "owner_returns": {
+        "labels": [
+          "2026",
+          "2027",
+          "2028",
+          "2029",
+          "2030",
+          "2031"
+        ],
+        "series": [
+          {
+            "label": "FCF/share (indexed)",
+            "data": [
+              100.0,
+              107.7,
+              116.3,
+              126.4,
+              138.1,
+              151.3
+            ],
+            "color": "#00294b"
+          },
+          {
+            "label": "Price (indexed)",
+            "data": [
+              100.0,
+              109.3,
+              119.7,
+              131.5,
+              144.8,
+              159.9
+            ],
+            "color": "#005f9e"
+          }
+        ]
+      },
+      "believe": {
+        "cols": [
+          "To earn\u2026",
+          "Base",
+          "Required FCF/EBITDA CAGR"
+        ],
+        "rows": [
+          [
+            "8% TSR \u2014 req_fcf_cagr_at_20x_fcf(5%yield)",
+            "\u2014",
+            "3.0%"
+          ],
+          [
+            "8% TSR \u2014 req_fcf_cagr_at_15x_fcf(6.7%yield)",
+            "\u2014",
+            "6.0%"
+          ],
+          [
+            "8% TSR \u2014 req_ebitda_cagr_at_15x_ev_ebitda",
+            "\u2014",
+            "4.9%"
+          ],
+          [
+            "10% TSR \u2014 req_fcf_cagr_at_20x_fcf(5%yield)",
+            "\u2014",
+            "5.0%"
+          ],
+          [
+            "10% TSR \u2014 req_fcf_cagr_at_15x_fcf(6.7%yield)",
+            "\u2014",
+            "8.0%"
+          ],
+          [
+            "10% TSR \u2014 req_ebitda_cagr_at_15x_ev_ebitda",
+            "\u2014",
+            "6.6%"
+          ]
+        ]
+      }
+    },
+    "s23": {
+      "bear_pt": 323,
+      "bear_math": {
+        "cols": [
+          "Lever",
+          "Base",
+          "Bear"
+        ],
+        "rows": [
+          [
+            "Software organic",
+            "per-opco P\u00d7Q",
+            "broad \u22121pt, contested tail bleeds"
+          ],
+          [
+            "Exit EV/EBITDA",
+            "18x T1",
+            "12x"
+          ],
+          [
+            "FY31 adj DEPS ($)",
+            "35.31",
+            "32.74"
+          ],
+          [
+            "FY31 EBITDA ($m)",
+            "5,133",
+            "3,843"
+          ],
+          [
+            "SOTP PT ($)",
+            "442",
+            "323"
+          ],
+          [
+            "5-yr TSR (ann., incl. div)",
+            "10.9%",
+            "2.9%"
+          ]
+        ]
+      },
+      "watch_items": {
+        "cols": [
+          "Tell",
+          "Source",
+          "Confirms the bear if\u2026"
+        ],
+        "rows": [
+          [
+            "Segment organic prints (Applicatio",
+            "ROP 10-Q segment note (quarter",
+            "organic <4% and decelerating for 2+ quarters"
+          ],
+          [
+            "CentralReach AI-attach follow-thro",
+            "ROP earnings calls (quarterly)",
+            "75% bookings print does not recur or fails to sp"
+          ],
+          [
+            "DAT spot truckload rates",
+            "DAT Trendlines / news releases",
+            "freight recovery stalls/reverses -> Network SW o"
+          ],
+          [
+            "Frontline district churn to Red Ro",
+            "Red Rover press / district boa",
+            "named ENTERPRISE logos leave (not just SMB tails"
+          ],
+          [
+            "Costpoint 8.2 migration noise post",
+            "Deltek/partner forums, GovCon ",
+            "defections to Unanet/competitors instead of in-D"
+          ],
+          [
+            "PowerPlan / Lucasys competitive & ",
+            "court dockets, utility-tech pr",
+            "credible challenger takes rate-case accounting s"
+          ],
+          [
+            "Buyback pace vs leverage",
+            "ROP 10-Q (quarterly)",
+            "net leverage climbs >3.5x funding buybacks at a "
+          ],
+          [
+            "M&A entry multiples on next platfo",
+            "ROP deal press releases",
+            "new platforms bought >18x (spread stays negative"
+          ],
+          [
+            "CSU-vs-ROP relative multiple",
+            "prices + filings (monthly)",
+            "ROP keeps cheapening vs CSU -> no re-rate coming"
+          ],
+          [
+            "Insider transactions",
+            "SEC Form 4",
+            "insiders SELL into weakness (undercuts 'manageme"
+          ],
+          [
+            "Consensus 2026-27 organic revenue ",
+            "sell-side estimate trend",
+            "organic estimates cut across the group"
+          ],
+          [
+            "Tier-1 net revenue retention comme",
+            "ROP calls / MD&A",
+            "mid-90s NRR on regulated core slips below ~92%"
+          ]
+        ]
+      },
+      "sizing_note": "Liquid S&P-100 name; core position. The bear we underwrite is the AI-thesis-fails case (exit 12x, contested tail loses share), not muddle-through \u2014 and it still marks to $323 (-11% vs spot) with a positive 2.9%/yr five-year TSR.",
+      "fls_tally": {
+        "n": 15,
+        "made": 12,
+        "lost": 2,
+        "pending": 1,
+        "right_reasons": 11,
+        "wrong_reasons": 0,
+        "note": "12 made / 2 lost / 1 pending; right-reasons 11, wrong-reasons 0. Zero 'wrong-reasons + lost-money'. The losses (Indicor 49% retention; FY25 organic) are a retention choice and a cyclical decel, not flawed logic."
+      }
+    },
+    "s24": {
+      "base_pt": 442,
+      "tsr_5yr_pct": 10.9,
+      "calendar": {
+        "cols": [
+          "Window",
+          "Catalyst",
+          "Why it matters"
+        ],
+        "rows": [
+          [
+            "~Jul 21, 2026",
+            "Q2'26 print",
+            "Segment organic + AI-attach follow-through"
+          ],
+          [
+            "Weekly",
+            "DAT spot-rate series",
+            "Freight inflection = network upside"
+          ],
+          [
+            "Next deal",
+            "Platform acquisition",
+            "Entry multiple tests the buyer's-market thesis"
+          ],
+          [
+            "2026-27",
+            "Costpoint 8.2 migration",
+            "Watch for defections (bear tell)"
+          ],
+          [
+            "Quarterly",
+            "Buyback cadence vs leverage",
+            "Discipline check at ~3.1x"
+          ]
+        ]
+      },
+      "restate_note": "Roper compounds cash at a P95 rate, the AI fear is aimed at ~10% of revenue, and you are paying the 0th percentile of a decade of multiples. Held to FY31 the base earns a double-digit TSR with no re-rate assumed; held ten years the owner math only needs 5-8% FCF/share growth to clear 10%/yr."
+    },
+    "a1": {
+      "table": {
+        "cols": [
+          "Opco",
+          "Segment",
+          "Revenue ($m)",
+          "Exposed %",
+          "AI grade",
+          "Benefit"
+        ],
+        "rows": [
+          [
+            "Vertafore",
+            "App",
+            950,
+            "12%",
+            "Neutral",
+            "Yes"
+          ],
+          [
+            "Deltek",
+            "App",
+            900,
+            "8%",
+            "Benefit",
+            "Yes"
+          ],
+          [
+            "Neptune",
+            "TEP",
+            750,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "DAT",
+            "Network",
+            675,
+            "5%",
+            "Benefit",
+            "Yes"
+          ],
+          [
+            "Clinisys/Sunquest",
+            "App",
+            640,
+            "10%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Strata Decision",
+            "App",
+            500,
+            "10%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Verathon",
+            "TEP",
+            475,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Frontline Education",
+            "App",
+            450,
+            "22%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "PowerPlan",
+            "App",
+            340,
+            "3%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Aderant",
+            "App",
+            340,
+            "8%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "iPipeline",
+            "Network",
+            320,
+            "5%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "ConstructConnect",
+            "Network",
+            290,
+            "30%",
+            "Exposed",
+            "Yes"
+          ],
+          [
+            "iTradeNetwork",
+            "Network",
+            230,
+            "12%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "NDI",
+            "TEP",
+            200,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "CentralReach",
+            "App",
+            190,
+            "18%",
+            "Neutral",
+            "Yes"
+          ],
+          [
+            "CIVCO",
+            "TEP",
+            160,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Foundry",
+            "Network",
+            135,
+            "30%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "Replicon",
+            "App",
+            130,
+            "65%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "Procare Solutions",
+            "App",
+            120,
+            "30%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "Data Innovations",
+            "App",
+            80,
+            "0%",
+            "Benefit",
+            "Yes"
+          ],
+          [
+            "MHA",
+            "Network",
+            80,
+            "3%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "rf IDEAS",
+            "TEP",
+            80,
+            "20%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "Inovonics",
+            "TEP",
+            75,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Horizon",
+            "App",
+            60,
+            "10%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "FMI",
+            "TEP",
+            60,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Subsplash",
+            "Network",
+            55,
+            "35%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "SHP",
+            "Network",
+            55,
+            "5%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "IntelliTrans",
+            "Network",
+            45,
+            "20%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "SoftWriters",
+            "Network",
+            40,
+            "25%",
+            "Exposed",
+            "No"
+          ],
+          [
+            "IPA",
+            "TEP",
+            35,
+            "0%",
+            "Neutral",
+            "No"
+          ],
+          [
+            "Loadlink",
+            "Network",
+            13,
+            "3%",
+            "Neutral",
+            "No"
+          ]
+        ]
+      }
+    },
+    "a2": {
+      "table": {
+        "cols": [
+          "Opco",
+          "Seg",
+          "ASP ($)",
+          "Q0 (units)",
+          "Price g %",
+          "Qty g %",
+          "Margin %"
+        ],
+        "rows": [
+          [
+            "Deltek",
+            "App",
+            "$1,622",
+            "555k",
+            5.5,
+            -0.5,
+            46
+          ],
+          [
+            "Vertafore",
+            "App",
+            "$2,853",
+            "333k",
+            6.5,
+            -1,
+            46
+          ],
+          [
+            "Clinisys",
+            "App",
+            "$240,000",
+            "3k",
+            4.5,
+            -0.5,
+            42
+          ],
+          [
+            "Strata",
+            "App",
+            "$178,571",
+            "3k",
+            5.5,
+            0.5,
+            46
+          ],
+          [
+            "Transact",
+            "App",
+            "$50,000",
+            "10k",
+            8.5,
+            -2,
+            48
+          ],
+          [
+            "Frontline",
+            "App",
+            "$69,231",
+            "6k",
+            4.5,
+            -0.5,
+            48
+          ],
+          [
+            "PowerPlan",
+            "App",
+            "$1,658,537",
+            "205",
+            6.5,
+            0.5,
+            50
+          ],
+          [
+            "Aderant",
+            "App",
+            "$1,700",
+            "200k",
+            6,
+            4,
+            47
+          ],
+          [
+            "CentralReach",
+            "App",
+            "$876",
+            "217k",
+            7,
+            7,
+            44
+          ],
+          [
+            "Foundry",
+            "Net",
+            "$4,500",
+            "30k",
+            5,
+            -3.5,
+            37
+          ],
+          [
+            "Replicon",
+            "App",
+            "$16,250",
+            "8k",
+            4,
+            -1,
+            38
+          ],
+          [
+            "Data Innovations",
+            "App",
+            "$13,333",
+            "6k",
+            5,
+            0,
+            52
+          ],
+          [
+            "Other",
+            "App",
+            "$95,000,000",
+            "1",
+            4,
+            0,
+            40
+          ],
+          [
+            "DAT",
+            "Net",
+            "$2,700",
+            "250k",
+            7.5,
+            -0.5,
+            53
+          ],
+          [
+            "iPipeline",
+            "Net",
+            "$3,200,000",
+            "100",
+            5,
+            1,
+            52
+          ],
+          [
+            "ConstructConnect",
+            "Net",
+            "$2,417",
+            "120k",
+            6,
+            -1,
+            40
+          ],
+          [
+            "iTrade",
+            "Net",
+            "$57,500",
+            "4k",
+            3.5,
+            1.5,
+            50
+          ],
+          [
+            "Loadlink",
+            "Net",
+            "$1,733",
+            "8k",
+            8,
+            -1.5,
+            53
+          ],
+          [
+            "Neptune",
+            "TEP",
+            "$190",
+            "3.95m",
+            4,
+            1,
+            32
+          ],
+          [
+            "Verathon",
+            "TEP",
+            "$73",
+            "6.50m",
+            3,
+            4,
+            42
+          ],
+          [
+            "NDI",
+            "TEP",
+            "$274",
+            "730k",
+            3,
+            4,
+            33
+          ],
+          [
+            "CIVCO",
+            "TEP",
+            "$45",
+            "3.55m",
+            2,
+            3,
+            34
+          ],
+          [
+            "rf IDEAS",
+            "TEP",
+            "$105",
+            "762k",
+            1.5,
+            3.5,
+            37
+          ],
+          [
+            "IPA",
+            "TEP",
+            "$7,778",
+            "4k",
+            3,
+            1,
+            36
+          ]
+        ]
+      }
+    },
+    "a3": {
+      "table": {
+        "cols": [
+          "Platform",
+          "Close",
+          "Net price ($m)",
+          "Entry x",
+          "Hold yrs",
+          "ROIC entry",
+          "ROIC now",
+          "Basis"
+        ],
+        "rows": [
+          [
+            "TransCore/DAT",
+            "2004-12",
+            606,
+            "7.6x",
+            21.6,
+            "7.5%",
+            "33.4%",
+            "Franchise"
+          ],
+          [
+            "Sunquest",
+            "2012-08",
+            1415,
+            "10.1x",
+            13.9,
+            "5.6%",
+            "6.0%",
+            "Franchise"
+          ],
+          [
+            "MHA (Managed Health Care Assoc.)",
+            "2013-09",
+            1000,
+            "10.5x",
+            12.8,
+            "5.4%",
+            "7.4%",
+            "Franchise"
+          ],
+          [
+            "Aderant",
+            "2015-10",
+            675,
+            "12.3x",
+            10.7,
+            "4.6%",
+            "13.5%",
+            "Graded"
+          ],
+          [
+            "Deltek",
+            "2016-12",
+            2800,
+            "14.0x",
+            9.6,
+            "4.1%",
+            "8.5%",
+            "Graded"
+          ],
+          [
+            "ConstructConnect",
+            "2016-10",
+            632,
+            "12.6x",
+            9.7,
+            "4.5%",
+            "10.4%",
+            "Graded"
+          ],
+          [
+            "PowerPlan",
+            "2018-06",
+            1100,
+            "14.7x",
+            8.1,
+            "3.9%",
+            "8.8%",
+            "Graded"
+          ],
+          [
+            "Foundry/Nuke",
+            "2019-04",
+            544,
+            "20.9x",
+            7.2,
+            "2.7%",
+            "5.2%",
+            "Graded"
+          ],
+          [
+            "iPipeline",
+            "2019-08",
+            1625,
+            "21.7x",
+            6.9,
+            "2.6%",
+            "5.8%",
+            "Graded"
+          ],
+          [
+            "Vertafore",
+            "2020-09",
+            5335,
+            "18.4x",
+            5.8,
+            "3.1%",
+            "4.7%",
+            "Graded"
+          ],
+          [
+            "Frontline Education",
+            "2022-09",
+            3375,
+            "19.3x",
+            3.8,
+            "3.0%",
+            "3.6%",
+            "Graded"
+          ],
+          [
+            "Syntellis (->Strata)",
+            "2023-08",
+            1250,
+            "14.7x",
+            2.9,
+            "3.9%",
+            "5.9%",
+            "Underwrite"
+          ],
+          [
+            "Procare Solutions",
+            "2024-03",
+            1750,
+            "18.4x",
+            2.3,
+            "3.1%",
+            "3.9%",
+            "Underwrite"
+          ],
+          [
+            "Transact Campus (->CBORD)",
+            "2024-09",
+            1500,
+            "14.3x",
+            1.8,
+            "4.0%",
+            "5.7%",
+            "Underwrite"
+          ],
+          [
+            "CentralReach",
+            "2025-05",
+            1650,
+            "24.7x",
+            1.1,
+            "2.6%",
+            "2.8%",
+            "Underwrite"
+          ],
+          [
+            "Subsplash",
+            "2025-07",
+            800,
+            "24.2x",
+            1.0,
+            "2.4%",
+            "2.4%",
+            "Underwrite"
+          ]
+        ]
+      }
+    },
+    "a4": {
+      "table": {
+        "cols": [
+          "Ticker",
+          "Name",
+          "Actual x",
+          "Predicted x",
+          "Residual"
+        ],
+        "rows": [
+          [
+            "SSNC",
+            "SS&C",
+            6.5,
+            16.5,
+            0
+          ],
+          [
+            "INTU",
+            "Intuit",
+            8.9,
+            18.4,
+            0
+          ],
+          [
+            "CSU.TO",
+            "Constellation Software",
+            12.0,
+            19.9,
+            0
+          ],
+          [
+            "ADSK",
+            "Autodesk",
+            14.9,
+            19.3,
+            0
+          ],
+          [
+            "ROP",
+            "Roper Technologies",
+            13.5,
+            17.6,
+            0
+          ],
+          [
+            "SPGI",
+            "S&P Global",
+            17.0,
+            16.6,
+            0
+          ],
+          [
+            "VRSK",
+            "Verisk",
+            16.9,
+            16.0,
+            0
+          ],
+          [
+            "IEX",
+            "IDEX",
+            18.4,
+            16.7,
+            0
+          ],
+          [
+            "APPF",
+            "AppFolio",
+            22.5,
+            20.2,
+            0
+          ],
+          [
+            "TYL",
+            "Tyler Technologies",
+            20.6,
+            17.0,
+            0
+          ],
+          [
+            "DHR",
+            "Danaher",
+            20.3,
+            15.9,
+            0
+          ],
+          [
+            "FICO",
+            "Fair Isaac",
+            24.7,
+            20.2,
+            0
+          ],
+          [
+            "PCOR",
+            "Procore",
+            23.4,
+            18.7,
+            0
+          ],
+          [
+            "BSY",
+            "Bentley",
+            22.9,
+            17.8,
+            0
+          ],
+          [
+            "MCO",
+            "Moody's",
+            21.9,
+            16.7,
+            0
+          ],
+          [
+            "AME",
+            "AMETEK",
+            22.7,
+            17.1,
+            0
+          ],
+          [
+            "MSCI",
+            "MSCI",
+            23.7,
+            17.0,
+            0
+          ],
+          [
+            "GWRE",
+            "Guidewire",
+            32.3,
+            21.5,
+            0
+          ]
+        ]
+      }
+    },
+    "a5": {
+      "table": {
+        "cols": [
+          "Year",
+          "Dry powder ($bn)",
+          "Median hold",
+          "Median DPI",
+          "SaaS entry x"
+        ],
+        "rows": [
+          [
+            "2014",
+            "\u2014",
+            "\u2014",
+            29,
+            "\u2014"
+          ],
+          [
+            "2017",
+            "\u2014",
+            "\u2014",
+            29,
+            "\u2014"
+          ],
+          [
+            "2019",
+            "\u2014",
+            5.7,
+            21,
+            "\u2014"
+          ],
+          [
+            "2021",
+            900,
+            5.8,
+            18,
+            25
+          ],
+          [
+            "2022",
+            1100,
+            "\u2014",
+            14,
+            "\u2014"
+          ],
+          [
+            "2023",
+            1150,
+            6.8,
+            13,
+            18
+          ],
+          [
+            "2024",
+            1250,
+            "\u2014",
+            11,
+            "\u2014"
+          ],
+          [
+            "2025",
+            1200,
+            7.0,
+            14,
+            18
+          ]
+        ]
+      }
+    },
+    "a6": {
+      "table": {
+        "cols": [
+          "Segment (FY2025)",
+          "Net revenue ($m)",
+          "Operating profit ($m)",
+          "D&A ($m)"
+        ],
+        "rows": [
+          [
+            "Consolidated",
+            7902.5,
+            2235.4,
+            898.2
+          ],
+          [
+            "Application Software",
+            4483.0,
+            1203.1,
+            702.2
+          ],
+          [
+            "Network Software",
+            1600.8,
+            695.8,
+            169.6
+          ],
+          [
+            "Technology Enabled Products",
+            1818.7,
+            626.7,
+            23.1
+          ],
+          [
+            "Corporate",
+            0.0,
+            -290.2,
+            3.3
+          ]
+        ]
+      }
+    },
+    "a7": {
+      "table": {
+        "cols": [
+          "Line item ($m unless noted)",
+          "FY26E",
+          "FY27E",
+          "FY28E",
+          "FY29E",
+          "FY30E",
+          "FY31E"
+        ],
+        "rows": [
+          [
+            "Revenue",
+            "8,475.0",
+            "9,163.2",
+            "9,887.7",
+            "10,650.0",
+            "11,451.9",
+            "12,295.4"
+          ],
+          [
+            "Adj EBITDA",
+            "3,432.4",
+            "3,734.0",
+            "4,054.0",
+            "4,393.1",
+            "4,752.5",
+            "5,133.3"
+          ],
+          [
+            "EBITDA margin %",
+            40.5,
+            40.7,
+            41.0,
+            41.2,
+            41.5,
+            41.7
+          ],
+          [
+            "Tangible D&A/maint.",
+            "127.1",
+            "137.4",
+            "148.3",
+            "159.8",
+            "171.8",
+            "184.4"
+          ],
+          [
+            "Interest (net debt \u00d7 4.5%)",
+            "453.6",
+            "462.6",
+            "473.0",
+            "491.6",
+            "517.0",
+            "548.1"
+          ],
+          [
+            "Adj net income",
+            "2,224.7",
+            "2,444.5",
+            "2,677.5",
+            "2,918.3",
+            "3,169.4",
+            "3,432.8"
+          ],
+          [
+            "Adj DEPS ($)",
+            "21.94",
+            "24.01",
+            "26.33",
+            "28.96",
+            "31.94",
+            "35.31"
+          ],
+          [
+            "Diluted shares (m)",
+            101.4,
+            101.81,
+            101.69,
+            100.77,
+            99.23,
+            97.22
+          ],
+          [
+            "Free cash flow",
+            "2,669.6",
+            "2,886.4",
+            "3,114.6",
+            "3,354.8",
+            "3,607.4",
+            "3,873.0"
+          ],
+          [
+            "FCF margin %",
+            31.5,
+            31.5,
+            31.5,
+            31.5,
+            31.5,
+            31.5
+          ],
+          [
+            "Dividends paid",
+            "369.1",
+            "408.3",
+            "448.5",
+            "488.7",
+            "528.9",
+            "569.7"
+          ],
+          [
+            "Buybacks",
+            "0.0",
+            "209.0",
+            "579.0",
+            "930.0",
+            "1,271.0",
+            "1,608.0"
+          ],
+          [
+            "Net debt (EOY)",
+            "10,281.0",
+            "10,511.0",
+            "10,924.0",
+            "11,488.0",
+            "12,180.0",
+            "12,985.0"
+          ],
+          [
+            "DPS ($)",
+            "3.64",
+            "4.01",
+            "4.41",
+            "4.85",
+            "5.33",
+            "5.86"
+          ]
+        ]
+      }
+    },
+    "a8": {
+      "body": "Every figure in this deck is assembled by scripts/build_deck_data.py from checked-in upstream JSONs (SEC XBRL panel, deal ledger, comps regression, AI-exposure grading, PE-stats). No number is authored in the deck HTML. Marks use unified anchors (price $364.20, EV $46.84bn, FY26E adj EBITDA ~$3,446m). Sections still on placeholders await data/model_out.json."
+    },
+    "a9": {
+      "table": {
+        "cols": [
+          "ID",
+          "Company",
+          "Claim",
+          "Status"
+        ],
+        "rows": [
+          [
+            "A1",
+            "DAT",
+            "RateView built on ~$1tn of paid freight transactions",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "A2",
+            "DAT",
+            "~3 million loads posted per month",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "A3",
+            "DAT",
+            "~+5% organic through the 2022-25 freight recession",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "A4",
+            "DAT",
+            "spot rates now N straight monthly gains",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "A5",
+            "DAT",
+            "~$675m revenue at ~53% EBITDA",
+            "PLAUSIBLE-EST"
+          ],
+          [
+            "P1",
+            "PowerPlan",
+            "a court filing characterized ~99% IOU share",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "P2",
+            "PowerPlan",
+            "~99% of US IOUs use it; ~99% logo retention",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "D1",
+            "Deltek",
+            "Costpoint used by 84% of top-25 primes / 98% of top-100 cont",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "D2",
+            "Deltek",
+            "GovWin IQ leading gov-contract intelligence",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "D3",
+            "Deltek",
+            "Costpoint 8.1 EOL April 2026; retention test",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "D4",
+            "Deltek",
+            "Unanet win; Relyant Global saved ~$250k/yr",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "DI1",
+            "Data Innovations",
+            "465+ Epic Beaker labs since 2016",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "DI2",
+            "Data Innovations",
+            "95% of US News Best Hospitals run it",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "DI3",
+            "Data Innovations",
+            "uncapped renewal repricing",
+            "PLAUSIBLE-EST"
+          ],
+          [
+            "AD1",
+            "Aderant",
+            "~50-55% of BigLaw / 86 of top 100 firms",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "AD2",
+            "Aderant",
+            "zero defections to 3E; TR Elite->3E forced migration",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "ST1",
+            "Strata",
+            "KLAS #1 Business Decision Support for 18 straight years",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "ST2",
+            "Strata",
+            "KLAS score of 92.3",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "NEP1",
+            "Neptune",
+            "vendor-matched closed network (rival meter can't run on Nept",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "NEP2",
+            "Neptune",
+            "meters read >72 million times/month",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "NEP3",
+            "Neptune",
+            "Neptune 360 >$1.25m/yr at large utilities; ~95% structural r",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "NEP4",
+            "Neptune",
+            "mech->ultrasonic ASP roughly doubles (T-10 $101 vs MACH 10 $",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "VER1",
+            "Verathon",
+            "video laryngoscopy first-pass 85% vs direct 70%",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "VER2",
+            "Verathon",
+            "~80% of ED/ICU intubations still use direct laryngoscopy",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "VER3",
+            "Verathon",
+            "GlideScope single-use blade ~$40",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "NDI1",
+            "NDI",
+            "~90% of surgical-navigation systems use NDI",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "NDI2",
+            "NDI",
+            "Polaris Vega 0.045mm RMSE",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "CR1",
+            "CentralReach",
+            "AI-attached bookings 0 -> ~75% in two years",
+            "VERIFIED-PRIMARY"
+          ],
+          [
+            "CR2",
+            "CentralReach",
+            "$59/seat vs Motivity $24-48/learner",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "CR3",
+            "CentralReach",
+            "650+ switchers",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "FR1",
+            "Frontline",
+            "named district churns to Red Rover (Chino Valley, Washoe, We",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "FR2",
+            "Frontline",
+            "Red Rover district count / growth",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "CC1",
+            "ConstructConnect",
+            "Togal.AI pricing/accuracy claims",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "CC2",
+            "ConstructConnect",
+            "1.5/5 TrustRadius + BBB complaints",
+            "VERIFIED-SECONDARY"
+          ],
+          [
+            "RC1",
+            "Roper corp",
+            "~70 of ~100 HQ staff on capital deployment",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "RC2",
+            "Roper corp",
+            "26-bagger under Jellison 2001-18",
+            "UNSUPPORTED-DROP"
+          ],
+          [
+            "RC3",
+            "Roper corp",
+            "30+ year dividend growth streak / Dividend Aristocrat",
+            "VERIFIED-PRIMARY"
+          ]
+        ]
+      }
+    },
+    "a10": {
+      "table": {
+        "cols": [
+          "Quarter",
+          "Consolidated organic",
+          "Filed"
+        ],
+        "rows": [
+          [
+            "2018Q4",
+            "9%",
+            "2019-02-01"
+          ],
+          [
+            "2019Q1",
+            "6%",
+            "2019-04-25"
+          ],
+          [
+            "2019Q2",
+            "2%",
+            "2019-07-25"
+          ],
+          [
+            "2019Q3",
+            "2%",
+            "2019-10-24"
+          ],
+          [
+            "2019Q4",
+            "1%",
+            "2020-01-30"
+          ],
+          [
+            "2020Q1",
+            "4%",
+            "2020-04-28"
+          ],
+          [
+            "2020Q2",
+            "-3%",
+            "2020-07-28"
+          ],
+          [
+            "2020Q3",
+            "-3%",
+            "2020-10-27"
+          ],
+          [
+            "2020Q4",
+            "-2%",
+            "2021-01-29"
+          ],
+          [
+            "2021Q1",
+            "-1%",
+            "2021-04-27"
+          ],
+          [
+            "2021Q2",
+            "7%",
+            "2021-07-23"
+          ],
+          [
+            "2021Q3",
+            "12%",
+            "2021-10-22"
+          ],
+          [
+            "2021Q4",
+            "13%",
+            "2022-02-02"
+          ],
+          [
+            "2022Q1",
+            "11%",
+            "2022-04-26"
+          ],
+          [
+            "2022Q2",
+            "11%",
+            "2022-07-22"
+          ],
+          [
+            "2022Q3",
+            "10%",
+            "2022-10-26"
+          ],
+          [
+            "2022Q4",
+            "7%",
+            "2023-01-27"
+          ],
+          [
+            "2023Q1",
+            "8%",
+            "2023-04-27"
+          ],
+          [
+            "2023Q2",
+            "9%",
+            "2023-07-21"
+          ],
+          [
+            "2023Q3",
+            "6%",
+            "2023-10-25"
+          ],
+          [
+            "2023Q4",
+            "8%",
+            "2024-01-31"
+          ],
+          [
+            "2024Q1",
+            "8%",
+            "2024-04-26"
+          ],
+          [
+            "2024Q2",
+            "4%",
+            "2024-07-24"
+          ],
+          [
+            "2024Q3",
+            "4%",
+            "2024-10-23"
+          ],
+          [
+            "2024Q4",
+            "7%",
+            "2025-01-30"
+          ],
+          [
+            "2025Q1",
+            "5%",
+            "2025-04-28"
+          ],
+          [
+            "2025Q2",
+            "7%",
+            "2025-07-21"
+          ],
+          [
+            "2025Q3",
+            "6%",
+            "2025-10-23"
+          ],
+          [
+            "2025Q4",
+            "4%",
+            "2026-01-27"
+          ],
+          [
+            "2026Q1",
+            "6%",
+            "2026-04-23"
+          ]
+        ]
+      }
+    },
+    "a11": {
+      "table": {
+        "cols": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Anchor price",
+            "$364.20"
+          ],
+          [
+            "Market cap ($bn)",
+            "36.8"
+          ],
+          [
+            "EV ($bn)",
+            "46.8"
+          ],
+          [
+            "FY26E adj EBITDA ($m)",
+            "3,446"
+          ],
+          [
+            "Req. CAGR \u2014 req_fcf_cagr_at_20x_fcf(5%yield)",
+            "3.0%"
+          ],
+          [
+            "Req. CAGR \u2014 req_fcf_cagr_at_15x_fcf(6.7%yield)",
+            "6.0%"
+          ],
+          [
+            "Req. CAGR \u2014 req_ebitda_cagr_at_15x_ev_ebitda",
+            "4.9%"
+          ]
+        ]
+      }
+    },
+    "a12": {
+      "body": "CRI = cash return on investment. NRR = net revenue retention. MOIC = multiple on invested capital. IRR = internal rate of return. DPI = distributions to paid-in. VMS = vertical market software. TEP = Technology Enabled Products. SOTP = sum of the parts. TSR = total shareholder return."
+    }
+  }
+}

@@ -1,0 +1,1086 @@
+<meta charset="utf-8">
+<title>ROP — Buy-Side Evidence Deck</title>
+<!--
+  ROP evidence deck (EQT-screenshot style). Single-file app.
+  Local sanity:  python3 -m http.server 8765   (open http://localhost:8765/deck/)
+  Validate:      node scripts/validate_deck.mjs
+  Data:          fetch data/deck_data.json, fall back to data/deck_data_STUB.json
+  NO CDN at runtime except Google Fonts (local font stack fallback included).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<script src="vendor/chart.umd.js"></script>
+
+<style>
+  :root {
+    --navy:#00294b; --navy2:#003a66; --blue:#005f9e; --blue2:#0075b5;
+    --teal:#007e6c; --teall:#75d9d7; --magenta:#a6256e; --warm:#ebe0da;
+    --bgblue:#def5ff; --bgteal:#ddf6f6; --gray:#6b7f8a; --gray1:#f1f1f1;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:"Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body { background:#eef0f3; font-family:var(--sans); color:var(--navy);
+         -webkit-font-smoothing:antialiased; }
+
+  .stage { position:fixed; inset:0; display:flex; align-items:center;
+           justify-content:center; overflow:hidden; }
+  .deck  { position:relative; width:1440px; height:900px; background:#fff;
+           box-shadow:0 8px 40px rgba(0,41,75,0.18); overflow:hidden;
+           transform-origin:center center; flex-shrink:0; }
+
+  .slide { position:absolute; inset:0; opacity:0; pointer-events:none;
+           transition:opacity .28s ease; padding:38px 46px 34px; }
+  .slide.active { opacity:1; pointer-events:auto; }
+
+  /* ---------- header ---------- */
+  .s-head { display:flex; justify-content:space-between; align-items:flex-start;
+            gap:24px; border-bottom:2px solid var(--navy); padding-bottom:14px; }
+  .s-head .lhs { flex:1; display:flex; gap:14px; align-items:flex-start; }
+  .s-badge { flex:none; width:34px; height:34px; border-radius:50%;
+             background:var(--navy); color:#fff; font-weight:700; font-size:16px;
+             display:flex; align-items:center; justify-content:center; margin-top:2px; }
+  .s-claim { font-family:var(--serif); font-weight:600; font-size:23px;
+             line-height:1.28; color:var(--navy); letter-spacing:-.1px; }
+  .s-claim u { text-decoration:none; border-bottom:2px solid var(--navy);
+               padding-bottom:1px; }
+  .chips { flex:none; display:flex; flex-direction:column; gap:5px; align-items:flex-end; }
+  .chip  { font-size:11px; font-weight:600; letter-spacing:.4px; text-transform:uppercase;
+           padding:4px 11px; border-radius:3px; white-space:nowrap; }
+  .chip.main { background:var(--navy); color:#fff; }
+  .chip.sub  { background:var(--bgblue); color:var(--navy2); }
+
+  /* ---------- panel grid ---------- */
+  .panels { display:flex; gap:16px; margin-top:20px; height:648px; }
+  .panels.cols-1 > .panel { flex:1; }
+  .panels.cols-2 > .panel { flex:1; }
+  .panels.cols-3 > .panel { flex:1; }
+  .panel { border:1px solid #00294b22; border-radius:4px; background:#fff;
+           display:flex; flex-direction:column; overflow:hidden; }
+  .panel .take { background:var(--bgblue); color:var(--navy2); font-size:13px;
+                 line-height:1.4; padding:9px 12px; border-bottom:1px solid #00294b18; }
+  .panel .take b { color:var(--navy); font-weight:700; }
+  .panel .ptitle { font-size:12px; font-weight:600; text-transform:uppercase;
+                   letter-spacing:.6px; color:var(--gray); text-align:center;
+                   padding:10px 8px 2px; }
+  .panel .pbody { flex:1; position:relative; padding:8px 12px 12px;
+                  min-height:0; display:flex; flex-direction:column; overflow:auto; }
+  .panel .chart-wrap { flex:1; position:relative; min-height:0; }
+  .panel canvas { position:absolute; inset:0; }
+
+  /* ---------- tables ---------- */
+  table.dt { width:100%; border-collapse:collapse; font-size:12px; }
+  table.dt thead th { background:var(--navy); color:#fff; font-weight:600;
+                      text-align:right; padding:6px 9px; font-size:11.5px;
+                      letter-spacing:.2px; white-space:nowrap; }
+  table.dt thead th:first-child { text-align:left; }
+  table.dt tbody td { padding:5px 9px; text-align:right; border-bottom:1px solid #00294b12;
+                      font-variant-numeric:tabular-nums; }
+  table.dt tbody td:first-child { text-align:left; font-weight:500; }
+  table.dt tbody tr:nth-child(even) { background:var(--gray1); }
+  table.dt tbody tr.total td { font-weight:700; border-top:1.5px solid var(--navy);
+                               background:var(--bgteal); }
+  table.dt.heat tbody tr:nth-child(even) { background:transparent; }
+  table.dt.heat th { text-align:center; }
+  .panel .pbody.scroll { overflow:auto; }
+
+  /* ---------- source footer ---------- */
+  .src { position:absolute; left:46px; right:46px; bottom:14px; font-size:9.5px;
+         line-height:1.42; color:var(--gray); }
+  .src .ln { margin-top:1px; }
+
+  /* ---------- kpi strip (cover) ---------- */
+  .kpis { display:flex; gap:0; border:1px solid #ffffff33; border-radius:6px;
+          overflow:hidden; }
+  .kpi { flex:1; padding:14px 16px; border-right:1px solid #ffffff22; }
+  .kpi:last-child { border-right:none; }
+  .kpi .k-label { font-size:10.5px; text-transform:uppercase; letter-spacing:1px;
+                  color:#9dc4de; }
+  .kpi .k-value { font-family:var(--serif); font-size:26px; font-weight:600;
+                  color:#fff; margin-top:3px; }
+  .kpi .k-sub { font-size:10px; color:#7fa8c4; margin-top:2px; }
+
+  /* ---------- cover ---------- */
+  .slide.cover { padding:0; }
+  .cover-inner { position:absolute; inset:0; padding:70px 76px;
+                 background:linear-gradient(135deg,#00294b 0%, #003a66 55%, #005f9e 130%);
+                 color:#fff; display:flex; flex-direction:column; }
+  .cover-eyebrow { font-size:13px; letter-spacing:3px; text-transform:uppercase;
+                   color:var(--teall); font-weight:600; }
+  .cover-title { font-family:var(--serif); font-size:56px; font-weight:700;
+                 line-height:1.08; margin-top:18px; max-width:1050px; }
+  .cover-sub { font-size:19px; line-height:1.5; color:#cfe3f2; margin-top:22px;
+               max-width:920px; }
+  .cover-rating { display:inline-flex; align-items:center; gap:10px; margin-top:26px; }
+  .cover-rating .pill { background:var(--teal); color:#fff; font-weight:700;
+                        font-size:15px; letter-spacing:1px; padding:6px 16px; border-radius:4px; }
+  .cover-spacer { flex:1; }
+  .cover-meta { font-size:12px; color:#9dc4de; margin-top:20px; letter-spacing:.3px; }
+
+  /* ---------- footer / progress ---------- */
+  .foot { position:absolute; left:0; right:0; bottom:0; height:0; }
+  .prog { position:fixed; left:0; right:0; bottom:0; height:26px; z-index:20;
+          display:flex; align-items:center; justify-content:space-between;
+          padding:0 18px; font-size:11px; color:var(--gray);
+          background:rgba(238,240,243,.85); backdrop-filter:blur(3px); }
+  .prog .dots { display:flex; gap:4px; }
+  .prog .dot { width:6px; height:6px; border-radius:50%; background:#c4ccd3; }
+  .prog .dot.on { background:var(--navy); }
+  .prog .nav-hint { letter-spacing:.4px; }
+  .banner { position:fixed; top:8px; left:8px; z-index:30; background:var(--magenta);
+            color:#fff; font-size:11px; font-weight:600; padding:3px 9px; border-radius:3px;
+            display:none; }
+  .banner.show { display:block; }
+  /* data-pending: a bracketed number whose upstream (model_out) hasn't landed */
+  .pending { color:var(--magenta); font-weight:700; border-bottom:1.5px dotted var(--magenta);
+             cursor:help; }
+</style>
+
+<div class="stage"><div class="deck" id="deck"></div></div>
+<div class="prog" id="prog">
+  <span id="prog-tag">ROP · Buy-Side Evidence</span>
+  <div class="dots" id="prog-dots"></div>
+  <span class="nav-hint">← / → · slide <span id="prog-num">1</span> / <span id="prog-tot">1</span></span>
+</div>
+<div class="banner" id="banner">STUB DATA</div>
+
+<script>
+/* ============================================================= *
+ *  Palette + Chart.js global defaults                            *
+ * ============================================================= */
+const C = {
+  NAVY:'#00294b', NAVY2:'#003a66', BLUE:'#005f9e', BLUE2:'#0075b5',
+  TEAL:'#007e6c', TEALL:'#75d9d7', MAGENTA:'#a6256e', WARM:'#ebe0da',
+  BGBLUE:'#def5ff', BGTEAL:'#ddf6f6', GRAY:'#6b7f8a', GRAY1:'#f1f1f1'
+};
+const SERIES = [C.NAVY, C.BLUE, C.TEAL, C.MAGENTA, C.BLUE2, C.TEALL, C.WARM, C.GRAY];
+
+if (window.Chart) {
+  Chart.defaults.color = C.NAVY;
+  Chart.defaults.borderColor = '#00294b18';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.font.size = 12;
+  Chart.defaults.elements.line.tension = 0;   // straight lines, never curves
+  Chart.defaults.elements.point.radius = 3.5;  // visible dots
+  Chart.defaults.elements.point.hoverRadius = 5;
+  Chart.defaults.plugins.legend.labels.boxWidth = 10;
+  Chart.defaults.plugins.legend.labels.font = { size: 11 };
+  Chart.defaults.maintainAspectRatio = false;
+  Chart.defaults.animation = false;
+}
+
+/* ============================================================= *
+ *  Component library (EQT-style helpers)                         *
+ * ============================================================= */
+
+// pv(value, {pre, suf, dp}) — render a bound number, or a data-pending "•" when
+// the value is absent / still the 999 stub sentinel (i.e. awaiting model_out).
+function pv(v, opts = {}) {
+  if (v === null || v === undefined || v === 999 || v === '999')
+    return `<span class="pending" title="awaiting model_out.json">•</span>`;
+  let s = (typeof v === 'number' && opts.dp != null) ? v.toFixed(opts.dp) : v;
+  return `${opts.pre || ''}${s}${opts.suf || ''}`;
+}
+
+// slideHeader(claimHTML, sectionTag, subTag, num)
+// claimHTML: full-sentence claim; wrap load-bearing phrases in <u>…</u>.
+// sectionTag / subTag: stacked chips top-right (subTag optional).
+// num: optional numbered circle badge (thesis-section slides).
+function slideHeader(claimHTML, sectionTag, subTag, num) {
+  const badge = (num != null && num !== '') ? `<div class="s-badge">${num}</div>` : '';
+  const sub = subTag ? `<span class="chip sub">${subTag}</span>` : '';
+  const chips = (sectionTag || subTag)
+    ? `<div class="chips">${sectionTag ? `<span class="chip main">${sectionTag}</span>` : ''}${sub}</div>`
+    : '';
+  return `<div class="s-head">
+    <div class="lhs">${badge}<div class="s-claim">${claimHTML}</div></div>
+    ${chips}
+  </div>`;
+}
+
+// panel(takeawayHTML, bodyHTML, opts)
+// opts: { title, canvasId }  — if canvasId given, bodyHTML is ignored and a
+//   chart-wrap+canvas is emitted (init your chart in the slide's init()).
+function panel(takeawayHTML, bodyHTML, opts = {}) {
+  const title = opts.title ? `<div class="ptitle">${opts.title}</div>` : '';
+  const body = opts.canvasId
+    ? `<div class="chart-wrap"><canvas id="${opts.canvasId}"></canvas></div>`
+    : (bodyHTML || '');
+  return `<div class="panel">
+    <div class="take">${takeawayHTML}</div>
+    ${title}
+    <div class="pbody">${body}</div>
+  </div>`;
+}
+
+// panelRow(panelsHTML[], nCols) — wrap panels in the flex grid.
+function panelRow(panelsHTML, nCols) {
+  const n = nCols || panelsHTML.length;
+  return `<div class="panels cols-${n}">${panelsHTML.join('')}</div>`;
+}
+
+// srcFooter(sources[], notes[])
+function srcFooter(sources, notes) {
+  const s = (sources && sources.length)
+    ? `<div class="ln"><b>Source${sources.length>1?'s':''}:</b> ${sources.join('; ')}</div>` : '';
+  const n = (notes && notes.length)
+    ? notes.map(x => `<div class="ln"><b>Note:</b> ${x}</div>`).join('') : '';
+  return `<div class="src">${s}${n}</div>`;
+}
+
+// kpiStrip([{label,value,sub}...]) — cover anchor strip.
+function kpiStrip(items) {
+  return `<div class="kpis">${items.map(k =>
+    `<div class="kpi"><div class="k-label">${k.label}</div>
+      <div class="k-value">${k.value}</div>
+      <div class="k-sub">${k.sub || ''}</div></div>`).join('')}</div>`;
+}
+
+// dataTable(cols, rows, opts) — compact financial table.
+// opts: { totalRow:true  -> last row styled as total; align:[...] optional }
+function dataTable(cols, rows, opts = {}) {
+  const head = `<thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>`;
+  const body = `<tbody>${rows.map((r, i) => {
+    const isTot = opts.totalRow && i === rows.length - 1;
+    return `<tr class="${isTot ? 'total' : ''}">${r.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
+  }).join('')}</tbody>`;
+  return `<table class="dt">${head}${body}</table>`;
+}
+
+/* Shared no-curve, no-#000 bar/line option helpers */
+function baseScales(yTitle, opts = {}) {
+  return {
+    x: { grid: { display:false }, ticks: { font:{ size:11 } } },
+    y: { grid: { color:'#00294b12' }, ticks: { font:{ size:11 } },
+         title: yTitle ? { display:true, text:yTitle, font:{ size:11 }, color:C.GRAY } : {},
+         ...(opts.y || {}) }
+  };
+}
+
+/* ---------- chart factories (all read the generic {labels, series} shape) ---------- */
+const el = id => document.getElementById(id);
+
+// bar / grouped bar / stacked bar / horizontal bar
+function mkBar(id, cfg = {}) {
+  if (!el(id) || !window.Chart) return;
+  const series = cfg.series || [];
+  const multi = series.length > 1;
+  new Chart(el(id), {
+    type: 'bar',
+    data: {
+      labels: cfg.labels || [],
+      datasets: series.map((s, i) => ({
+        label: s.label || '',
+        data: s.data || [],
+        backgroundColor: s.color || SERIES[i % SERIES.length],
+        borderWidth: 0
+      }))
+    },
+    options: {
+      indexAxis: cfg.horizontal ? 'y' : 'x',
+      plugins: { legend: { display: multi } },
+      scales: {
+        x: { stacked: !!cfg.stacked, grid: { display: !!cfg.horizontal, color:'#00294b12' }, ticks: { font:{ size:11 } } },
+        y: { stacked: !!cfg.stacked, grid: { color:'#00294b12' }, ticks: { font:{ size:11 } },
+             title: cfg.yTitle ? { display:true, text:cfg.yTitle, color:C.GRAY, font:{ size:11 } } : {} }
+      }
+    }
+  });
+}
+
+// line / multi-line (straight, dotted points via global defaults)
+function mkLine(id, cfg = {}) {
+  if (!el(id) || !window.Chart) return;
+  const series = cfg.series || [];
+  new Chart(el(id), {
+    type: 'line',
+    data: {
+      labels: cfg.labels || [],
+      datasets: series.map((s, i) => ({
+        label: s.label || '',
+        data: s.data || [],
+        borderColor: s.color || SERIES[i % SERIES.length],
+        backgroundColor: (s.color || SERIES[i % SERIES.length]),
+        borderWidth: 2, fill: false
+      }))
+    },
+    options: { plugins: { legend: { display: series.length > 1 } }, scales: baseScales(cfg.yTitle) }
+  });
+}
+
+// scatter with optional fit line + highlighted point
+function mkScatter(id, cfg = {}) {
+  if (!el(id) || !window.Chart) return;
+  const ds = [{ type:'scatter', label: cfg.peerLabel || 'Peers', data: cfg.points || [],
+                backgroundColor: C.BLUE, pointRadius: 4 }];
+  if (cfg.fit) ds.push({ type:'line', label:'Fit', data: cfg.fit, borderColor: C.GRAY,
+                         borderWidth: 1.5, pointRadius: 0, fill: false });
+  if (cfg.highlight) ds.push({ type:'scatter', label: cfg.highlight.label || 'ROP',
+                               data: [cfg.highlight], backgroundColor: C.MAGENTA, pointRadius: 6 });
+  new Chart(el(id), {
+    data: { datasets: ds },
+    options: {
+      plugins: { legend: { display: true } },
+      scales: {
+        x: { title: cfg.xTitle ? { display:true, text:cfg.xTitle, color:C.GRAY, font:{ size:11 } } : {},
+             grid: { color:'#00294b12' }, ticks: { font:{ size:11 } } },
+        y: { title: cfg.yTitle ? { display:true, text:cfg.yTitle, color:C.GRAY, font:{ size:11 } } : {},
+             grid: { color:'#00294b12' }, ticks: { font:{ size:11 } } }
+      }
+    }
+  });
+}
+
+// heatmap rendered as a colored HTML table (Chart.js has no native matrix).
+// g: { colTitle, rowTitle, colLabels:[…], rows:[{label, cells:[num]}] }
+function heatmapTable(g = {}) {
+  if (!g.rows) return '';
+  const flat = g.rows.flatMap(r => r.cells);
+  const lo = Math.min(...flat), hi = Math.max(...flat);
+  const shade = v => {
+    const t = hi === lo ? 0.5 : (v - lo) / (hi - lo);      // 0..1
+    // interpolate warm(low) -> teal(high) in the CG palette, no #000
+    const a = 0.15 + 0.55 * t;
+    return `background:rgba(0,126,108,${a.toFixed(2)});color:${t > 0.6 ? '#fff' : C.NAVY}`;
+  };
+  const head = `<tr><th></th>${(g.colLabels || []).map(c => `<th>${c}</th>`).join('')}</tr>`;
+  const body = g.rows.map(r =>
+    `<tr><td style="font-weight:600">${r.label}</td>${r.cells.map(v =>
+      `<td style="text-align:center;${shade(v)}">${v}</td>`).join('')}</tr>`).join('');
+  return `<table class="dt heat">${g.colTitle ? `<caption style="font-size:10px;color:${C.GRAY};padding-bottom:4px">${g.colTitle}</caption>` : ''}<thead>${head}</thead><tbody>${body}</tbody></table>`;
+}
+
+/* buildSlide — declarative slide from a config object.
+ * cfg: { claim, section, sub, num, cols, panels:[…], sources, notes }
+ * each panel: { take, title, and one of: canvasId | table:{cols,rows} | grid:{…} | body }
+ */
+function buildSlide(cfg) {
+  const panels = (cfg.panels || []).map(p => {
+    let body = null;
+    if (p.canvasId) return panel(p.take, null, { title: p.title, canvasId: p.canvasId });
+    if (p.table) body = dataTable(p.table.cols, p.table.rows, p.tableOpts || {});
+    else if (p.grid) body = heatmapTable(p.grid);
+    else if (p.body) body = p.body;
+    return panel(p.take, body, { title: p.title });
+  });
+  return slideHeader(cfg.claim, cfg.section, cfg.sub, cfg.num)
+    + panelRow(panels, cfg.cols || panels.length)
+    + srcFooter(cfg.sources, cfg.notes);
+}
+
+/* ============================================================= *
+ *  DATA                                                          *
+ * ============================================================= */
+let DATA = null;
+let USING_STUB = false;
+
+async function loadData() {
+  try {
+    const r = await fetch('data/deck_data.json', { cache:'no-store' });
+    if (!r.ok) throw new Error('no real data');
+    DATA = await r.json();
+  } catch (e) {
+    const r2 = await fetch('data/deck_data_STUB.json', { cache:'no-store' });
+    DATA = await r2.json();
+    USING_STUB = true;
+  }
+  if (USING_STUB || DATA._stub) document.getElementById('banner').classList.add('show');
+}
+
+/* ============================================================= *
+ *  SLIDES registry                                              *
+ *  Each entry: { title, render(d)->innerHTML, init?(d) }        *
+ *  render returns INNER html only (never a wrapped .slide div). *
+ *  init() runs after DOM insert — build charts here.            *
+ * ============================================================= */
+const SLIDES = [
+
+  /* ---- S0 COVER ---- */
+  {
+    title: 'Cover',
+    cover: true,
+    render(d) {
+      const m = d.meta || {};
+      return `<div class="cover-inner">
+        <div class="cover-eyebrow">${m.ticker || 'ROP'} · Roper Technologies · Buy-Side Evidence Deck</div>
+        <div class="cover-title">The market is discounting the wrong dollars in Roper's software base.</div>
+        <div class="cover-sub">${m.one_line || 'STUB one-line trade thesis.'}</div>
+        <div class="cover-rating"><span class="pill">${m.rating || 'BUY'}</span>
+          <span style="font-size:14px;color:#cfe3f2">Base PT ${m.price_target != null ? '$'+m.price_target : '—'} · ${m.tsr_5yr_pct != null ? m.tsr_5yr_pct+'% 5-yr TSR' : ''} · skew ${m.skew || '—'}</span>
+        </div>
+        <div class="cover-spacer"></div>
+        ${kpiStrip(d.cover_kpis || [])}
+        <div class="cover-meta">By JAOD &amp; (mainly) Claude · As of ${m.asof || ''} · All figures scripted from data/deck_data.json</div>
+      </div>`;
+    }
+  },
+
+  /* ---- S1 Recommendation one-pager ---- */
+  {
+    title: 'S1 · Recommendation',
+    render(d) {
+      const s = sd(d, 's1');
+      const theses = (s.theses || []).map(t =>
+        `<div style="display:flex;gap:9px;padding:7px 0;border-bottom:1px solid #00294b12">
+           <div class="s-badge" style="width:22px;height:22px;font-size:12px;flex:none">${t.n}</div>
+           <div><div style="font-size:12.5px;font-weight:600;line-height:1.3">${t.title}</div>
+             <div style="font-size:11.5px;color:${C.TEAL};font-weight:600">${t.eps_impact}</div></div>
+         </div>`).join('');
+      const wrong = (s.wrong || []).map(w => `<li style="margin:3px 0">${w}</li>`).join('');
+      const skewBody = `<div style="font-size:13px;line-height:1.6">
+          Up:down skew <b style="color:${C.NAVY}">${(s.skew || {}).ratio ?? '—'}</b> — base headlined, not the bull.
+          <div style="margin-top:8px;font-size:12px;font-weight:600;color:${C.GRAY}">WHAT WOULD MAKE ME WRONG</div>
+          <ul style="font-size:12px;margin-left:16px">${wrong}</ul></div>`;
+      return buildSlide({
+        claim: `Three theses, one trade: <u>exposed dollars are mispriced</u>, <u>hardware is under-owned</u>, and the allocator compounds to a <u>$${s.base_pt ?? '—'} base case</u> and <u>${s.tsr_5yr_pct ?? '—'}% TSR</u>.`,
+        section: 'Recommendation', sub: 'One-pager',
+        panels: [
+          { take: `Each thesis maps to a <b>discrete EPS driver</b>; the trade works even if only two of three land.`, title: 'The three theses', body: theses },
+          { take: `At a glance — <b>price, EV, multiple, and our base target</b> on one card.`, title: 'At a glance', table: s.at_glance },
+          { take: `Skew is <b>~${(s.skew || {}).ratio ?? '—'}</b>, honestly struck; the downside is the AI-thesis-fails bear, not muddle-through.`, title: 'Skew & falsifiers', body: skewBody }
+        ],
+        cols: 3,
+        sources: ['model_out.json', 'prices.json (7/2 close)'],
+        notes: ['Base case headlined per the honesty contract; bull and bear on S21.']
+      });
+    }
+  },
+
+  /* ---- S2 The setup: de-rate anatomy ---- */
+  {
+    title: 'S2 · The setup',
+    render(d) {
+      const s = sd(d, 's2');
+      return buildSlide({
+        claim: `The de-rate did all the damage — <u>EPS compounded ~${s.eps_cagr_pct ?? '—'}%</u> since 2021 while the multiple gave back <u>${s.derate_turns ?? '—'} turns</u>, not the business.`,
+        section: 'The setup', sub: 'De-rate anatomy',
+        panels: [
+          { take: `Price and EPS <b>diverged</b> after 2021 — the gap is multiple, not fundamentals.`, title: 'Price vs EPS (indexed)', canvasId: 'c-s2-price' },
+          { take: `ROP now trades <b>below its own history</b> and into the VMS median.`, title: 'EV/EBITDA vs history', canvasId: 'c-s2-eve' },
+          { take: `TSR decomposition: <b>multiple compression</b> swamped a healthy earnings contribution.`, title: 'TSR decomposition (pp)', canvasId: 'c-s2-tsr' }
+        ],
+        sources: ['prices.json', 'vms_derate.json', 'panel.json'],
+        notes: ['Indexed to 2021 = 100. Multiple = EV/NTM EBITDA.']
+      });
+    },
+    init(d) { const s = sd(d, 's2');
+      mkLine('c-s2-price', s.price_vs_eps); mkLine('c-s2-eve', s.evebitda_hist);
+      mkBar('c-s2-tsr', { ...s.tsr_decomp, yTitle: 'pp' }); }
+  },
+
+  /* ---- S3 What Roper actually is ---- */
+  {
+    title: 'S3 · What Roper is',
+    render(d) {
+      const s = sd(d, 's3');
+      const flow = `<div style="font-size:13px;line-height:1.9">
+          <b>Buy</b> niche software/med-tech monopolies →<br><b>Run</b> them decentralized for cash →<br>
+          <b>Redeploy</b> the cash into the next one.
+          <div style="margin-top:10px;padding:8px;background:${C.BGTEAL};border-radius:4px;font-size:12px">
+            Cash-return-on-investment (CRI): <b style="color:${C.NAVY}">${s.cri_pct ?? '—'}%</b><br>
+            <span style="color:${C.GRAY}">${s.cri_note ?? ''}</span></div></div>`;
+      return buildSlide({
+        claim: `Roper is a <u>${s.n_opcos ?? '—'}-opco cash machine</u>, not a software bet — buy niche monopolies, run for cash, and <u>redeploy at a ${s.cri_pct ?? '—'}% cash return</u>.`,
+        section: 'Business', sub: 'What Roper is',
+        panels: [
+          { take: `Three segments, but one <b>business model</b> — software plus a durable med-tech/water leg.`, title: 'Revenue by segment ($m)', canvasId: 'c-s3-mix' },
+          { take: `No single opco dominates — the <b>top names</b> are each niche leaders, not one big bet.`, title: 'Top opcos by revenue ($m)', canvasId: 'c-s3-tree' },
+          { take: `The <b>mothership</b> compounds by redeploying opco cash, not by operating synergy.`, title: 'The compounding machine', body: flow }
+        ],
+        sources: ['panel.json (segment)', 'ai_exposure.json (opco revenue)'],
+        notes: ['Opco revenue estimated where not separately disclosed.']
+      });
+    },
+    init(d) { const s = sd(d, 's3');
+      mkBar('c-s3-mix', { ...s.segment_mix, yTitle: '$m' });
+      mkBar('c-s3-tree', { ...s.opco_treemap, horizontal: true }); }
+  },
+
+  /* ---- S4 Dollar decomposition (THE slide) ---- */
+  {
+    title: 'S4 · Dollar decomposition',
+    render(d) {
+      const s = sd(d, 's4');
+      // panel C: the most-durable franchises (lowest AI-exposure) from the graded book
+      const durable = (s.opcos || []).filter(o => o.grade !== 'exposed')
+        .sort((a, b) => b.rev - a.rev).slice(0, 7);
+      const tbl = dataTable(['Durable franchise', 'Revenue ($m)', 'Grade'],
+        durable.map(o => [o.name, o.rev, o.grade === 'benefit' ? 'AI-benefiting' : 'Durable']));
+      return buildSlide({
+        claim: `The revenue AI threatens and the revenue AI helps are <u>not the same dollars</u> — the <u>exposed ~${s.exposed_pct ?? '—'}%</u> is small next to a durable core that trades four turns below the peer line.`,
+        section: 'Thesis 1 — Software', sub: 'Dollar decomposition', num: 1,
+        panels: [
+          { take: `Only <b>~${s.exposed_pct ?? '—'}%</b> of the book is genuinely AI-exposed; the rest is workflow spend AI makes stickier.`, title: 'Revenue by AI-exposure grade ($m)', canvasId: 'c-s4-decomp' },
+          { take: `Adversarially graded, AI nets to <b>−0.6 to +0.3pp/yr</b> of software organic — a rounding error against a ~40% de-rate.`, title: 'Net AI effect on organic (pp/yr)', canvasId: 'c-s4-net' },
+          { take: `The durable core is a stack of <b>dominant install bases</b> with switching costs measured in years.`, title: 'Most-durable franchises', body: tbl }
+        ],
+        sources: ['ai_exposure.json#opcos', 'ai_exposure.json#net_organic_growth_effect'],
+        notes: ['Grading is ours; opco revenues are estimates (Roper does not disclose sub-company P&Ls). Range shown, not a point.']
+      });
+    },
+    init(d) {
+      const s = sd(d, 's4'); const opcos = s.opcos || [];
+      const gc = g => g === 'benefit' ? C.TEAL : g === 'exposed' ? C.MAGENTA : C.BLUE;
+      if (el('c-s4-decomp')) new Chart(el('c-s4-decomp'), { type: 'bar',
+        data: { labels: opcos.map(o => o.name), datasets: [{ data: opcos.map(o => o.rev), backgroundColor: opcos.map(o => gc(o.grade)), borderWidth: 0 }] },
+        options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: baseScales('') } });
+      const ne = s.net_effect || { labels: [], series: [] };
+      mkBar('c-s4-net', { ...ne, yTitle: 'pp/yr',
+        series: (ne.series || []).map(x => ({ ...x, color: C.BLUE })) });
+    }
+  },
+
+  /* ---- S5 System-of-record map ---- */
+  {
+    title: 'S5 · System of record',
+    render(d) {
+      const s = sd(d, 's5');
+      return buildSlide({
+        claim: `Most of the software book is the <u>system of record someone's auditor, regulator, or counterparty relies on</u> — you can write code cheaply; you cannot cheaply cold-start a freight network or assume audit continuity.`,
+        section: 'Thesis 1 — Software', sub: 'System of record',
+        panels: [
+          { take: `The case franchises carry a <b>durable revenue share</b> AI does not dislodge — the inverse of their graded exposure.`, title: 'Durable revenue share (%)', canvasId: 'c-s5-share' },
+          { take: `Five franchises, five moats — <b>regulatory, network, and switching-cost</b> in kind; every claim traces to the verified registry.`, title: 'Case franchises (verified facts)', table: s.tiles }
+        ],
+        cols: 2,
+        sources: ['ai_exposure.json#opcos (1 − exposed %)', 'case_facts.json (VERIFIED only)'],
+        notes: ['Durability = 100 − AI-exposed %; verified facts are VERIFIED-PRIMARY/SECONDARY only (see A9).']
+      });
+    },
+    init(d) { const s = sd(d, 's5');
+      mkBar('c-s5-share', { ...s.durability_bar, horizontal: true, series: (s.durability_bar?.series || []).map(x => ({ ...x, color: C.BLUE })) }); }
+  },
+
+  /* ---- S6 Pricing power ---- */
+  {
+    title: 'S6 · Pricing power',
+    render(d) {
+      const s = sd(d, 's6');
+      return buildSlide({
+        claim: `Growth here is <u>price on bases that cannot leave</u> — organic held mean <u>~${s.mean_organic_pct ?? '—'}%</u> and never worse than <u>${s.min_organic_pct ?? '—'}%</u> through COVID, the freight recession, DOGE, and the AI panic.`,
+        section: 'Thesis 1 — Software', sub: 'Pricing power',
+        panels: [
+          { take: `Consolidated organic stayed positive across <b>every macro shock since 2019</b> — mean ~${s.mean_organic_pct ?? '—'}%, trough ${s.min_organic_pct ?? '—'}%.`, title: 'ROP organic growth by year (%)', canvasId: 'c-s6-org' },
+          { take: `Growth is <b>contractual price</b>: modeled escalators cluster near ${s.median_escalator_pct ?? '—'}%/yr, written into renewals, not won deal-by-deal.`, title: 'Modeled price escalators by opco (%/yr)', canvasId: 'c-s6-esc' }
+        ],
+        cols: 2,
+        sources: ['organic.json (SEC 8-K organic series)', 'model/drivers.json#priceG'],
+        notes: ['Escalators are the modeled per-opco price-growth assumptions, anchored to disclosed renewal terms where available.']
+      });
+    },
+    init(d) { const s = sd(d, 's6');
+      mkLine('c-s6-org', { ...s.organic_by_year, yTitle: '%' });
+      mkBar('c-s6-esc', { ...s.escalators, horizontal: true, yTitle: '%' }); }
+  },
+
+  /* ---- S7 The contested 12% ---- */
+  {
+    title: 'S7 · Contested 12%',
+    render(d) {
+      const s = sd(d, 's7');
+      return buildSlide({
+        claim: `Here is the <u>honest ${s.contested_pct ?? '—'}%</u> we could lose — <u>named challenger by named challenger</u>, with what we assume they take.`,
+        section: 'Thesis 1 — Software', sub: 'Contested 12%',
+        panels: [
+          { take: `The contested set is <b>small and named</b> — no hand-waving; each has a live challenger.`, title: 'Contested opcos & challengers', table: s.challengers },
+          { take: `Even if challengers win, the <b>revenue at risk</b> is bounded — sized here per opco.`, title: 'Revenue at risk ($m)', canvasId: 'c-s7-contested' }
+        ],
+        cols: 2,
+        sources: ['ai_exposure.json (contested set)'],
+        notes: ['Assumed loss is a deliberately conservative haircut, not a base case.']
+      });
+    },
+    init(d) { const s = sd(d, 's7'); mkBar('c-s7-contested', { ...s.contested_bar, horizontal: true, series: (s.contested_bar?.series || []).map(x => ({ ...x, color: C.MAGENTA })) }); }
+  },
+
+  /* ---- S8 AI as attach ---- */
+  {
+    title: 'S8 · AI as attach',
+    render(d) {
+      const s = sd(d, 's8');
+      return buildSlide({
+        claim: `AI shows up first as <u>attach, not substitution</u> — a <u>${s.attach_print_pct ?? '—'}% CentralReach print</u> anchors a modeled <u>+${s.net_uplift_pp ?? '—'}pt net uplift</u>.`,
+        section: 'Thesis 1 — Software', sub: 'AI as attach',
+        panels: [
+          { take: `Demand is <b>workflow, not cycle</b> — consolidated organic stayed positive through every shock since 2019.`, title: 'ROP organic growth by year (%)', canvasId: 'c-s8-dat' },
+          { take: `The bull carries AI-attach to a <b>higher FY31 adj DEPS</b>; we hold it as optionality, anchored to one CentralReach print.`, title: 'FY31 adj DEPS: base vs bull (attach)', canvasId: 'c-s8-attach' },
+          { take: `The attach evidence is <b>verified, primary, and labeled</b> — one print, not a run-rate.`, title: 'Verified attach statements', table: s.tam_statements }
+        ],
+        sources: ['ai_exposure.json', 'model_out.json', 'earnings transcripts'],
+        notes: ['+1pt uplift is a one-print extrapolation — explicitly not a proven run-rate.']
+      });
+    },
+    init(d) { const s = sd(d, 's8');
+      mkLine('c-s8-dat', { ...s.dat_organic, yTitle: '%' });
+      mkBar('c-s8-attach', { ...s.attach_model, yTitle: 'NRR %' }); }
+  },
+
+  /* ---- S9 TEP razor/blade ---- */
+  {
+    title: 'S9 · TEP economics',
+    render(d) {
+      const s = sd(d, 's9');
+      return buildSlide({
+        claim: `TEP is <u>razor-and-blade med-tech plus a water annuity</u> — a <u>${s.tep_organic_pct ?? '—'}% organic</u> P×Q build, not cyclical metal.`,
+        section: 'Thesis 2 — Hardware', sub: 'TEP economics', num: 2,
+        panels: [
+          { take: `Revenue is <b>price × units</b>, product by product — a build, not a black box.`, title: 'TEP P×Q build', table: s.pxq_build },
+          { take: `Modeled organic is <b>steady mid-single-digit</b>, consumable-carried — not cyclical metal.`, title: 'Modeled TEP organic (%)', canvasId: 'c-s9-organic' },
+          { take: `Opco margins read like <b>med-tech</b>, not metal-bending.`, title: 'Opco margin by product (%)', canvasId: 'c-s9-margins' }
+        ],
+        sources: ['model/drivers.json (P×Q)', 'model_out.json (TEP revenue path)'],
+        notes: ['P×Q units are estimated from disclosed installed base and ASP; organic is the modeled base path.']
+      });
+    },
+    init(d) { const s = sd(d, 's9');
+      mkLine('c-s9-organic', { ...s.organic_hist, yTitle: '%' });
+      mkBar('c-s9-margins', { ...s.margins, yTitle: '%', series: (s.margins?.series || []).map(x => ({ ...x, color: C.TEAL })) }); }
+  },
+
+  /* ---- S10 Lock-in ---- */
+  {
+    title: 'S10 · Lock-in',
+    render(d) {
+      const s = sd(d, 's10');
+      return buildSlide({
+        claim: `The hardware <u>locks the software in</u> — <u>Neptune's closed system</u>, <u>Verathon's RCT-backed conversion</u>, and a <u>${s.consumable_mix_pct ?? '—'}% consumable mix</u>.`,
+        section: 'Thesis 2 — Hardware', sub: 'Lock-in',
+        panels: [
+          { take: `Units × ASP with a <b>consumable tail</b> — the installed base annuitizes.`, title: 'Units × ASP × consumable', table: s.units_asp },
+          { take: `Verathon's video laryngoscopy has <b>RCT-backed</b> first-pass gains — a clinical, not price, moat.`, title: 'First-pass success (%)', canvasId: 'c-s10-vl' },
+          { take: `Consumable mix is <b>high and rising</b> — recurring by design.`, title: 'Consumable mix (%)', canvasId: 'c-s10-cons' }
+        ],
+        sources: ['model_out.json (drivers)', 'clinical literature'],
+        notes: ['RCT figures cited in A9.']
+      });
+    },
+    init(d) { const s = sd(d, 's10');
+      mkBar('c-s10-vl', { ...s.vl_conversion, yTitle: '%' });
+      mkBar('c-s10-cons', { ...s.consumable_bar, yTitle: '%', series: (s.consumable_bar?.series || []).map(x => ({ ...x, color: C.TEAL })) }); }
+  },
+
+  /* ---- S11 Hardware EV floor ---- */
+  {
+    title: 'S11 · EV floor',
+    render(d) {
+      const s = sd(d, 's11');
+      return buildSlide({
+        claim: `Marked to hardware peers, TEP alone is worth <u>$${s.ev_floor_bn ?? '—'}bn</u> — leaving the software at an <u>implied ${s.residual_sw_multiple ?? '—'}x residual</u>.`,
+        section: 'Thesis 2 — Hardware', sub: 'EV floor',
+        panels: [
+          { take: `Peer marks bracket TEP — <b>defensible ~17–18x</b>, with 20x+ the bull, not the base.`, title: 'Hardware peer marks', table: s.peer_marks },
+          { take: `TEP EV floor of <b>$${s.ev_floor_bn ?? '—'}bn</b> (bear/base/bull).`, title: 'TEP EV by case ($bn)', canvasId: 'c-s11-floor' },
+          { take: `Back out TEP and the software trades at an <b>implied ${s.residual_sw_multiple ?? '—'}x</b> — the mispricing.`, title: 'Residual software multiple', canvasId: 'c-s11-residual' }
+        ],
+        sources: ['comps_regression.json (hardware peers)', 'model_out.json'],
+        notes: ['Floor uses the base 17–18x mark; residual is EV less TEP over software EBITDA.']
+      });
+    },
+    init(d) { const s = sd(d, 's11');
+      mkBar('c-s11-floor', { ...s.ev_floor, yTitle: '$bn', series: (s.ev_floor?.series || []).map(x => ({ ...x, color: C.BLUE })) });
+      mkBar('c-s11-residual', { ...s.residual }); }
+  },
+
+  /* ---- S12 Deal ledger ---- */
+  {
+    title: 'S12 · Deal ledger',
+    render(d) {
+      const s = sd(d, 's12');
+      return buildSlide({
+        claim: `Roper <u>buys well</u> and it shows — a <u>${s.median_moic ?? '—'}x median MOIC</u> and <u>${s.median_irr_pct ?? '—'}% IRR</u> across the platform ledger, cheap and full vintages labeled.`,
+        section: 'Thesis 3 — Allocator', sub: 'Deal ledger', num: 3,
+        panels: [
+          { take: `Platform-by-platform <b>MOIC and IRR</b>, disclosed vs estimated clearly marked.`, title: 'Platform deal ledger', table: s.ledger },
+          { take: `Cheap <b>2015–18</b> vintages, fuller <b>2020–22</b> — entry discipline is visible.`, title: 'Entry multiple by vintage', canvasId: 'c-s12-vintage' }
+        ],
+        cols: 2,
+        sources: ['deal_ledger.json'],
+        notes: ['MOIC/IRR estimated from disclosed price, segment margins, and hold period where not reported.']
+      });
+    },
+    init(d) { const s = sd(d, 's12'); mkScatter('c-s12-vintage', { points: s.vintage_scatter?.points, highlight: s.vintage_scatter?.highlight, xTitle: 'Vintage year', yTitle: 'Entry EV/EBITDA', peerLabel: 'Platforms' }); }
+  },
+
+  /* ---- S13 ROIC rises with hold ---- */
+  {
+    title: 'S13 · ROIC mechanism',
+    render(d) {
+      const s = sd(d, 's13');
+      return buildSlide({
+        claim: `ROIC <u>rises with the hold</u> — a <u>${s.entry_yield_pct ?? '—'}% day-one yield</u> compounds to <u>${s.today_yield_pct ?? '—'}% cash-on-cash</u> as price escalators run.`,
+        section: 'Thesis 3 — Allocator', sub: 'ROIC mechanism',
+        panels: [
+          { take: `Entry yield is <b>modest (~${s.entry_yield_pct ?? '—'}%)</b>; the return is built in the hold, not day one.`, title: 'Entry vs today cash yield (%)', canvasId: 'c-s13-coc' },
+          { take: `The mechanism is <b>entry-yield × (1+g)^t</b> — escalators do the compounding.`, title: 'Cash yield over hold (%)', canvasId: 'c-s13-curve' },
+          { take: `Reported ROIC understates cash ROIC once <b>goodwill</b> is adjusted.`, title: 'Reported vs cash ROIC (%)', canvasId: 'c-s13-bridge' }
+        ],
+        sources: ['deal_ledger.json', 'model_out.json'],
+        notes: ['Installed-base ~25% cash ROIC ≠ marginal reinvestment (~3–3.5% day-one yield).']
+      });
+    },
+    init(d) { const s = sd(d, 's13');
+      mkBar('c-s13-coc', { ...s.cash_on_cash, yTitle: '%' });
+      mkLine('c-s13-curve', { ...s.yield_curve, yTitle: '%' });
+      mkBar('c-s13-bridge', { ...s.roic_bridge, yTitle: '%' }); }
+  },
+
+  /* ---- S14 Sold well ---- */
+  {
+    title: 'S14 · Divestitures',
+    render(d) {
+      const s = sd(d, 's14');
+      return buildSlide({
+        claim: `Roper <u>sold well, not just bought well</u> — a divestiture ledger, a working-capital tailwind, and <u>${s.fcf_conversion_cents ?? '—'}¢ of FCF per revenue dollar</u>.`,
+        section: 'Thesis 3 — Allocator', sub: 'Divestitures',
+        panels: [
+          { take: `Exits realized value <b>at the top of the cycle</b> ($3.36bn audited net-of-tax gains in 2022), not fire-sale.`, title: 'Divestiture ledger', table: s.divestitures },
+          { take: `<b>${s.fcf_conversion_cents ?? '—'}¢ of FCF per $1 revenue</b> — decade median at P95 of the 824-cap cross-section.`, title: 'FCF conversion vs large-cap distribution', canvasId: 'c-s14-fcf' }
+        ],
+        cols: 2,
+        sources: ['deal_ledger.json#divestitures', 'stats_pack.json#fcf_conversion'],
+        notes: ['FCF conversion = FCF / revenue; large-cap distribution from the 824-name SEC frames cross-section.']
+      });
+    },
+    init(d) { const s = sd(d, 's14');
+      mkBar('c-s14-fcf', { ...s.fcf_conversion, series: (s.fcf_conversion?.series || []).map((x, i) => ({ ...x, color: i === 0 ? C.MAGENTA : C.GRAY })) }); }
+  },
+
+  /* ---- S15 Buyback discipline ---- */
+  {
+    title: 'S15 · Buybacks',
+    render(d) {
+      const s = sd(d, 's15');
+      return buildSlide({
+        claim: `Buybacks are a <u>decision, not a reflex</u> — zero for a decade, then <u>$${s.buyback_bn ?? '—'}bn</u> only when a <u>${s.fcf_yield_pct ?? '—'}% FCF yield</u> beat the pipeline.`,
+        section: 'Thesis 3 — Allocator', sub: 'Buybacks',
+        panels: [
+          { take: `<b>Zero buyback for ~a decade</b>, then a deliberate $${s.buyback_bn ?? '—'}bn — timing, not habit.`, title: 'Annual buyback ($bn)', canvasId: 'c-s15-buyback' },
+          { take: `The rule: buy back only when <b>FCF yield > after-tax debt cost</b> and the pipeline is full-priced.`, title: 'FCF yield vs debt cost (%)', canvasId: 'c-s15-yield' },
+          { take: `A written <b>decision rule</b> — buyback vs M&A by signal.`, title: 'Buyback vs M&A rule', table: s.decision }
+        ],
+        sources: ['panel.json', 'model_out.json'],
+        notes: ['Q1’26 buyback was debt-funded; leverage ~3.1x — disclosed, then defended (5% debt vs 7% FCF yield).']
+      });
+    },
+    init(d) { const s = sd(d, 's15');
+      mkBar('c-s15-buyback', { ...s.buyback_hist, yTitle: '$bn', series: (s.buyback_hist?.series || []).map(x => ({ ...x, color: C.NAVY })) });
+      mkBar('c-s15-yield', { ...s.yield_vs_debt, yTitle: '%', series: (s.yield_vs_debt?.series || []).map(x => ({ ...x, color: C.TEAL })) }); }
+  },
+
+  /* ---- S16 Forced sellers ---- */
+  {
+    title: 'S16 · Forced sellers',
+    render(d) {
+      const s = sd(d, 's16');
+      return buildSlide({
+        claim: `The clearing window is <u>open</u> — <u>$${s.dry_powder_bn ?? '—'}bn of dry powder</u> aging past a <u>${s.median_hold_yrs ?? '—'}-year median hold</u>, and few permanent-capital buyers.`,
+        section: 'Thesis 3 — Allocator', sub: 'Forced sellers',
+        panels: [
+          { take: `<b>Dry powder</b> is high but exits are jammed — pressure to transact.`, title: 'PE dry powder ($bn)', canvasId: 'c-s16-dry' },
+          { take: `Portfolio inventory is <b>aging</b> past normal hold windows.`, title: 'Portfolio cos by age', canvasId: 'c-s16-aging' },
+          { take: `DPI at lows and <b>hold times extending</b> — sellers need a clearing buyer.`, title: 'DPI & median hold', canvasId: 'c-s16-dpi' }
+        ],
+        sources: ['pe_stats.json'],
+        notes: ['ROP is one of few permanent-capital buyers able to clear whole platforms.']
+      });
+    },
+    init(d) { const s = sd(d, 's16');
+      mkLine('c-s16-dry', { ...s.dry_powder, yTitle: '$bn' });
+      mkBar('c-s16-aging', { ...s.aging_inventory });
+      mkLine('c-s16-dpi', { ...s.dpi_holdtime }); }
+  },
+
+  /* ---- S17 ROP vs CSU ---- */
+  {
+    title: 'S17 · ROP vs CSU',
+    render(d) {
+      const s = sd(d, 's17');
+      return buildSlide({
+        claim: `Own Roper <u>over Constellation</u> — <u>comparable cash ROIC</u>, more <u>deployment capacity</u>, and a <u>hardware leg CSU does not have</u>.`,
+        section: 'Thesis 3 — Allocator', sub: 'ROP vs CSU',
+        panels: [
+          { take: `Head-to-head, ROP is a <b>peer</b> — not "the best allocator in the market", just the cheaper one here.`, title: 'ROP vs Constellation', table: s.head_to_head },
+          { take: `ROP's edge is <b>deployment capacity</b> and a hardware annuity CSU lacks.`, title: 'Selected metrics', canvasId: 'c-s17-compare' }
+        ],
+        cols: 2,
+        sources: ['comps_regression.json', 'company filings'],
+        notes: ['Framed as a peer comparison, per the honesty contract.']
+      });
+    },
+    init(d) { const s = sd(d, 's17'); mkBar('c-s17-compare', { ...s.compare_bar }); }
+  },
+
+  /* ---- S18 Model architecture ---- */
+  {
+    title: 'S18 · Model architecture',
+    render(d) {
+      const s = sd(d, 's18');
+      const flow = `<div style="font-size:14px;line-height:2.2">${(s.flow_steps || []).map((st, i) =>
+        `<div><b style="color:${C.BLUE}">${i + 1}.</b> ${st}</div>`).join('')}
+        <div style="margin-top:8px;font-size:12px;color:${C.GRAY}">Balance sheet balances; cash on the BS ties to cash from the CF.</div></div>`;
+      return buildSlide({
+        claim: `Every number <u>ties out</u> — from <u>P×Q per opco</u> up through a <u>balancing three-statement model</u> to <u>FCF and TSR</u>.`,
+        section: 'Valuation', sub: 'Model architecture',
+        panels: [
+          { take: `One spine: <b>units × price → segments → three statements → TSR</b>. No orphan numbers.`, title: 'Model flow', body: flow },
+          { take: `Each thesis maps to a <b>driver</b> and an <b>EPS impact</b> — the deck is the model.`, title: 'Thesis → driver → EPS', table: s.drivers }
+        ],
+        cols: 2,
+        sources: ['model_out.json'],
+        notes: ['IS + BS + CF; BS balances; cash on BS = cash from CF (three-statement standard).']
+      });
+    }
+  },
+
+  /* ---- S19 Comps regression (the stat valuation) ---- */
+  {
+    title: 'S19 · Comps regression',
+    render(d) {
+      const s = sd(d, 's19');
+      return buildSlide({
+        claim: `On growth and margin, Roper trades <u>${s.residual_turns ?? '—'} turns cheap</u> to the VMS fit line (<u>R²=${s.r2 ?? '—'}</u>) — the residual is the opportunity.`,
+        section: 'Valuation', sub: 'Comps regression',
+        panels: [
+          { take: `Regress EV/EBITDA on <b>growth + margin</b>; ROP sits <b>below the fit</b> line.`, title: 'EV/EBITDA vs growth+margin', canvasId: 'c-s19-scatter' },
+          { take: `The residual is <b>${s.residual_turns ?? '—'} turns</b> — the statistical core of the valuation.`, title: 'Residual by comp (turns)', canvasId: 'c-s19-residual' }
+        ],
+        cols: 2,
+        sources: ['comps_regression.json'],
+        notes: ['OLS on the VMS comp set; ROP excluded from the fit, then marked against it.']
+      });
+    },
+    init(d) { const s = sd(d, 's19');
+      mkScatter('c-s19-scatter', { points: s.scatter?.points, fit: s.scatter?.fit, highlight: s.scatter?.highlight, xTitle: 'Growth + margin score', yTitle: 'EV/EBITDA', peerLabel: 'VMS peers' });
+      mkBar('c-s19-residual', { ...s.residual_bar, horizontal: true, series: (s.residual_bar?.series || []).map(x => ({ ...x, color: C.MAGENTA })) }); }
+  },
+
+  /* ---- S20 SOTP tiered ---- */
+  {
+    title: 'S20 · SOTP',
+    render(d) {
+      const s = sd(d, 's20');
+      return buildSlide({
+        claim: `Sum the parts and the floor is <u>$${s.sotp_pt ?? '—'}</u> — tiered software multiples plus a hardware mark, with <u>break-evens well below spot</u>.`,
+        section: 'Valuation', sub: 'SOTP',
+        panels: [
+          { take: `Tiered by quality: <b>T1/T2/T3 software + TEP</b>, each on its own multiple.`, title: 'Sum-of-the-parts', table: s.sotp },
+          { take: `Bear/base/bull <b>scenario grid</b> — the base is not the ceiling.`, title: 'Scenario grid', grid: s.scenario_grid },
+          { take: `<b>Break-even multiples</b> sit below spot — you are paid to be patient.`, title: 'Break-even vs spot', canvasId: 'c-s20-breakeven' }
+        ],
+        sources: ['model_out.json (SOTP)'],
+        notes: ['Tier multiples anchored to the S19 regression, not picked.']
+      });
+    },
+    init(d) { const s = sd(d, 's20'); mkBar('c-s20-breakeven', { ...s.breakeven }); }
+  },
+
+  /* ---- S21 TSR ladder + sensitivity ---- */
+  {
+    title: 'S21 · TSR ladder',
+    render(d) {
+      const s = sd(d, 's21');
+      return buildSlide({
+        claim: `The ladder pays <u>${s.base_tsr_pct ?? '—'}% base</u>, <u>${s.bull_tsr_pct ?? '—'}% bull</u>, <u>${s.bear_tsr_pct ?? '—'}% bear</u> — buyback and dividend carry it even if the multiple never re-rates.`,
+        section: 'Valuation', sub: 'TSR ladder',
+        panels: [
+          { take: `Even the <b>bear</b> clears cash returns — multiple re-rate is upside, not the thesis.`, title: '5-yr annualized TSR (%)', canvasId: 'c-s21-ladder' },
+          { take: `TSR is mostly <b>organic + buyback + dividend</b> — multiple is a minority of the return.`, title: 'TSR contribution', canvasId: 'c-s21-contrib' },
+          { take: `Sensitivity to <b>exit multiple × organic</b> — the base sits mid-grid.`, title: 'Sensitivity (multiple × organic)', grid: s.sensitivity }
+        ],
+        sources: ['model_out.json'],
+        notes: ['Skew ~2.5:1, not 5:1; bear is the AI-thesis-fails case.']
+      });
+    },
+    init(d) { const s = sd(d, 's21');
+      mkBar('c-s21-ladder', { ...s.ladder, yTitle: '%', series: (s.ladder?.series || []).map(x => ({ ...x, color: C.BLUE })) });
+      mkBar('c-s21-contrib', { ...s.contribution, stacked: true }); }
+  },
+
+  /* ---- S22 Long-term owner returns ---- */
+  {
+    title: 'S22 · Owner returns',
+    render(d) {
+      const s = sd(d, 's22');
+      return buildSlide({
+        claim: `Held ten years, you compound with <u>${s.fcf_share_cagr_pct ?? '—'}% FCF-per-share growth</u> — <u>price follows cash</u>, and the <u>multiple is a rounding error</u>.`,
+        section: 'Valuation', sub: 'Owner returns',
+        panels: [
+          { take: `Over a decade, <b>FCF/share and price converge</b> — you earn the compounding, not the re-rate.`, title: 'FCF/share vs price (indexed)', canvasId: 'c-s22-owner' },
+          { take: `What you must <b>believe</b> — base assumptions vs what today's price implies.`, title: 'What you have to believe', table: s.believe }
+        ],
+        cols: 2,
+        sources: ['model_out.json', 'reverse_dcf.json'],
+        notes: ['Very-long-term owner lens; indexed to 2026 = 100.']
+      });
+    },
+    init(d) { const s = sd(d, 's22'); mkLine('c-s22-owner', { ...s.owner_returns }); }
+  },
+
+  /* ---- S23 Risks & falsifiers ---- */
+  {
+    title: 'S23 · Risks',
+    render(d) {
+      const s = sd(d, 's23');
+      const sizing = `<div style="font-size:13px;line-height:1.6">${s.sizing_note ?? ''}
+        <div style="margin-top:8px;font-size:12px;color:${C.GRAY}">Bear target: <b style="color:${C.MAGENTA}">$${s.bear_pt ?? '—'}</b></div></div>`;
+      return buildSlide({
+        claim: `Here is the <u>bear case that would make us wrong</u> — the NRR tells, the Costpoint migration, and the DAT spot cycle, each with a <u>date to watch</u>.`,
+        section: 'Risks', sub: 'Falsifiers',
+        panels: [
+          { take: `Honest <b>bear math</b> — the levers that break the thesis, quantified.`, title: 'Bear math', table: s.bear_math },
+          { take: `<b>Dated watch-items</b> — NRR tells, Costpoint 8.1, DAT spot — with the signal to track.`, title: 'Watch-items & dates', table: s.watch_items },
+          { take: `<b>Sizing</b>: liquid mega-cap, core/overweight — falsifiable, not a lottery ticket.`, title: 'Sizing & falsifiability', body: sizing }
+        ],
+        sources: ['model_out.json', 'build_deck_data.py'],
+        notes: ['Downside is the AI-thesis-fails bear, not muddle-through.']
+      });
+    }
+  },
+
+  /* ---- S24 Catalysts + restate ---- */
+  {
+    title: 'S24 · Catalysts',
+    render(d) {
+      const s = sd(d, 's24');
+      const restate = `<div style="font-size:14px;line-height:1.6">${s.restate_note ?? ''}
+        <div style="margin-top:10px;padding:10px;background:${C.BGBLUE};border-radius:4px">
+          <b style="color:${C.NAVY};font-size:16px">BUY</b> — base $${s.base_pt ?? '—'}, ${s.tsr_5yr_pct ?? '—'}% five-year TSR.</div></div>`;
+      return buildSlide({
+        claim: `The catalysts are <u>dated and specific</u> — reiterate <u>BUY to a $${s.base_pt ?? '—'} base</u> and a <u>${s.tsr_5yr_pct ?? '—'}% five-year TSR</u>.`,
+        section: 'Close', sub: 'Catalysts',
+        panels: [
+          { take: `Catalysts are <b>on the calendar</b> — each with why it moves the stock.`, title: 'Catalyst calendar', table: s.calendar },
+          { take: `Restated: <b>BUY</b>, base $${s.base_pt ?? '—'}, ${s.tsr_5yr_pct ?? '—'}% TSR.`, title: 'Recommendation', body: restate }
+        ],
+        cols: 2,
+        sources: ['build_deck_data.py', 'company IR calendar'],
+        notes: ['Dates are scheduled events, not our forecasts of the print.']
+      });
+    }
+  },
+
+  /* ================= APPENDIX ================= */
+  { title: 'A1 · Opco grading', render: appx('a1', 'Every opco is <u>graded individually</u> — the exposure call is <u>bottom-up</u>, not a segment guess.', 'Opco AI grading', ['ai_exposure.json'], ['Grades: Benefit / Neutral / Resistant / Exposed.']) },
+  { title: 'A2 · Unit economics', render: appx('a2', 'Per-opco <u>unit economics</u> underpin the P×Q model — price proxy, base quantity, and growth split.', 'Per-opco unit economics', ['model_out.json (drivers)'], []) },
+  { title: 'A3 · Deal ledger detail', render: appx('a3', 'The <u>full deal ledger</u> — entry multiple, MOIC, and IRR for every disclosed platform, estimates labeled.', 'Deal ledger (detail)', ['deal_ledger.json'], ['EST rows flagged where inputs are inferred.']) },
+  { title: 'A4 · Regression table', render: appx('a4', 'The <u>regression table</u> — every VMS comp, predicted vs actual multiple, and Roper’s residual.', 'VMS regression & residuals', ['comps_regression.json'], []) },
+  { title: 'A5 · PE stats', render: appx('a5', 'The <u>PE forced-seller series</u> — dry powder, hold times, DPI, and entry multiples by year.', 'PE forced-seller series', ['pe_stats.json'], []) },
+  { title: 'A6 · Segment recon', render: appx('a6', '<u>Segment reconciliation</u> — reported to adjusted to the figures used in this deck.', 'Segment reconciliation', ['panel.json'], []) },
+  { title: 'A7 · Model statements', render: appx('a7', 'The <u>three-statement model</u> — income statement, balance sheet, and cash flow, five years out.', 'Three-statement model', ['model_out.json'], ['BS balances; cash ties to CF.']) },
+  { title: 'A8 · Methodology', render: appx('a8', '<u>Methodology and sources</u> — every figure traces to a primary filing or a named script.', 'Methodology & sources', ['build_deck_data.py'], []) },
+  { title: 'A9 · Review citations', render: appx('a9', '<u>Review evidence</u> — the citations behind the pricing-power and retention claims.', 'Review-evidence citations', ['ai_exposure.json'], []) },
+  { title: 'A10 · Organic bridge', render: appx('a10', 'The <u>quarterly organic bridge</u> — price, volume, FX, and M&A decomposed.', 'Quarterly organic bridge', ['panel.json'], []) },
+  { title: 'A11 · Reverse DCF', render: appx('a11', 'The <u>reverse DCF</u> — what the current price already assumes.', 'Reverse DCF', ['reverse_dcf.json'], []) },
+  { title: 'A12 · Glossary', render: appx('a12', '<u>Glossary</u> — the metrics and abbreviations used throughout.', 'Glossary', ['build_deck_data.py'], []) }
+];
+
+// safe slide-data accessor
+function sd(d, k) { return (d && d.slides && d.slides[k]) || {}; }
+
+// appendix render factory — single table or body panel, cols-1
+function appx(key, claim, title, sources, notes) {
+  return function (d) {
+    const s = sd(d, key);
+    const p = s.table
+      ? { take: `<b>${title}</b> — full detail underlying the deck.`, title, table: s.table, tableOpts: {} }
+      : { take: `<b>${title}</b>.`, title, body: `<div style="font-size:13px;line-height:1.7">${s.body || ''}</div>` };
+    // large tables scroll inside the panel body
+    return buildSlide({ claim, section: 'Appendix', sub: title, panels: [p], cols: 1, sources, notes });
+  };
+}
+
+function todoRender(entry) {
+  return slideHeader(
+    `${entry.title} — <u>content to be built</u> from research/ + data/deck_data.json.`,
+    'TODO')
+    + `<div class="panels cols-1"><div class="panel"><div class="take">Registry placeholder. Implement render(d)/init(d) per DECK_SPEC.md.</div><div class="pbody" style="display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:15px">${entry.title}</div></div></div>`;
+}
+
+/* ============================================================= *
+ *  Render + navigation                                          *
+ * ============================================================= */
+let cur = 0;
+
+function renderAll() {
+  const deck = document.getElementById('deck');
+  deck.innerHTML = '';
+  SLIDES.forEach((entry, i) => {
+    const s = document.createElement('div');
+    s.className = 'slide' + (i === 0 ? ' active' : '') + (entry.cover ? ' cover' : '');
+    if (entry.todo || typeof entry.render !== 'function') {
+      s.innerHTML = todoRender(entry);
+    } else {
+      s.innerHTML = entry.render(DATA);   // returns INNER html only
+    }
+    deck.appendChild(s);
+  });
+  // run init() for chart slides after DOM is in place
+  SLIDES.forEach((entry, i) => {
+    if (typeof entry.init === 'function') { try { entry.init(DATA); } catch (e) { console.error('init slide', i, e); } }
+  });
+  buildDots();
+  updateChrome();
+}
+
+function buildDots() {
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = SLIDES.map((_, i) => `<span class="dot" data-i="${i}"></span>`).join('');
+  document.getElementById('prog-tot').textContent = SLIDES.length;
+  dots.querySelectorAll('.dot').forEach(d =>
+    d.addEventListener('click', () => go(+d.dataset.i)));
+}
+
+function updateChrome() {
+  document.querySelectorAll('.prog .dot').forEach((d, i) =>
+    d.classList.toggle('on', i === cur));
+  document.getElementById('prog-num').textContent = cur + 1;
+  document.getElementById('prog-tag').textContent =
+    `ROP · ${SLIDES[cur].title || ('Slide '+(cur+1))}`;
+}
+
+function go(i) {
+  if (i < 0 || i >= SLIDES.length || i === cur) return;
+  const slides = document.querySelectorAll('.slide');
+  slides[cur].classList.remove('active');
+  cur = i;
+  slides[cur].classList.add('active');
+  location.hash = '#' + (cur + 1);
+  updateChrome();
+}
+
+function jumpFromHash() {
+  const n = parseInt((location.hash || '').replace('#', ''), 10);
+  if (!isNaN(n) && n >= 1 && n <= SLIDES.length) go(n - 1);
+}
+
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(cur + 1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+  else if (e.key === 'Home') go(0);
+  else if (e.key === 'End') go(SLIDES.length - 1);
+});
+addEventListener('hashchange', jumpFromHash);
+
+/* ============================================================= *
+ *  Fixed-canvas scale-to-fit                                    *
+ * ============================================================= */
+function fitDeck() {
+  const margin = 24;
+  const sx = (innerWidth  - margin * 2) / 1440;
+  const sy = (innerHeight - margin * 2 - 26) / 900;  // 26 = progress bar
+  const s = Math.min(sx, sy, 1);                      // never upscale past 1
+  document.getElementById('deck').style.transform = `scale(${s})`;
+}
+addEventListener('resize', fitDeck);
+
+/* ============================================================= *
+ *  Boot                                                         *
+ * ============================================================= */
+loadData().then(() => {
+  renderAll();
+  fitDeck();
+  jumpFromHash();
+});
+</script>

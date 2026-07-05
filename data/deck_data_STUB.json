@@ -1,0 +1,2907 @@
+{
+  "_stub": true,
+  "_note": "PLACEHOLDER contract (999 / \"STUB\"). Real values -> scripts/build_deck_data.py. Schema: data/deck_data_SCHEMA.md",
+  "meta": {
+    "ticker": "ROP",
+    "name": "Roper Technologies",
+    "rating": "BUY",
+    "one_line": "STUB one-line trade thesis goes here",
+    "asof": "2026-07-03",
+    "price": 999,
+    "shares_out_m": 999,
+    "ev_bn": 999,
+    "ev_ebitda": 999,
+    "fcf_yield_pct": 999,
+    "price_target": 999,
+    "tsr_5yr_pct": 999,
+    "skew": "9.9:1"
+  },
+  "cover_kpis": [
+    {
+      "label": "Price (7/2)",
+      "value": "$999",
+      "sub": "STUB"
+    },
+    {
+      "label": "EV",
+      "value": "$99.9bn",
+      "sub": "STUB"
+    },
+    {
+      "label": "EV/EBITDA",
+      "value": "99.9x",
+      "sub": "NTM"
+    },
+    {
+      "label": "FCF yield",
+      "value": "9.9%",
+      "sub": "STUB"
+    },
+    {
+      "label": "Base PT",
+      "value": "$999",
+      "sub": "STUB"
+    },
+    {
+      "label": "5-yr TSR",
+      "value": "99%",
+      "sub": "STUB"
+    },
+    {
+      "label": "Skew",
+      "value": "9.9:1",
+      "sub": "up:down"
+    }
+  ],
+  "slides": {
+    "s1": {
+      "base_pt": 999,
+      "tsr_5yr_pct": 999,
+      "theses": [
+        {
+          "n": 1,
+          "title": "STUB thesis one — exposed vs benefiting dollars",
+          "eps_impact": "+$9.99 EPS"
+        },
+        {
+          "n": 2,
+          "title": "STUB thesis two — hardware compounder covers ¼–⅓ of EV",
+          "eps_impact": "+$9.99 EPS"
+        },
+        {
+          "n": 3,
+          "title": "STUB thesis three — allocator + forced-seller window",
+          "eps_impact": "+$9.99 EPS"
+        }
+      ],
+      "at_glance": {
+        "cols": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999
+          ],
+          [
+            "STUB 2",
+            999
+          ],
+          [
+            "STUB 3",
+            999
+          ],
+          [
+            "STUB 4",
+            999
+          ],
+          [
+            "STUB 5",
+            999
+          ],
+          [
+            "STUB 6",
+            999
+          ]
+        ]
+      },
+      "skew": {
+        "up": 999,
+        "down": 999,
+        "ratio": "9.9:1"
+      },
+      "wrong": [
+        "STUB falsifier one",
+        "STUB falsifier two",
+        "STUB falsifier three"
+      ]
+    },
+    "s2": {
+      "derate_turns": 999,
+      "eps_cagr_pct": 999,
+      "price_vs_eps": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "label": "Price (indexed)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "EPS (indexed)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "evebitda_hist": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "label": "ROP EV/EBITDA",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "VMS median",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "tsr_decomp": {
+        "labels": [
+          "EPS growth",
+          "Multiple",
+          "Dividend",
+          "Buyback"
+        ],
+        "series": [
+          {
+            "label": "Contribution (pp)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s3": {
+      "n_opcos": 999,
+      "cri_pct": 999,
+      "segment_mix": {
+        "labels": [
+          "App Software",
+          "Network Software",
+          "TEP"
+        ],
+        "series": [
+          {
+            "label": "Revenue ($m)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "opco_treemap": {
+        "labels": [
+          "STUB DAT",
+          "STUB Deltek",
+          "STUB Vertafore",
+          "STUB Clinisys",
+          "STUB Neptune",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Revenue ($m)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "cri_note": "STUB cash-return-on-investment machine description"
+    },
+    "s4": {
+      "exposed_pct": 999,
+      "benefiting_pct": 999,
+      "opcos": [
+        {
+          "name": "STUB-A",
+          "rev": 999,
+          "grade": "benefit"
+        },
+        {
+          "name": "STUB-B",
+          "rev": 999,
+          "grade": "benefit"
+        },
+        {
+          "name": "STUB-C",
+          "rev": 999,
+          "grade": "neutral"
+        },
+        {
+          "name": "STUB-D",
+          "rev": 999,
+          "grade": "neutral"
+        },
+        {
+          "name": "STUB-E",
+          "rev": 999,
+          "grade": "exposed"
+        },
+        {
+          "name": "STUB-F",
+          "rev": 999,
+          "grade": "exposed"
+        }
+      ],
+      "retention_dist": {
+        "labels": [
+          "<95%",
+          "95-98%",
+          "98-100%",
+          ">100% NRR"
+        ],
+        "counts": [
+          999,
+          999,
+          999,
+          999
+        ]
+      },
+      "case_tiles": [
+        {
+          "opco": "STUB-DAT",
+          "share_pct": 999,
+          "retention_pct": 999
+        },
+        {
+          "opco": "STUB-Deltek",
+          "share_pct": 999,
+          "retention_pct": 999
+        },
+        {
+          "opco": "STUB-PowerPlan",
+          "share_pct": 999,
+          "retention_pct": 999
+        }
+      ],
+      "net_effect": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "Net AI effect on software organic (pp/yr)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s5": {
+      "share_bar": {
+        "labels": [
+          "STUB DAT",
+          "STUB PowerPlan",
+          "STUB Deltek",
+          "STUB DataInno",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Category share (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "retention_bar": {
+        "labels": [
+          "STUB DAT",
+          "STUB PowerPlan",
+          "STUB Deltek",
+          "STUB DataInno",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Gross retention (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "tiles": {
+        "cols": [
+          "Case opco",
+          "Type",
+          "Share",
+          "Retention"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "s6": {
+      "median_escalator_pct": 999,
+      "escalators": {
+        "labels": [
+          "STUB Deltek",
+          "STUB Vertafore",
+          "STUB Clinisys",
+          "STUB Strata",
+          "STUB Aderant"
+        ],
+        "series": [
+          {
+            "label": "Contract escalator (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "retention_dist": {
+        "labels": [
+          "<95%",
+          "95-98%",
+          "98-100%",
+          ">100%"
+        ],
+        "series": [
+          {
+            "label": "Opco count",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "reviews": {
+        "points": [
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "fit": [
+          {
+            "x": 0,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "highlight": {
+          "x": 999,
+          "y": 999,
+          "label": "ROP"
+        }
+      }
+    },
+    "s7": {
+      "contested_pct": 999,
+      "challengers": {
+        "cols": [
+          "Opco",
+          "Named challenger",
+          "Exposure grade",
+          "Assumed loss"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "contested_bar": {
+        "labels": [
+          "STUB CentralReach",
+          "STUB ConstructConnect",
+          "STUB Frontline",
+          "STUB Foundry",
+          "STUB iTrade",
+          "STUB rf IDEAS"
+        ],
+        "series": [
+          {
+            "label": "Revenue at risk ($m)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s8": {
+      "attach_print_pct": 999,
+      "net_uplift_pp": 999,
+      "dat_organic": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "DAT organic (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "attach_model": {
+        "labels": [
+          "Base",
+          "+1pt attach"
+        ],
+        "series": [
+          {
+            "label": "NRR (%)",
+            "data": [
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "tam_statements": {
+        "cols": [
+          "Opco",
+          "TAM statement",
+          "Source"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "s9": {
+      "tep_organic_pct": 999,
+      "pxq_build": {
+        "cols": [
+          "Product",
+          "Price",
+          "Units",
+          "Revenue ($m)"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "organic_hist": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "TEP organic (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "margins": {
+        "labels": [
+          "STUB Neptune",
+          "STUB Verathon",
+          "STUB NDI",
+          "STUB CIVCO"
+        ],
+        "series": [
+          {
+            "label": "Gross margin (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s10": {
+      "consumable_mix_pct": 999,
+      "units_asp": {
+        "cols": [
+          "Product",
+          "Units",
+          "ASP",
+          "Consumable %"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "vl_conversion": {
+        "labels": [
+          "Direct laryngoscopy",
+          "Video laryngoscopy"
+        ],
+        "series": [
+          {
+            "label": "First-pass success (%)",
+            "data": [
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "consumable_bar": {
+        "labels": [
+          "STUB Neptune",
+          "STUB Verathon",
+          "STUB NDI"
+        ],
+        "series": [
+          {
+            "label": "Consumable mix (%)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s11": {
+      "ev_floor_bn": 999,
+      "ev_bull_bn": 999,
+      "residual_sw_multiple": 999,
+      "peer_marks": {
+        "cols": [
+          "Peer",
+          "EV/EBITDA",
+          "Gross margin",
+          "Organic %"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "ev_floor": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "TEP EV ($bn)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "residual": {
+        "labels": [
+          "Total EV",
+          "less TEP",
+          "= Software EV",
+          "/ SW EBITDA"
+        ],
+        "series": [
+          {
+            "label": "($bn / x)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s12": {
+      "median_moic": 999,
+      "median_irr_pct": 999,
+      "ledger": {
+        "cols": [
+          "Platform",
+          "Vintage",
+          "MOIC",
+          "IRR",
+          "Basis"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "vintage_scatter": {
+        "points": [
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "fit": [
+          {
+            "x": 0,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "highlight": {
+          "x": 999,
+          "y": 999,
+          "label": "ROP"
+        }
+      }
+    },
+    "s13": {
+      "entry_yield_pct": 999,
+      "today_yield_pct": 999,
+      "goodwill_pct": 999,
+      "cash_on_cash": {
+        "labels": [
+          "STUB Deltek",
+          "STUB Vertafore",
+          "STUB Clinisys",
+          "STUB Neptune"
+        ],
+        "series": [
+          {
+            "label": "Entry yield (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Today yield (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "yield_curve": {
+        "labels": [
+          "t+0",
+          "t+2",
+          "t+4",
+          "t+6",
+          "t+8",
+          "t+10"
+        ],
+        "series": [
+          {
+            "label": "Cash yield (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "roic_bridge": {
+        "labels": [
+          "Reported ROIC",
+          "Goodwill adj",
+          "Cash ROIC"
+        ],
+        "series": [
+          {
+            "label": "ROIC (%)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s14": {
+      "fcf_conversion_cents": 999,
+      "divestitures": {
+        "cols": [
+          "Asset",
+          "Year",
+          "Proceeds ($bn)",
+          "Est. MOIC"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "wc_swing": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "NWC / revenue (%)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "fcf_conversion": {
+        "labels": [
+          "STUB ROP",
+          "S&P p25",
+          "S&P median",
+          "S&P p75"
+        ],
+        "series": [
+          {
+            "label": "FCF / $1 revenue",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s15": {
+      "buyback_bn": 999,
+      "fcf_yield_pct": 999,
+      "debt_cost_pct": 999,
+      "buyback_hist": {
+        "labels": [
+          "2016",
+          "2018",
+          "2020",
+          "2022",
+          "2024",
+          "2026"
+        ],
+        "series": [
+          {
+            "label": "Buyback ($bn)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "yield_vs_debt": {
+        "labels": [
+          "FCF yield",
+          "After-tax debt cost"
+        ],
+        "series": [
+          {
+            "label": "(%)",
+            "data": [
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "decision": {
+        "cols": [
+          "Signal",
+          "Buyback",
+          "M&A"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "s16": {
+      "dry_powder_bn": 999,
+      "median_hold_yrs": 999,
+      "dry_powder": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Dry powder ($bn)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "aging_inventory": {
+        "labels": [
+          "<3y",
+          "3-5y",
+          "5-7y",
+          ">7y"
+        ],
+        "series": [
+          {
+            "label": "Portfolio cos (count)",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "dpi_holdtime": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "label": "Median DPI",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Median hold (yrs)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s17": {
+      "csu_premium_now_pct": 999,
+      "head_to_head": {
+        "cols": [
+          "Metric",
+          "ROP",
+          "CSU"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999
+          ]
+        ]
+      },
+      "compare_bar": {
+        "labels": [
+          "Cash ROIC",
+          "FCF/share CAGR",
+          "Deploy capacity"
+        ],
+        "series": [
+          {
+            "label": "ROP",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "CSU",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s18": {
+      "flow_steps": [
+        "P×Q per opco",
+        "→ segment revenue",
+        "→ 3-statement",
+        "→ FCF & TSR"
+      ],
+      "drivers": {
+        "cols": [
+          "Thesis",
+          "Driver",
+          "EPS impact"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "s19": {
+      "residual_turns": 999,
+      "r2": 999,
+      "scatter": {
+        "points": [
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "fit": [
+          {
+            "x": 0,
+            "y": 999
+          },
+          {
+            "x": 999,
+            "y": 999
+          }
+        ],
+        "highlight": {
+          "x": 999,
+          "y": 999,
+          "label": "ROP"
+        }
+      },
+      "residual_bar": {
+        "labels": [
+          "STUB peer1",
+          "STUB peer2",
+          "ROP",
+          "STUB peer4",
+          "STUB peer5"
+        ],
+        "series": [
+          {
+            "label": "Residual (turns EV/EBITDA)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s20": {
+      "sotp_ev_bn": 999,
+      "sotp_pt": 999,
+      "sotp": {
+        "cols": [
+          "Tier",
+          "EBITDA ($m)",
+          "Multiple",
+          "EV ($bn)"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ]
+        ]
+      },
+      "scenario_grid": {
+        "rowTitle": "STUB row axis",
+        "colTitle": "STUB col axis",
+        "colLabels": [
+          "Low",
+          "Mid",
+          "High"
+        ],
+        "rows": [
+          {
+            "label": "Bear",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Base",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Bull",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "breakeven": {
+        "labels": [
+          "STUB T1",
+          "STUB T2",
+          "STUB T3",
+          "TEP"
+        ],
+        "series": [
+          {
+            "label": "Break-even multiple",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Spot-implied",
+            "data": [
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s21": {
+      "base_tsr_pct": 999,
+      "bull_tsr_pct": 999,
+      "bear_tsr_pct": 999,
+      "ladder": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "5-yr annualized TSR (%)",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "contribution": {
+        "labels": [
+          "Bear",
+          "Base",
+          "Bull"
+        ],
+        "series": [
+          {
+            "label": "Organic",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Buyback",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Dividend",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Multiple",
+            "data": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "sensitivity": {
+        "rowTitle": "STUB row axis",
+        "colTitle": "STUB col axis",
+        "colLabels": [
+          "4%",
+          "6%",
+          "8%"
+        ],
+        "rows": [
+          {
+            "label": "16x",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "18x",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "20x",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "22x",
+            "cells": [
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      }
+    },
+    "s22": {
+      "fcf_share_cagr_pct": 999,
+      "owner_returns": {
+        "labels": [
+          "2026",
+          "2028",
+          "2030",
+          "2032",
+          "2034",
+          "2036"
+        ],
+        "series": [
+          {
+            "label": "FCF/share (indexed)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          },
+          {
+            "label": "Price (indexed)",
+            "data": [
+              999,
+              999,
+              999,
+              999,
+              999,
+              999
+            ]
+          }
+        ]
+      },
+      "believe": {
+        "cols": [
+          "Assumption",
+          "Base case",
+          "Implied by price"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "s23": {
+      "bear_pt": 999,
+      "bear_math": {
+        "cols": [
+          "Lever",
+          "Base",
+          "Bear"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ]
+        ]
+      },
+      "watch_items": {
+        "cols": [
+          "Watch item",
+          "Date",
+          "Tell"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ]
+        ]
+      },
+      "sizing_note": "STUB sizing note — liquid mega-cap, core/overweight",
+      "fls_tally": {
+        "n": 999,
+        "made": 999,
+        "lost": 999,
+        "pending": 999,
+        "right_reasons": 999,
+        "wrong_reasons": 999
+      }
+    },
+    "s24": {
+      "base_pt": 999,
+      "tsr_5yr_pct": 999,
+      "calendar": {
+        "cols": [
+          "Date",
+          "Catalyst",
+          "Why it matters"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999
+          ]
+        ]
+      },
+      "restate_note": "STUB recommendation restatement"
+    },
+    "a1": {
+      "table": {
+        "cols": [
+          "Opco",
+          "Segment",
+          "Revenue ($m)",
+          "Organic %",
+          "AI grade",
+          "NRR"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 9",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 10",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 11",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 12",
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a2": {
+      "table": {
+        "cols": [
+          "Opco",
+          "Price proxy",
+          "Q0",
+          "Price g",
+          "Qty g",
+          "Margin %"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 9",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 10",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 11",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 12",
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a3": {
+      "table": {
+        "cols": [
+          "Platform",
+          "Year",
+          "Price ($bn)",
+          "Entry EBITDA",
+          "Entry x",
+          "MOIC",
+          "IRR",
+          "Basis"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 9",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 10",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 11",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 12",
+            999,
+            999,
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a4": {
+      "table": {
+        "cols": [
+          "Company",
+          "Growth",
+          "Margin",
+          "Predicted x",
+          "Actual x",
+          "Residual"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 9",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 10",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 11",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 12",
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a5": {
+      "table": {
+        "cols": [
+          "Year",
+          "Dry powder ($bn)",
+          "Median hold",
+          "Median DPI",
+          "Entry x"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a6": {
+      "table": {
+        "cols": [
+          "Segment",
+          "Reported",
+          "Adj.",
+          "Reconciled"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a7": {
+      "table": {
+        "cols": [
+          "Line item",
+          "FY24",
+          "FY25",
+          "FY26E",
+          "FY27E",
+          "FY28E"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 9",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 10",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 11",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 12",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 13",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 14",
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a8": {
+      "body": "STUB methodology & sources — every figure traces to a primary filing or a named script."
+    },
+    "a9": {
+      "table": {
+        "cols": [
+          "Opco",
+          "Evidence",
+          "Metric",
+          "Citation"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a10": {
+      "table": {
+        "cols": [
+          "Quarter",
+          "Price",
+          "Volume",
+          "FX",
+          "M&A",
+          "Organic"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 7",
+            999,
+            999,
+            999,
+            999,
+            999
+          ],
+          [
+            "STUB 8",
+            999,
+            999,
+            999,
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a11": {
+      "table": {
+        "cols": [
+          "Assumption",
+          "Value",
+          "Implied by spot"
+        ],
+        "rows": [
+          [
+            "STUB 1",
+            999,
+            999
+          ],
+          [
+            "STUB 2",
+            999,
+            999
+          ],
+          [
+            "STUB 3",
+            999,
+            999
+          ],
+          [
+            "STUB 4",
+            999,
+            999
+          ],
+          [
+            "STUB 5",
+            999,
+            999
+          ],
+          [
+            "STUB 6",
+            999,
+            999
+          ]
+        ]
+      }
+    },
+    "a12": {
+      "body": "STUB glossary — CRI, NRR, MOIC, DPI, VMS, TEP, SOTP, TSR."
+    }
+  }
+}
