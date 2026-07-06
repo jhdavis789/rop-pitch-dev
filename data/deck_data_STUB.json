@@ -60,17 +60,17 @@
       "theses": [
         {
           "n": 1,
-          "title": "STUB thesis one — exposed vs benefiting dollars",
+          "title": "STUB thesis one \u2014 exposed vs benefiting dollars",
           "eps_impact": "+$9.99 EPS"
         },
         {
           "n": 2,
-          "title": "STUB thesis two — hardware compounder covers ¼–⅓ of EV",
+          "title": "STUB thesis two \u2014 hardware compounder covers \u00bc\u2013\u2153 of EV",
           "eps_impact": "+$9.99 EPS"
         },
         {
           "n": 3,
-          "title": "STUB thesis three — allocator + forced-seller window",
+          "title": "STUB thesis three \u2014 allocator + forced-seller window",
           "eps_impact": "+$9.99 EPS"
         }
       ],
@@ -288,35 +288,15 @@
           "grade": "exposed"
         }
       ],
-      "retention_dist": {
-        "labels": [
-          "<95%",
-          "95-98%",
-          "98-100%",
-          ">100% NRR"
-        ],
-        "counts": [
-          999,
-          999,
-          999,
-          999
-        ]
-      },
       "case_tiles": [
         {
-          "opco": "STUB-DAT",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-DAT"
         },
         {
-          "opco": "STUB-Deltek",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-Deltek"
         },
         {
-          "opco": "STUB-PowerPlan",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-PowerPlan"
         }
       ],
       "net_effect": {
@@ -338,48 +318,6 @@
       }
     },
     "s5": {
-      "share_bar": {
-        "labels": [
-          "STUB DAT",
-          "STUB PowerPlan",
-          "STUB Deltek",
-          "STUB DataInno",
-          "STUB Aderant"
-        ],
-        "series": [
-          {
-            "label": "Category share (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
-      "retention_bar": {
-        "labels": [
-          "STUB DAT",
-          "STUB PowerPlan",
-          "STUB Deltek",
-          "STUB DataInno",
-          "STUB Aderant"
-        ],
-        "series": [
-          {
-            "label": "Gross retention (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
       "tiles": {
         "cols": [
           "Case opco",
@@ -443,92 +381,6 @@
             ]
           }
         ]
-      },
-      "retention_dist": {
-        "labels": [
-          "<95%",
-          "95-98%",
-          "98-100%",
-          ">100%"
-        ],
-        "series": [
-          {
-            "label": "Opco count",
-            "data": [
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
-      "reviews": {
-        "points": [
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          }
-        ],
-        "fit": [
-          {
-            "x": 0,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          }
-        ],
-        "highlight": {
-          "x": 999,
-          "y": 999,
-          "label": "ROP"
-        }
       }
     },
     "s7": {
@@ -1164,31 +1016,6 @@
           ]
         ]
       },
-      "wc_swing": {
-        "labels": [
-          "2019",
-          "2020",
-          "2021",
-          "2022",
-          "2023",
-          "2024",
-          "2025"
-        ],
-        "series": [
-          {
-            "label": "NWC / revenue (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
       "fcf_conversion": {
         "labels": [
           "STUB ROP",
@@ -1440,10 +1267,10 @@
     },
     "s18": {
       "flow_steps": [
-        "P×Q per opco",
-        "→ segment revenue",
-        "→ 3-statement",
-        "→ FCF & TSR"
+        "P\u00d7Q per opco",
+        "\u2192 segment revenue",
+        "\u2192 3-statement",
+        "\u2192 FCF & TSR"
       ],
       "drivers": {
         "cols": [
@@ -1955,7 +1782,7 @@
           ]
         ]
       },
-      "sizing_note": "STUB sizing note — liquid mega-cap, core/overweight",
+      "sizing_note": "STUB sizing note \u2014 liquid mega-cap, core/overweight",
       "fls_tally": {
         "n": 999,
         "made": 999,
@@ -2719,7 +2546,7 @@
       }
     },
     "a8": {
-      "body": "STUB methodology & sources — every figure traces to a primary filing or a named script."
+      "body": "STUB methodology & sources \u2014 every figure traces to a primary filing or a named script."
     },
     "a9": {
       "table": {
@@ -2901,7 +2728,7 @@
       }
     },
     "a12": {
-      "body": "STUB glossary — CRI, NRR, MOIC, DPI, VMS, TEP, SOTP, TSR."
+      "body": "STUB glossary \u2014 CRI, NRR, MOIC, DPI, VMS, TEP, SOTP, TSR."
     }
   }
 }

@@ -458,8 +458,12 @@ const SLIDES = [
         section: 'Recommendation', sub: 'One-pager',
         panels: [
           { take: `Each thesis maps to a <b>named EPS driver</b>; the trade works even if only two of three land.`, title: 'The three theses', body: theses },
-          { take: `At a glance — <b>price, EV, multiple, base target</b>; the PT is a 12-mo SOTP mark, the TSR a 5-yr hold.`, title: 'At a glance', table: s.at_glance },
-          { take: `Skew is <b>${k.ratio ?? '—'}</b> on SOTP marks; the downside is the AI-thesis-fails bear, not muddle-through.`, title: 'Skew & falsifiers', body: skewBody }
+          { take: `At a glance — <b>price, EV, multiple, base target</b>; the PT is a 12-mo SOTP mark, the TSR a 5-yr hold.`, title: 'At a glance', table: { cols: s.at_glance.cols, rows: [...s.at_glance.rows,
+              ['5-yr TSR (base, 16.5x exit)', `${d.slides.s21?.base_tsr_pct ?? '—'}%/yr`],
+              ['5-yr TSR (no re-rate, 13.6x)', `${d.slides.s21?.no_rerate_pct ?? '—'}%/yr`],
+              ['5-yr TSR (bear, 12x exit)', `+${d.slides.s21?.bear_tsr_pct ?? '—'}%/yr`],
+              ['FCF/share CAGR delivered (10-yr)', `${d.slides.s22?.fcf_share_cagr_pct ?? '—'}%`]] } },
+          { take: `Skew is <b>${k.ratio ?? '—'}</b> on SOTP marks; the downside is the AI-thesis-fails bear, not muddle-through.`, title: 'Skew & falsifiers', body: skewBody + `<div style="margin-top:14px;padding:10px 12px;background:#ddf6f6;border-radius:4px;font-size:12.5px;line-height:1.5"><b>The decade test:</b> at $364 the market pays for ~1% FCF/share growth against 10% delivered for a decade; a ten-year holder needs only 5–8% growth at humble exit multiples to earn 10%/yr. The valuation embeds the bear case.</div>` }
         ],
         cols: 3,
         sources: ['model_out.json#sotp,scenarios', 'bear_dossier.json (trough)'],
@@ -533,7 +537,7 @@ const SLIDES = [
       const tbl = dataTable(['Durable franchise', 'Revenue ($m)', 'Grade'],
         durable.map(o => [o.name, o.rev, o.grade === 'benefit' ? 'AI-benefiting' : 'Durable']));
       return buildSlide({
-        claim: `The revenue AI threatens and the revenue AI helps are <u>not the same dollars</u>: $${s.exposed_m ?? '—'}M (${s.exposed_pct ?? '—'}%) is genuinely exposed, while the durable core carries mid-90s retention — yet the whole book trades ${s.residual_turns ? Math.round(s.residual_turns) : '4'} turns below the peer line.`,
+        claim: `The revenue AI threatens and the revenue AI helps are <u>not the same dollars</u>: $${s.exposed_m ?? '—'}M (${s.exposed_pct ?? '—'}%) is genuinely exposed, while the durable core is regulatory and networked systems of record — yet the whole book trades <u>34% below the vertical-software peer median</u>.`,
         section: 'Thesis 1 — Software', sub: 'Dollar decomposition', num: 1,
         panels: [
           { take: `Only <b>~${s.exposed_pct ?? '—'}%</b> of the book is genuinely AI-exposed; the rest is workflow spend AI makes stickier.`, title: 'Revenue by AI-exposure grade ($m)', canvasId: 'c-s4-decomp' },
@@ -704,12 +708,12 @@ const SLIDES = [
         claim: `Marked opco-by-opco against Badger Meter, Teleflex, Ambu and Masimo, TEP is worth <u>~$11.5bn at the peer-mark floor</u> (17–18x) — and our SOTP carries it below even that, at 15.5x (~$${s.ev_floor_bn ?? '—'}bn), so the hardware leg needs no generosity to do its work in the valuation.`,
         section: 'Thesis 2 — Hardware', sub: 'EV floor',
         panels: [
-          { take: `Peer marks bracket TEP — <b>defensible ~17–18x</b>, with 20x+ the bull, not the base.`, title: 'Hardware peer marks', table: s.peer_marks },
-          { take: `TEP EV floor of <b>$${s.ev_floor_bn ?? '—'}bn</b> (bear/base/bull).`, title: 'TEP EV by case ($bn)', canvasId: 'c-s11-floor' },
+          { take: `Peer marks bracket TEP at <b>~17–18x</b> (~$11.5bn); our SOTP carries it <b>below the floor at 15.5x (~$${s.ev_floor_bn ?? '—'}bn)</b> — conservative on purpose.`, title: 'Hardware peer marks', table: s.peer_marks },
+          { take: `TEP EV by case: our base mark <b>$${s.ev_floor_bn ?? '—'}bn</b> sits under the peer floor, 20x+ only the bull.`, title: 'TEP EV by case ($bn)', canvasId: 'c-s11-floor' },
           { take: `Back out TEP and the software trades at an <b>implied ${s.residual_sw_multiple ?? '—'}x</b> — the mispricing.`, title: 'Residual software multiple', canvasId: 'c-s11-residual' }
         ],
         sources: ['comps_regression.json (hardware peers)', 'model_out.json'],
-        notes: ['Floor uses the base 17–18x mark; residual is EV less TEP over software EBITDA.']
+        notes: ['Peer-mark floor is 17–18x (~$11.5bn); the deck marks TEP conservatively at 15.5x so the leg needs no generosity. 20x+ = bull. BMI itself is −41% off its high — the read-across cuts both ways.']
       });
     },
     init(d) { const s = sd(d, 's11');

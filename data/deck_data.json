@@ -70,7 +70,7 @@
         {
           "n": 3,
           "title": "A disciplined redeployment machine enters its best buyer's market in a decade \u2014 record PE exit backlog, DPI at lows.",
-          "eps_impact": "Model: buyback +$1.12; disciplined M&A the swing ($-7.40 vs the buyback alternative)"
+          "eps_impact": "Model: buyback adds +$1.12 of FY31 adj DEPS; at today's 16x entry multiples buybacks beat M&A by $7.40 \u2014 the forced-seller window (13\u201314x entries) is what flips M&A back on"
         }
       ],
       "at_glance": {
@@ -97,11 +97,11 @@
           ],
           [
             "Base PT (SOTP)",
-            "$427"
+            "$442"
           ],
           [
             "Skew (reward:risk)",
-            "0.7:1"
+            "1.9:1"
           ]
         ]
       },
@@ -431,35 +431,15 @@
           "grade": "neutral"
         }
       ],
-      "retention_dist": {
-        "labels": [
-          "<95%",
-          "95-98%",
-          "98-100%",
-          ">100% NRR"
-        ],
-        "counts": [
-          999,
-          999,
-          999,
-          999
-        ]
-      },
       "case_tiles": [
         {
-          "opco": "STUB-DAT",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-DAT"
         },
         {
-          "opco": "STUB-Deltek",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-Deltek"
         },
         {
-          "opco": "STUB-PowerPlan",
-          "share_pct": 999,
-          "retention_pct": 999
+          "opco": "STUB-PowerPlan"
         }
       ],
       "net_effect": {
@@ -484,48 +464,6 @@
       "residual_turns": 4.1
     },
     "s5": {
-      "share_bar": {
-        "labels": [
-          "STUB DAT",
-          "STUB PowerPlan",
-          "STUB Deltek",
-          "STUB DataInno",
-          "STUB Aderant"
-        ],
-        "series": [
-          {
-            "label": "Category share (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
-      "retention_bar": {
-        "labels": [
-          "STUB DAT",
-          "STUB PowerPlan",
-          "STUB Deltek",
-          "STUB DataInno",
-          "STUB Aderant"
-        ],
-        "series": [
-          {
-            "label": "Gross retention (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
       "tiles": {
         "cols": [
           "Case opco",
@@ -622,92 +560,6 @@
             "color": "#005f9e"
           }
         ]
-      },
-      "retention_dist": {
-        "labels": [
-          "<95%",
-          "95-98%",
-          "98-100%",
-          ">100%"
-        ],
-        "series": [
-          {
-            "label": "Opco count",
-            "data": [
-              999,
-              999,
-              999,
-              999
-            ]
-          }
-        ]
-      },
-      "reviews": {
-        "points": [
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          }
-        ],
-        "fit": [
-          {
-            "x": 0,
-            "y": 999
-          },
-          {
-            "x": 999,
-            "y": 999
-          }
-        ],
-        "highlight": {
-          "x": 999,
-          "y": 999,
-          "label": "ROP"
-        }
       },
       "mean_organic_pct": 5.6,
       "min_organic_pct": -3.0,
@@ -1520,31 +1372,6 @@
             "financial buyer",
             246
           ]
-        ]
-      },
-      "wc_swing": {
-        "labels": [
-          "2019",
-          "2020",
-          "2021",
-          "2022",
-          "2023",
-          "2024",
-          "2025"
-        ],
-        "series": [
-          {
-            "label": "NWC / revenue (%)",
-            "data": [
-              999,
-              999,
-              999,
-              999,
-              999,
-              999,
-              999
-            ]
-          }
         ]
       },
       "fcf_conversion": {
