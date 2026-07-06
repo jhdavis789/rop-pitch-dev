@@ -618,8 +618,9 @@ const SLIDES = [
         panels: [
           { take: `Named challenger by named challenger, with <b>independent review evidence</b> — Unanet out-rates Deltek (G2 4.4/645); STACK leads takeoff (4.5/1,300).`, title: 'Challenger reviews (Capterra / G2)', table: s.challenger_reviews },
           { take: `Even if they win, the <b>revenue at risk is bounded</b> — sized per opco; a demand-side overhang noted honestly.`, title: 'Revenue at risk ($m)',
-            body: `<div style="position:relative;height:150px"><canvas id="c-s7-contested"></canvas></div>
-              <div style="font-size:10px;color:${C.GRAY};line-height:1.35;margin-top:6px">${s.aba_note ?? ''}</div>` }
+            body: `<div style="position:relative;height:210px"><canvas id="c-s7-contested"></canvas></div>
+              <div style="font-size:10.5px;color:${C.GRAY};line-height:1.4;margin-top:8px">${s.aba_note ?? ''}</div>
+              <div style="font-size:11.5px;color:${C.NAVY};line-height:1.45;margin-top:10px;padding:9px 11px;background:${C.WARM}55;border-radius:4px">${s.named_churn_note ?? ''}</div>` }
         ],
         cols: 2,
         sources: ['alt_evidence.json#workstream_3_review_trends', 'ai_exposure.json (exposed $)', 'alt_evidence.json (HHS-OIG audits)'],

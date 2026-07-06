@@ -740,7 +740,8 @@
           ]
         ]
       },
-      "aba_note": "Demand-side overhang, stated honestly: HHS-OIG ABA-Medicaid audits have flagged ~$200M in improper payments (Indiana $56M Dec-2024; Wisconsin $18.5M Jul-2025). CentralReach is the software vendor, not the biller, so it is not a target \u2014 but reimbursement pressure on its ABA-provider base tempers the S8 attach story."
+      "aba_note": "Demand-side overhang, stated honestly: HHS-OIG ABA-Medicaid audits have flagged ~$200M in improper payments (Indiana $56M Dec-2024; Wisconsin $18.5M Jul-2025). CentralReach is the software vendor, not the biller, so it is not a target \u2014 but reimbursement pressure on its ABA-provider base tempers the S8 attach story.",
+      "named_churn_note": "Named churn we could verify (secondary sources): Chino Valley, Washoe, Weber and SFUSD moved to or dual-run Red Rover against Frontline in 2025; Togal and STACK are winning takeoff seats against ConstructConnect's tool layer. These losses are in the base case, deeper in the bear."
     },
     "s8": {
       "attach_print_pct": 75,
@@ -2207,6 +2208,31 @@
             "Buyback pace vs leverage",
             "ROP 10-Q (quarterly)",
             "net leverage climbs >3.5x funding buybacks at a flat/de-rating price"
+          ],
+          [
+            "M&A entry multiples on next platform deals",
+            "ROP deal press releases",
+            "new platforms bought >18x (spread stays negative); CONFIRMS BULL if a deal lands 12-15x"
+          ],
+          [
+            "CSU-vs-ROP relative multiple",
+            "prices + filings (monthly)",
+            "ROP keeps cheapening vs CSU -> no re-rate coming"
+          ],
+          [
+            "Insider transactions",
+            "SEC Form 4",
+            "insiders SELL into weakness (undercuts 'management buying' bull point)"
+          ],
+          [
+            "Consensus 2026-27 organic revenue revisions",
+            "sell-side estimate trend",
+            "organic estimates cut across the group"
+          ],
+          [
+            "Tier-1 net revenue retention commentary",
+            "ROP calls / MD&A",
+            "mid-90s NRR on regulated core slips below ~92%"
           ]
         ]
       },
@@ -2256,6 +2282,21 @@
             "Quarterly",
             "Buyback cadence vs leverage",
             "Discipline check at ~3.1x"
+          ],
+          [
+            "Ongoing",
+            "Insider Form 4s",
+            "Selling into weakness would undercut the buyback signal"
+          ],
+          [
+            "Quarterly",
+            "CSU-vs-ROP relative cash multiple",
+            "Parity holding = composition thesis intact"
+          ],
+          [
+            "Macro",
+            "Rate path / software-duration beta",
+            "The July pop's driver \u2014 it can reverse"
           ]
         ]
       },
